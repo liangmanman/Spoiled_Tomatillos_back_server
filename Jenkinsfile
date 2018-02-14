@@ -9,8 +9,7 @@ pipeline {
     stage ( 'Build' ) {
       steps {
         echo "Building"
-        sh 'mvn -f Spoiled_Tomatillos/pom.xml compile'
-        sh 'mvn -f Spoiled_Tomatillos/pom.xml package'
+        sh 'mvn -f Spoiled_Tomatillos/pom.xml clean install'
       }
     }
     stage ( 'Test' ){
