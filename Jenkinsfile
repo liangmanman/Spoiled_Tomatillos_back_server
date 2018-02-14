@@ -9,7 +9,7 @@ pipeline {
     stage ( 'Build' ) {
       steps {
         echo "Building"
-        sh 'mvn -f Spoiled_Tomatillos/pom.xml clean install'
+        sh 'mvn -f Spoiled_Tomatillos/pom.xml clean install -DskipTests'
       }
     }
     stage ( 'Test' ){
