@@ -18,7 +18,8 @@ public class SpoiledTomatillosApplication  extends SpringBootServletInitializer{
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/movies").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/api/**")
+					.allowedOrigins("*");
 			}
 		};
 	}

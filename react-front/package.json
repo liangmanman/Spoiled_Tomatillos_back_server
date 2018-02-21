@@ -1,21 +1,33 @@
 {
   "name": "react-front",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js",
+    "dev-server": "webpack-dev-server",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist --src '**/*'"
+  },
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.18",
     "gh-pages": "^1.1.0",
+    "html-webpack-plugin": "^2.30.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "validator": "^9.4.1",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   },
-  "proxy": "http://localhost:8080",
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "webpack-merge": "^4.1.1"
   },
   "homepage": "https://github.ccs.neu.edu/CS4500/team-13-spring18"
 }

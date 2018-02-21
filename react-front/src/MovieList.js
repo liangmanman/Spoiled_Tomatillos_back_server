@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { s_t_Instance } from './api/_axios';
 
 class MovieList extends React.Component<{}, any> {
   constructor(props: any) {
@@ -11,11 +12,15 @@ class MovieList extends React.Component<{}, any> {
   }
 
   componentDidMount() {
-  this.setState({isLoading: true});
+    this.setState({isLoading: true});
+    s_t_Instance.get('api/movies')
+    .then((response) => {
 
-  fetch('api/movies')
-    .then(response => response.json())
-    .then(data => this.setState({movies: data, isLoading: false}));
+      this.setState({movies: response.data, isLoading: false});
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   render() {
