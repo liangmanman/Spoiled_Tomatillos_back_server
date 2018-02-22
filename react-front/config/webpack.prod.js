@@ -13,5 +13,5 @@ module.exports = merge(common, {
                 'NODE_ENV': JSON.stringify('production'),
             },
         }),
-    ]
+    ],
 });

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MovieList from './MovieList';
+import IndexContainer from './containers';
 
 ReactDOM.render(
-  <MovieList />,
-  document.getElementById('react-root')
+    <IndexContainer />,
+    document.getElementById('react-root')
 );
