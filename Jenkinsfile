@@ -9,13 +9,13 @@ pipeline {
     stage ( 'Build' ) {
       steps {
         echo "Building"
-        sh 'mvn -f Spoiled_Tomatillos/pom.xml clean install -DskipTests'
+        sh 'mvn -f Spoiled_Tomatillos/back-end/pom.xml clean install -DskipTests'
       }
     }
     stage ( 'Test' ){
       steps {
         echo "Testing"
-        sh 'mvn -f Spoiled_Tomatillos/pom.xml test'
+        sh 'mvn -f Spoiled_Tomatillos/back-end/pom.xml test'
       }
     }
     stage ( 'Deploy' ) {

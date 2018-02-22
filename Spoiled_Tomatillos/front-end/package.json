@@ -8,7 +8,7 @@
     "build": "webpack --config ./config/webpack.prod.js",
     "lint": "./node_modules/.bin/eslint ./src/",
     "fix": "./node_modules/.bin/eslint ./src/ --fix",
-    "deploy": "cp ./build/* ../Spoiled_Tomatillos/src/main/webapp/"
+    "deploy": "cp ./build/* ../back-end/src/main/resources/static/"
   },
   "dependencies": {
     "axios": "^0.18.0",
