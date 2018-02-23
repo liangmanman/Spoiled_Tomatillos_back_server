@@ -1,0 +1,5 @@
+SpoiledTomatillosApplication.class
+model/Movie.class
+ServletInitializer.class
+controller/MovieController.class
+model/MovieRepository.class
