@@ -29,12 +29,12 @@ public class Review implements Serializable {
     @Column(name = "Id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name= "Username")
     private String username;
 
-    @ManyToOne
-    @Column(name = "ApiMovieId")
+    @ManyToOne(targetEntity = Movie.class)
+    @JoinColumn(name = "ApiMovieId")
     private String apiMovieId;
 
     @Column(name = "ThumbsUp")
