@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * Review represents the cached information that represents a review. A review is created
+ * and stored in database when a User creates one
+ */
+
 @Entity
 @Table(name="Review")
 public class Review implements Serializable {

@@ -9,12 +9,13 @@ import javax.persistence.Table;
 
 
 /**
- * User represents the cached information that represents a user. A User is created
- * and stored in database when they are created from user registration
+ * UserType represents the cached information that represents what type of user
+ * a user is. It is created and stored in database when a user is created from user registration
  */
+
 @Entity
 @Table(name="UserType")
-public class UserType {
+public class UserType implements Serializable {
 
     public UserType() {
 
@@ -28,6 +29,5 @@ public class UserType {
     @Column(name = "Username")
     private int type;
 
-
-
+    
 }

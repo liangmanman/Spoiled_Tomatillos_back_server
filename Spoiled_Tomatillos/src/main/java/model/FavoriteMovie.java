@@ -7,6 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * User represents the cached information that represents a User's favorite movie.
+ * A favorite movie is created and stored in database when it is created from
+ * a user
+ */
+
 @Entity
 @Table(name="Review")
 public class FavoriteMovie implements Serializable {
