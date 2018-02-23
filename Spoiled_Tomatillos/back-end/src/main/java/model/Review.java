@@ -2,9 +2,12 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -17,33 +20,41 @@ import javax.persistence.Table;
 @Table(name="Review")
 public class Review implements Serializable {
 
-    public Review(String iauthor, String icomment) {
-        this.author = iauthor;
-        this.comment = icomment;
-    }
+    public Review() {}
 
-    public Review(String iauthor, boolean thumbs, String icomment, Date create, Date update) {
-        this.author = iauthor;
+    public Review(String author, String apiMovieId, boolean thumbs, String comment, Date create,
+                  Date update) {
+        this.author = author;
+        this.apiMovieId = apiMovieId;
         this.thumbsUp = thumbs;
-        this.comment = icomment;
+        this.comment = comment;
         this.dateCreated = create;
         this.dateUpdated = update;
     }
 
-    @Id
-    @Column(name = "author")
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long id;
+
+    @ManyToOne
+    //@JoinColumn(name="")
+    @Column(name = "Author")
     private String author;
 
-    @Column(name = "thumbsUp")
+    @ManyToOne
+    @Column(name = "ApiMovieId")
+    private String apiMovieId;
+
+    @Column(name = "ThumbsUp")
     private boolean thumbsUp;
 
-    @Column(name = "comment")
+    @Column(name = "Comment")
     private String comment;
 
-    @Column(name = "dateCreated")
+    @Column(name = "DateCreated")
     private Date dateCreated;
 
-    @Column(name = "dateUpdated")
+    @Column(name = "DateUpdated")
     private Date dateUpdated;
 
     public String getAuthor() {

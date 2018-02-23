@@ -2,8 +2,11 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,29 +19,24 @@ import javax.persistence.Table;
 @Table(name="User")
 public class User implements Serializable{
 
-    public User() {
+    public User() { }
 
-    }
-
-    public User(String user, String password){
-        this.username = user;
+    public User(String username, String password, String email, String fullName, UserType userType,
+                String profilePicPath, String shortBio){
+        this.username = username;
         this.password = password;
-    }
-
-    public User(String user, String password, String mail, String name, UserType type,
-                String path, String bio, Date create, Date update){
-        this.username = user;
-        this.password = password;
-        this.eMail = mail;
-        this.fullName = name;
-        this.userType = type;
-        this.profilePicPath = path;
-        this.shortBio = bio;
-        this.dateCreated = create;
-        this.lastUpdated = update;
+        this.email = email;
+        this.fullName = fullName;
+        this.userType = userType;
+        this.profilePicPath = profilePicPath;
+        this.shortBio = shortBio;
     }
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long id;
+
     @Column(name = "Username")
     private String username;
 
@@ -46,7 +44,7 @@ public class User implements Serializable{
     private String password;
 
     @Column(name = "Email")
-    private String eMail;
+    private String email;
 
     @Column(name = "FullName")
     private String fullName;
@@ -66,12 +64,14 @@ public class User implements Serializable{
     @Column(name = "LastUpdate")
     private Date lastUpdated;
 
+    public Long getId() {return id;}
+
     public String getPassword() {
         return password;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     public String getFullName() {
@@ -99,8 +99,10 @@ public class User implements Serializable{
     }
 
     public String getUsername() {
+        return username;}
 
-        return username;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUsername(String username) {
@@ -111,8 +113,8 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void seteMail(String email) {
+        this.email = email;
     }
 
     public void setFullName(String fullName) {
