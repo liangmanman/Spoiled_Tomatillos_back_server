@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { MOVIE_LIST_URI } from "./routesContainer/uriConstants";
+import {MOVIE_LIST_URI, SIGNUP_URI} from "./routesContainer/uriConstants";
 import SearchBar from '../components/SearchBar';
 import LoginForm from '../components/LoginForm';
 import styles from '../style/HomePage.css'
@@ -23,6 +23,8 @@ class HomePage extends React.Component {
       <div className={styles.topBar}>
         <h2>Spoiled Tomatillos</h2>
           <LoginForm />
+          <Link to={SIGNUP_URI}>Create an account</Link>
+          <br />
           <Link to={MOVIE_LIST_URI}>Movie List</Link>
           <SearchBar />
       </div>

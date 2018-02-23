@@ -17,11 +17,6 @@ public class MovieController {
   @Autowired
   private MovieRepository movieRepository;
 
-  @RequestMapping("/api/test")
-  public String sayHello() {
-    return "Hello Green Monster!";
-  }
-
   @RequestMapping("/api/movies")
   public List<Movie> movieList() {
     return movieRepository.findAll();
