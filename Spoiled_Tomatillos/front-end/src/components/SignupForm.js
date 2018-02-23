@@ -6,8 +6,14 @@ class SignupForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.handleSignup = this.handleSignup.bind(this);
+
         this.state = {
             isLoading: false,
+            fullName: null,
+            username: null,
+            email: null,
+            password: null
         };
     }
 
@@ -17,31 +23,36 @@ class SignupForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSignup}>
-                <input type={'text'} name={'fullName'} placeholder={'Full Name'} />
+                <input type={'text'} name={'fullName'} placeholder={'Full Name'}
+                       onChange={(e) => this.setState({fullName: e.target.value})}/>
                 <br />
-                <input type={'text'} name={'username'} placeholder={'Username'} />
+                <input type={'text'} name={'username'} placeholder={'Username'}
+                       onChange={(e) => this.setState({username: e.target.value})}/>
                 <br />
-                <input type={'text'} name={'email'} placeholder={'Email'} />
+                <input type={'text'} name={'email'} placeholder={'Email'}
+                       onChange={(e) => this.setState({email: e.target.value})}/>
                 <br />
-                <input type={'text'} name={'password'} placeholder={'Password'}/>
+                <input type={'password'} name={'password'} placeholder={'Password'}
+                       onChange={(e) => this.setState({password: e.target.value})}/>
                 <br />
-                <input type={'text'} name={'confirmPassword'} placeholder={'Confirm Password'}/>
+                <input type={'password'} name={'confirmPassword'} placeholder={'Confirm Password'}/>
                 <br />
-                <input type={'submit'} value={'Create Account'} />
+                <input type={'submit'} value={'Create Account'}/>
                 <br />
             </form>
         );
     }
 
     handleSignup(event) {
-        axios.post('/', JSON.stringify({
-                fullName: event.fullName,
-                username: event.username,
-                email: event.email,
-                password: event.password
-            }))
+        event.preventDefault();
+        axios.post(SIGNUP_URI, {
+                fullName: this.state.fullName,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            })
             .then(function (response) {
-                console.log(response);
+                alert(response.data);
             });
     }
 }
