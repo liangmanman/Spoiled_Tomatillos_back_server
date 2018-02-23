@@ -1,5 +1,4 @@
 export const MOVIE_LIST_URI = '/movie/list';
-<<<<<<< HEAD
-export const SIGNUP_URI = '/'
-=======
->>>>>>> master
+export const SIGN_UP_URI = '/signup';
+export const LOGIN_URI = '/login';
+
