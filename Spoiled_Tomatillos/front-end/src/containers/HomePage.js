@@ -1,19 +1,25 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
+<<<<<<< HEAD
 import {MOVIE_LIST_URI, SIGNUP_URI} from "./routesContainer/uriConstants";
+=======
+import { MOVIE_LIST_URI } from "./routesContainer/uriConstants";
+import SearchBar from '../components/SearchBar';
+>>>>>>> master
 
 class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            isLoading: false,
-        };
-    }
+    this.state = {
+      isLoading: false,
+    };
+  }
 
-    componentDidMount() {
-    }
+  componentDidMount() {
+  }
 
+<<<<<<< HEAD
     render() {
         return (
             <div>
@@ -43,6 +49,17 @@ class HomePage extends React.Component {
     handleLogin(event) {
         alert('user tried to log in!');
     }
+=======
+  render() {
+    return (
+      <div>
+        <h2>Home Page</h2>
+        <Link to={MOVIE_LIST_URI}>Movie List</Link>
+        <SearchBar />
+      </div>
+    );
+  }
+>>>>>>> master
 }
 
 export default HomePage;
