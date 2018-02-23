@@ -29,11 +29,11 @@ public class FavoriteMovie implements Serializable {
     @Column(name = "Id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "Username")
     private String username;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Movie.class)
     @JoinColumn(name = "ApiMovieId")
     private String apiMovieId;
 
