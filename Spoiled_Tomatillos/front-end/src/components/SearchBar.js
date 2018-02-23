@@ -3,6 +3,7 @@ import { omdb_axios } from '../api/_axios';
 import ReactDOM from 'react-dom';
 import { OMDB_API_KEY } from '../constants';
 import _ from 'lodash';
+import SearchResult from './SearchResult';
 
 class SearchBar extends React.Component {
 
@@ -12,6 +13,12 @@ class SearchBar extends React.Component {
         results: [],
       };
   };
+
+  handleLike = (e) => {
+    e.preventDefault();
+    console.log(e.target, 'hahah');
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const searchContent = e.target.elements.searchContent.value.trim();
@@ -24,7 +31,6 @@ class SearchBar extends React.Component {
             return m.imdbID;
           });
           this.setState({results: movies});
-          console.log(this.state.results);
         })
         .catch(function (error) {
           console.log(error);
@@ -39,19 +45,7 @@ class SearchBar extends React.Component {
           <input type="search" name="searchContent"></input>
           <button className="btn btn-primary">search</button>
         </form>
-        <div className="result-list">
-          {this.state.results.map((result) => {
-            return <div className="row Card" key={result.imdbID}>
-                    <div className="col-sm-4">
-                      <img className="img-fluid" alt="Responsive image" src={result.Poster} />
-                    </div>
-                    <div className="col-sm-8 card-right card-title">
-                      <h5>Title: {result.Title}</h5>
-                      <p>Year: {result.Year}</p>
-                    </div>
-                  </div>
-          })}
-        </div>
+        <SearchResult results={this.state.results}/>
       </div>
     );
   }
