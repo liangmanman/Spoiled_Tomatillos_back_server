@@ -59,7 +59,7 @@ public class Review implements Serializable {
         lastUpdated = new Date();
     }
 
-    public Review() {}
+    public Review() { }
 
     public Review(String username, String apiMovieId, boolean thumbs, String comment) {
         this.username = username;

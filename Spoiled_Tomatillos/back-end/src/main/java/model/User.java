@@ -21,19 +21,6 @@ import javax.persistence.Table;
 @Table(name="User")
 public class User implements Serializable{
 
-    public User() { }
-
-    public User(String username, String password, String email, String fullName, UserType userType,
-                String profilePicPath, String shortBio){
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.fullName = fullName;
-        this.userType = userType;
-        this.profilePicPath = profilePicPath;
-        this.shortBio = shortBio;
-    }
-
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "Id")
@@ -74,5 +61,98 @@ public class User implements Serializable{
     @PreUpdate
     protected void onUpdate() {
         lastUpdated = new Date();
+    }
+
+    public User() { }
+
+    public User(String username, String password, String email, String fullName, UserType userType,
+                String profilePicPath, String shortBio){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.fullName = fullName;
+        this.userType = userType;
+        this.profilePicPath = profilePicPath;
+        this.shortBio = shortBio;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public String getProfilePicPath() {
+        return profilePicPath;
+    }
+
+    public void setProfilePicPath(String profilePicPath) {
+        this.profilePicPath = profilePicPath;
+    }
+
+    public String getShortBio() {
+        return shortBio;
+    }
+
+    public void setShortBio(String shortBio) {
+        this.shortBio = shortBio;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

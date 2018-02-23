@@ -46,14 +46,11 @@ public class UserType implements Serializable {
         lastUpdated = new Date();
     }
 
-    public UserType() {
-
-    }
+    public UserType() { }
 
     public UserType(String type){
         this.type = type;
     }
-
 
     public Long getId() {
         return Id;
