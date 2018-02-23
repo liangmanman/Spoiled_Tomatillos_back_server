@@ -7,7 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 
@@ -20,26 +24,14 @@ import javax.persistence.Table;
 @Table(name="Review")
 public class Review implements Serializable {
 
-    public Review() {}
-
-    public Review(String author, String apiMovieId, boolean thumbs, String comment, Date create,
-                  Date update) {
-        this.author = author;
-        this.apiMovieId = apiMovieId;
-        this.thumbsUp = thumbs;
-        this.comment = comment;
-        this.dateCreated = create;
-        this.dateUpdated = update;
-    }
-
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
     private Long id;
 
     @ManyToOne
-    //@JoinColumn(name="")
-    @Column(name = "Author")
-    private String author;
+    @JoinColumn(name= "Username")
+    private String username;
 
     @ManyToOne
     @Column(name = "ApiMovieId")
@@ -54,15 +46,50 @@ public class Review implements Serializable {
     @Column(name = "DateCreated")
     private Date dateCreated;
 
-    @Column(name = "DateUpdated")
-    private Date dateUpdated;
+    @Column(name = "LastUpdated")
+    private Date lastUpdated;
 
-    public String getAuthor() {
-        return author;
+    @PrePersist
+    protected void onCreate() {
+        dateCreated = new Date();
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdated = new Date();
+    }
+
+    public Review() {}
+
+    public Review(String username, String apiMovieId, boolean thumbs, String comment) {
+        this.username = username;
+        this.apiMovieId = apiMovieId;
+        this.thumbsUp = thumbs;
+        this.comment = comment;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getApiMovieId() {
+        return apiMovieId;
+    }
+
+    public void setApiMovieId(String apiMovieId) {
+        this.apiMovieId = apiMovieId;
     }
 
     public boolean isThumbsUp() {
@@ -89,11 +116,11 @@ public class Review implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateUpdated() {
-        return dateUpdated;
+    public Date getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setDateUpdated(Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

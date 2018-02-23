@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 
@@ -37,7 +39,7 @@ public class User implements Serializable{
     @Column(name = "Id")
     private Long id;
 
-    @Column(name = "Username")
+    @Column(name = "Username", unique = true)
     private String username;
 
     @Column(name = "Password")
@@ -61,83 +63,16 @@ public class User implements Serializable{
     @Column(name = "DateCreated")
     private Date dateCreated;
 
-    @Column(name = "LastUpdate")
+    @Column(name = "LastUpdated")
     private Date lastUpdated;
 
-    public Long getId() {return id;}
-
-    public String getPassword() {
-        return password;
+    @PrePersist
+    protected void onCreate() {
+        dateCreated = new Date();
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public String getProfilePicPath() {
-        return profilePicPath;
-    }
-
-    public String getShortBio() {
-        return shortBio;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public String getUsername() {
-        return username;}
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void seteMail(String email) {
-        this.email = email;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public void setProfilePicPath(String profilePicPath) {
-        this.profilePicPath = profilePicPath;
-    }
-
-    public void setShortBio(String shortBio) {
-        this.shortBio = shortBio;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdated = new Date();
     }
 }

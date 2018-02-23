@@ -1,12 +1,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 
@@ -19,6 +22,30 @@ import javax.persistence.Table;
 @Table(name="UserType")
 public class UserType implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long Id;
+
+    @Column(name = "Type")
+    private String type;
+
+    @Column(name = "DateCreated")
+    private Date dateCreated;
+
+    @Column(name = "LastUpdated")
+    private Date lastUpdated;
+
+    @PrePersist
+    protected void onCreate() {
+        dateCreated = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdated = new Date();
+    }
+
     public UserType() {
 
     }
@@ -27,13 +54,6 @@ public class UserType implements Serializable {
         this.type = type;
     }
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "Id")
-    private Long Id;
-
-    @Column(name = "Type")
-    private String type;
 
     public Long getId() {
         return Id;
@@ -49,5 +69,21 @@ public class UserType implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

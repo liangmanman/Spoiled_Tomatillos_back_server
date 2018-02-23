@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 
@@ -18,45 +24,64 @@ import javax.persistence.Table;
 @Table(name="Review")
 public class FavoriteMovie implements Serializable {
 
-    public FavoriteMovie(String user, long movie, Date create, Date update) {
-        this.userId = user;
-        this.movieId = movie;
-        this.dateCreated = create;
-        this.dateUpdated = update;
-    }
-
-    public FavoriteMovie(String user, long movie) {
-        this.userId = user;
-        this.movieId = movie;
-    }
-
     @Id
-    @Column(name = "userId")
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long id;
 
-    @Column(name = "movieId")
-    private long movieId;
+    @ManyToOne
+    @JoinColumn(name = "Username")
+    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "ApiMovieId")
+    private String apiMovieId;
 
     @Column(name = "DateCreated")
     private Date dateCreated;
 
-    @Column(name = "LastUpdate")
-    private Date dateUpdated;
+    @Column(name = "LastUpdated")
+    private Date lastUpdated;
 
-    public String getUserId() {
-        return userId;
+    @PrePersist
+    protected void onCreate() {
+        dateCreated = new Date();
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    @PreUpdate
+    protected void onUpdate() {
+        lastUpdated = new Date();
     }
 
-    public long getMovieId() {
-        return movieId;
+    public FavoriteMovie() {}
+
+    public FavoriteMovie(String username, String apiMovieId) {
+        this.username = username;
+        this.apiMovieId = apiMovieId;
     }
 
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getApiMovieId() {
+        return apiMovieId;
+    }
+
+    public void setApiMovieId(String apiMovieId) {
+        this.apiMovieId = apiMovieId;
     }
 
     public Date getDateCreated() {
@@ -67,11 +92,11 @@ public class FavoriteMovie implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateUpdated() {
-        return dateUpdated;
+    public Date getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setDateUpdated(Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }
