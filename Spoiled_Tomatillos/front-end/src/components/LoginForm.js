@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
     handleLogin(event) {
         event.preventDefault();
         console.log(event);
-        axios.post(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
+        axios.get(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
             .then(function (response) {
                 alert(response.data);
             });

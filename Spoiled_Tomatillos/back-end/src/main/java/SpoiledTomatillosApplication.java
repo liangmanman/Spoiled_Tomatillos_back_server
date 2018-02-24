@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@SpringBootApplication(scanBasePackages = {"controller", "service"})
-@EnableJpaRepositories(basePackages = {"model"})
+@SpringBootApplication(scanBasePackages = {"controller", "service", "dao"})
+@EnableJpaRepositories(basePackages = {"model", "dao"})
 @EntityScan("model")
 public class SpoiledTomatillosApplication  extends SpringBootServletInitializer{
 
