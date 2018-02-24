@@ -7,24 +7,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import dao.IMovieDao;
 import model.Movie;
-import model.MovieRepository;
 
 
 @RestController
 public class MovieController {
 
   @Autowired
-  private MovieRepository movieRepository;
-
-  @RequestMapping("/api/test")
-  public String sayHello() {
-    return "Hello Green Monster!";
-  }
+  private IMovieDao movieDao;
 
   @RequestMapping("/api/movies")
-  public List<Movie> movieList() {
-    return movieRepository.findAll();
+  public List<Movie> findAllMovies() {
+    return movieDao.findAllMovies();
   }
 
   @RequestMapping("/api/movies/insert/{apiMovieKey}")
@@ -33,7 +28,8 @@ public class MovieController {
     mov.setApiMovieId(apiMovieKey);
     mov.setTitle("This is a test");
     mov.setReleaseYear(1996L);
-    movieRepository.save(mov);
+    movieDao.insertMovie(mov);
+
     return mov;
   }
 }
