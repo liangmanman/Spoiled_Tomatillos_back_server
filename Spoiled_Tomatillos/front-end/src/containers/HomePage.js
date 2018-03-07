@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
 import { MOVIE_LIST_URI } from "./routesContainer/uriConstants";
-import SearchBar from '../components/SearchBar';
+import NavBar from '../components/NavBar';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -18,8 +18,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <Link to={MOVIE_LIST_URI}>Movie List</Link>
+        <NavBar/>
       </div>
     );
   }
