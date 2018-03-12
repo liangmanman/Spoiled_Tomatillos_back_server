@@ -1,4 +1,5 @@
 target/
+src/main/resources/static/bundle.js
 !.mvn/wrapper/maven-wrapper.jar
 
 ### IntelliJ IDEA ###

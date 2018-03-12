@@ -13,7 +13,6 @@ class HomePage extends React.Component {
   componentDidMount() {
   }
 
-
   render() {
     return (
       <NavBar/>
