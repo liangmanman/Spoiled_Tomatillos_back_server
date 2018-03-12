@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
 
     if (searchContent) {
         this.props.history.push('/search?query=' + searchContent);
+        window.location.reload();
     }
   };
 

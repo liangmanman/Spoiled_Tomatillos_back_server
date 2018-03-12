@@ -2,6 +2,8 @@ import * as React from 'react';
 import NavBar from "../components/NavBar";
 import { omdb_axios } from '../api/_axios';
 import { OMDB_API_KEY } from '../constants';
+import { withRouter } from 'react-router-dom'
+import qs from 'query-string';
 import _ from 'lodash';
 
 class SearchResults extends React.Component {
@@ -14,7 +16,8 @@ class SearchResults extends React.Component {
     };
 
     componentDidMount() {
-        const searchContent = "test";
+        console.log(this.props.location.search);
+        const searchContent = qs.parse(this.props.location.search).query;
         const url = OMDB_API_KEY + searchContent;
         omdb_axios.get(url)
             .then((response) => {
@@ -53,4 +56,4 @@ class SearchResults extends React.Component {
     }
 }
 
-export default SearchResults;
+export default withRouter(SearchResults);
