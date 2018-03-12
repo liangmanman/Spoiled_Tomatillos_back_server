@@ -1,46 +1,72 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import { OMDB_API_KEY } from '../constants';
 import { omdb_axios } from '../api/_axios';
 
 class SearchResult extends React.Component {
 
   constructor(props) {
-      super(props);
-      console.log(this.props);
-      this.state = {
-          result: ['a', 'b', 'c'],
-          results: [],
-          isLoading: false,
-      };
+    super(props);
+    this.state = {
+      results: [],
+      isLoading: true,
+    };
+    this.searchByKeyWord = this.searchByKeyWord.bind(this);
   }
+
+  searchByKeyWord = (searchContent) => {
+    console.log(searchContent);
+    const url = OMDB_API_KEY + '&s='+ searchContent;
+    omdb_axios.get(url)
+      .then((response) => {
+        let movies = response.data.Search;
+        movies = _.uniqBy(movies, function (m) {
+          return m.imdbID;
+        });
+        movies.map((movie) => {
+          const url2 = OMDB_API_KEY + '&i='+ movie.imdbID;
+          omdb_axios.get(url2)
+            .then((response) => {
+              this.setState({
+                results: [...this.state.results, response.data]
+              });
+              console.log(this.state.results);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   componentDidMount() {
-    this.setState({isLoading: true,});
-    this.setState({ results: this.props.location.movies,});
-    this.setState({isLoading: false,});
+    const searchBy = this.props.location.search;
+    this.searchByKeyWord(searchBy.substr(7));
+    this.setState({isLoading: false});
   }
-
 
 
   render() {
     const {results, isLoading,} = this.state;
-    const {movies,} = this.props.location;
-
     if (isLoading) {
         return <p>Loading...</p>;
     }
-    console.log('render called');
-    console.log(this.state.result);
-    console.log(this.props.location.movies);
-    this.props.location.movies.map((movie) => console.log(movie));
-    debugger;
-
     return (
       <div className="result-list">
-          <h1>Search Result</h1>
-          { this.state.results.map((movie) => <h1 id={movie.imdbId}>{movie.Title}</h1>) }
-          { this.state.result.map((movie) => <h1>{movie}</h1>) }
+        <h1>Search Result</h1>
+        {results.map((result) => {
+          return <div className="row Card" key={result.imdbID}>
+            <div className="col-sm-4">
+              <img className="img-fluid" alt="Responsive image" src={result.Poster} />
+            </div>
+            <div className="col-sm-8 card-right card-title">
+              <h5>Title: {result.Title}</h5>
+              <p>Year: {result.Year}</p>
+            </div>
+          </div>
+        })}
       </div>
     );
   }
