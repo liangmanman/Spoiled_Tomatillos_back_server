@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -31,7 +32,11 @@ public class UserDao implements IUserDao {
     Query query = entityManager.createQuery(hql);
     query.setParameter("username", username);
 
-    return (User) query.getSingleResult();
+    try {
+      return (User)query.getSingleResult();
+    } catch(NoResultException nre) {
+      return new User();
+    }
   }
 
   @Override

@@ -5,26 +5,26 @@ import SignupForm from "../components/SignupForm";
 
 class SignupPage extends React.Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            isLoading: false,
-        };
-    }
+    this.state = {
+      isLoading: false,
+    };
+  }
 
-    componentDidMount() {
-    }
+  componentDidMount() {
+  }
 
-    render() {
-        return (
-            <div>
-                <NavBar/>
-                <LoginForm/>
-                <SignupForm/>
-            </div>
-        );
-    }
+  render() {
+    return (
+        <div>
+          <NavBar/>
+          <LoginForm/>
+          <SignupForm/>
+        </div>
+    );
+  }
 }
 
 export default SignupPage;

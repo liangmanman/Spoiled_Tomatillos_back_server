@@ -1,51 +1,59 @@
 import * as React from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import { LOGIN_URI } from "../containers/routesContainer/uriConstants";
+import { withRouter } from 'react-router-dom';
+import {LOGIN_URI} from "../containers/routesContainer/uriConstants";
 
 class LoginForm extends React.Component {
 
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.handleLogin = this.handleLogin.bind(this);
 
-        this.handleLogin = this.handleLogin.bind(this);
+    this.state = {
+      isLoading: false,
+      failedLogin: false,
+      username: null,
+      password: null
+    };
+  }
 
-        this.state = {
-            isLoading: false,
-            username: null,
-            password: null
-        };
-    }
+  render() {
+    const failedLogin = this.state.failedLogin;
+    let loginMessage = failedLogin ? 'Invalid Username or Password, please try again.' : '';
 
-    componentDidMount() {
-    }
+    return (
+        <div>
+          {loginMessage}
+          <form onSubmit={this.handleLogin}>
+            <input type={'text'} name={'username'} placeholder={'Username/Email'}
+                   onChange={(e) => this.setState({username: e.target.value})}/>
+            <input type={'password'} name={'password'} placeholder={'Password'}
+                   onChange={(e) => this.setState({password: e.target.value})}/>
+            <input type={'submit'} value={'Log In'}/>
+          </form>
+        </div>
+    );
+  }
 
-    render() {
-        return (
-                <form onSubmit={this.handleLogin}>
-                    <input type={'text'} name={'username'} placeholder={'Username/Email'}
-                           onChange={(e) => this.setState({username: e.target.value})}/>
-                    <input type={'password'} name={'password'} placeholder={'Password'}
-                           onChange={(e) => this.setState({password: e.target.value})}/>
-                    <input type={'submit'} value={'Log In'} />
-                </form>
-        );
-    }
 
-    handleLogin(event) {
-        const cookies = new Cookies();
+  handleLogin(event) {
+    const cookies = new Cookies();
 
-        event.preventDefault();
-        console.log(event);
-        axios.get(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
-            .then(function (response) {
-                if(response.data) {
-                    cookies.set('username', response.data, { path: '/' });
-                    console.log(cookies.get('username'));
-                }
-            });
-    }
+    event.preventDefault();
+    console.log(event);
+    axios.get(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
+        .then((response) => {
+          if (response.data) {
+            cookies.set('username', response.data, {path: '/'});
+            console.log(cookies.get('username'));
+            this.props.history.push('/');
+          } else {
+            this.setState({failedLogin: true});
+          }
+        });
+  }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -4,6 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import IndexContainer from './containers';
 
 ReactDOM.render(
-    <IndexContainer />,
+    <IndexContainer/>,
     document.getElementById('react-root')
 );

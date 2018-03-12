@@ -25,10 +25,10 @@ public class UserController {
     User user = userDao.findCredentialsByUsername(username);
 
     if (user.getPassword() != null && user.getPassword().equals(password)) {
-      return "Login Success!";
+      return user.getUsername();
     }
     else {
-      return "Login Failed! Invalid Username/Email or Password.";
+      return null;
     }
   }
 
