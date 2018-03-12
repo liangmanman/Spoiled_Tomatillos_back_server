@@ -15,7 +15,7 @@ class NavBar extends React.Component {
                 <h3 className="title">Spoiled Tomatillos</h3>
                 <Link className="active" to="/">Home</Link>
                 <Link to={SIGNUP_URI}>Profile</Link>
-                <Link to="#recommendations">Recommendations</Link>
+                <Link to="recommendations">Recommendations</Link>
                 <Link to={MOVIE_LIST_URI}>Movies</Link>
                 <SearchBar className="searchBar"></SearchBar>
             </div>

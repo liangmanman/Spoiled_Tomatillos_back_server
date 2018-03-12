@@ -1,9 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import {MOVIE_LIST_URI, SIGNUP_URI} from "./routesContainer/uriConstants";
-import SearchBar from '../components/SearchBar';
-import LoginForm from '../components/LoginForm';
-import styles from '../style/HomePage.css'
+import NavBar from "../components/NavBar";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -20,14 +16,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className={styles.topBar}>
-        <h2>Spoiled Tomatillos</h2>
-          <LoginForm />
-          <Link to={SIGNUP_URI}>Create an account</Link>
-          <br />
-          <Link to={MOVIE_LIST_URI}>Movie List</Link>
-          <SearchBar />
-      </div>
+      <NavBar/>
     );
   }
 }
