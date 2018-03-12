@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { OMDB_API_KEY } from '../constants';
 import { omdb_axios } from '../api/_axios';
+import _ from 'lodash';
+import NavBar from '../components/NavBar';
+import MovieInfo from '../components/MovieInfo';
 
 class SearchResult extends React.Component {
 
@@ -14,7 +17,6 @@ class SearchResult extends React.Component {
   }
 
   searchByKeyWord = (searchContent) => {
-    console.log(searchContent);
     const url = OMDB_API_KEY + '&s='+ searchContent;
     omdb_axios.get(url)
       .then((response) => {
@@ -29,7 +31,6 @@ class SearchResult extends React.Component {
               this.setState({
                 results: [...this.state.results, response.data]
               });
-              console.log(this.state.results);
             })
             .catch(function (error) {
               console.log(error);
@@ -54,20 +55,15 @@ class SearchResult extends React.Component {
         return <p>Loading...</p>;
     }
     return (
-      <div className="result-list">
-        <h1>Search Result</h1>
-        {results.map((result) => {
-          return <div className="row Card" key={result.imdbID}>
-            <div className="col-sm-4">
-              <img className="img-fluid" alt="Responsive image" src={result.Poster} />
-            </div>
-            <div className="col-sm-8 card-right card-title">
-              <h5>Title: {result.Title}</h5>
-              <p>Year: {result.Year}</p>
-            </div>
+        <div>
+          <NavBar/>
+          <div className="result-list">
+            <h1>Search Result</h1>
+            {results.map((result) => {
+              return <MovieInfo movie={result} key={result.imdbID}/>
+            })}
           </div>
-        })}
-      </div>
+        </div>
     );
   }
 }
