@@ -25,20 +25,20 @@ class SignupForm extends React.Component {
             <form onSubmit={this.handleSignup}>
                 <input type={'text'} name={'fullName'} placeholder={'Full Name'}
                        onChange={(e) => this.setState({fullName: e.target.value})}/>
-                <br />
+                <br/>
                 <input type={'text'} name={'username'} placeholder={'Username'}
                        onChange={(e) => this.setState({username: e.target.value})}/>
-                <br />
+                <br/>
                 <input type={'text'} name={'email'} placeholder={'Email'}
                        onChange={(e) => this.setState({email: e.target.value})}/>
-                <br />
+                <br/>
                 <input type={'password'} name={'password'} placeholder={'Password'}
                        onChange={(e) => this.setState({password: e.target.value})}/>
-                <br />
+                <br/>
                 <input type={'password'} name={'confirmPassword'} placeholder={'Confirm Password'}/>
-                <br />
+                <br/>
                 <input type={'submit'} value={'Create Account'}/>
-                <br />
+                <br/>
             </form>
         );
     }

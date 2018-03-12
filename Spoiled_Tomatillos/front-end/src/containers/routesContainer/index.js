@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch, withRouter, } from 'react-router-dom';
 import HomePage from '../HomePage';
 import MovieList from '../MovieList';
-import SignupPage from '../SignupPage';
-import { MOVIE_LIST_URI, SIGNUP_URI } from "./uriConstants";
+import SignupPage from '../SignupPage'
+import {MOVIE_LIST_URI, SIGNUP_URI} from "./uriConstants";
 
 const RoutesContainer = () => {
     return (

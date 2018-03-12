@@ -3,6 +3,7 @@ import { omdb_axios } from '../api/_axios';
 import ReactDOM from 'react-dom';
 import { OMDB_API_KEY } from '../constants';
 import _ from 'lodash';
+import styles from '../styles/SearchBar.css';
 
 class SearchBar extends React.Component {
 
@@ -35,9 +36,9 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={ this.handleSubmit }>
-          <input type="search" name="searchContent"></input>
-          <button className="btn btn-primary">search</button>
+        <form className="searchBar" onSubmit={ this.handleSubmit }>
+          <input className="searchText" type="search" name="searchContent"></input>
+          <button className="btn btn-primary searchButton ">search</button>
         </form>
         <div className="result-list">
           {this.state.results.map((result) => {
