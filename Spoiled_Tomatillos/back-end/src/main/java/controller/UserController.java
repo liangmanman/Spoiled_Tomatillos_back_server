@@ -13,7 +13,7 @@ import model.User;
 import model.UserType;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
   @Autowired

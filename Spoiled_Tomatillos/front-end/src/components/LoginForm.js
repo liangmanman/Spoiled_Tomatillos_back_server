@@ -1,9 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import { LOGIN_URI } from "../containers/routesContainer/uriConstants";
 
-
 class LoginForm extends React.Component {
+
+
     constructor(props) {
         super(props);
 
@@ -32,11 +34,16 @@ class LoginForm extends React.Component {
     }
 
     handleLogin(event) {
+        const cookies = new Cookies();
+
         event.preventDefault();
         console.log(event);
         axios.get(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
             .then(function (response) {
-                alert(response.data);
+                if(response.data) {
+                    cookies.set('username', response.data, { path: '/' });
+                    console.log(cookies.get('username'));
+                }
             });
     }
 }
