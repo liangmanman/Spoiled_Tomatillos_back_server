@@ -10,8 +10,6 @@ class MovieInfo extends Component {
 
   render() {
     const {result} = this.state;
-
-    console.log(result);
     return (
         <div className="row Card">
           <div className="col-sm-4">
