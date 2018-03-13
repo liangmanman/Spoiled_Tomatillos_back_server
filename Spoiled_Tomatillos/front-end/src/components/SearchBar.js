@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { OMDB_API_KEY } from '../constants';
 import _ from 'lodash';
 import styles from '../styles/SearchBar.css';
+import {MOVIE_URI} from "../containers/routesContainer/uriConstants";
+import { Link } from 'react-router-dom';
 
 class SearchBar extends React.Component {
 
@@ -47,7 +49,7 @@ class SearchBar extends React.Component {
                       <img className="img-fluid" alt="Responsive image" src={result.Poster} />
                     </div>
                     <div className="col-sm-8 card-right card-title">
-                      <h5>Title: {result.Title}</h5>
+                      <h5><Link to={`${MOVIE_URI}/${result.imdbID}`}>Title: {result.Title}</Link></h5>
                       <p>Year: {result.Year}</p>
                     </div>
                   </div>
