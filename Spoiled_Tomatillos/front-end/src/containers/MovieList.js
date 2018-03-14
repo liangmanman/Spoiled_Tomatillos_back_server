@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { axios, } from '../api/_axios';
+import NavBar from '../components/NavBar';
 
 class MovieList extends React.Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class MovieList extends React.Component {
 
         return (
             <div>
+                <NavBar/>
                 <h2>Movie List</h2>
                 {movies.map((movie) =>
                     <div key={movie.apiMovieId}>
