@@ -16,7 +16,16 @@ class SearchResult extends React.Component {
     this.searchByKeyWord = this.searchByKeyWord.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const searchBy = nextProps.location.search;
+    this.searchByKeyWord(searchBy.substr(7));
+  }
+
   searchByKeyWord = (searchContent) => {
+    this.setState({
+      results: [],
+      isLoading: true
+    });
     const url = OMDB_API_KEY + '&s='+ searchContent;
     omdb_axios.get(url)
       .then((response) => {
@@ -40,12 +49,12 @@ class SearchResult extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+    this.setState({ isLoading: false });
   };
 
   componentDidMount() {
     const searchBy = this.props.location.search;
     this.searchByKeyWord(searchBy.substr(7));
-    this.setState({isLoading: false});
   }
 
 

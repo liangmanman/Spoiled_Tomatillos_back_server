@@ -2,7 +2,7 @@ import * as React from 'react';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom'
 import {MOVIE_LIST_URI, SIGNUP_URI} from '../containers/routesContainer/uriConstants'
-import styles from '../styles/NavBar.css';
+import '../styles/NavBar.css';
 
 class NavBar extends React.Component {
     constructor(props) {
