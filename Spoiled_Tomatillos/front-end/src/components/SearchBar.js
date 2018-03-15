@@ -2,7 +2,6 @@ import * as React from 'react';
 import styles from '../styles/SearchBar.css';
 import {withRouter} from "react-router-dom";
 
-
 class SearchBar extends React.Component {
 
   constructor(props) {

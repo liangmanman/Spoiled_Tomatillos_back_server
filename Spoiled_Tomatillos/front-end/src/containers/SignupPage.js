@@ -3,6 +3,7 @@ import LoginForm from "../components/LoginForm";
 import NavBar from "../components/NavBar";
 import SignupForm from "../components/SignupForm";
 
+
 class SignupPage extends React.Component {
 
   constructor(props) {
@@ -11,9 +12,6 @@ class SignupPage extends React.Component {
     this.state = {
       isLoading: false,
     };
-  }
-
-  componentDidMount() {
   }
 
   render() {
@@ -25,6 +23,7 @@ class SignupPage extends React.Component {
         </div>
     );
   }
+
 }
 
 export default SignupPage;

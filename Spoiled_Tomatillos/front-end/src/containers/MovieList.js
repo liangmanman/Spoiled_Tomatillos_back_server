@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {axios,} from '../api/_axios';
+import { axios } from '../api/_axios';
+import NavBar from '../components/NavBar';
 
 class MovieList extends React.Component {
   constructor(props) {
@@ -22,24 +23,25 @@ class MovieList extends React.Component {
         });
   }
 
-  render() {
-    const {movies, isLoading,} = this.state;
+    render() {
+        const {movies, isLoading} = this.state;
 
-    if (isLoading) {
-      return <p>Loading...</p>;
+        if (isLoading) {
+            return <p>Loading...</p>;
+        }
+
+        return (
+            <div>
+                <NavBar/>
+                <h2>Movie List</h2>
+                {movies.map((movie) =>
+                    <div key={movie.apiMovieId}>
+                        {movie.apiMovieId}
+                    </div>
+                )}
+            </div>
+        );
     }
-
-    return (
-        <div>
-          <h2>Movie List</h2>
-          {movies.map((movie) =>
-              <div key={movie.apiMovieId}>
-                {movie.apiMovieId}
-              </div>
-          )}
-        </div>
-    );
-  }
 }
 
 export default MovieList;
