@@ -1,9 +1,12 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const rootPath =  path.resolve(path.dirname("./"));
 const buildPath = path.resolve(rootPath, "./build");
 const assetsPath = path.resolve(rootPath, "./src/assets");
+const HTML_TITLE = 'Spoiled Tomatillos';
 
 module.exports = {
   entry: path.join(__dirname, '../src/app.js'),
@@ -19,10 +22,14 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: assetsPath, },
     ]),
+    new HtmlWebpackPlugin({
+      title: HTML_TITLE,
+      template: path.resolve(assetsPath, 'index.html'),
+    })
   ],
   output: {
     path: buildPath,
-    filename: '[name].[chunkhash].js',
+    filename: 'bundle.[chunkhash].js',
   },
   module: {
     rules: [{
