@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import {SIGNUP_URI} from "../containers/routesContainer/uriConstants";
+import { SIGNUP_API } from "../api/constants";
 import Cookies from "universal-cookie";
 
 class SignupForm extends React.Component {
@@ -47,7 +47,7 @@ class SignupForm extends React.Component {
   handleSignup(event) {
     event.preventDefault();
 
-    axios.post(SIGNUP_URI, {
+    axios.post(SIGNUP_API, {
       fullName: this.state.fullName,
       username: this.state.username,
       email: this.state.email,

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import LoginForm from "../components/LoginForm";
-import NavBar from "../components/NavBar";
+import { Link } from 'react-router-dom';
 import SignupForm from "../components/SignupForm";
-
+// import NavBar from "../components/NavBar";
 
 class SignupPage extends React.Component {
 
@@ -13,17 +12,15 @@ class SignupPage extends React.Component {
       isLoading: false,
     };
   }
-
   render() {
     return (
         <div>
-          <NavBar/>
-          <LoginForm/>
-          <SignupForm/>
+          {/*<NavBar/>*/}
+          <SignupForm />
+          <Link to={'/'}>Go Back</Link>
         </div>
     );
   }
-
 }
 
 export default SignupPage;

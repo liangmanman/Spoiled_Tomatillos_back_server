@@ -23,13 +23,13 @@ public class UserService {
     encryptor.setPassword(SECRET_KEY);
   }
 
-  public String loginUser(String username, String password) {
+  public User loginUser(String username, String password) {
     User user = userDao.findCredentialsByUsername(username);
 
     if (password != null && user.getPassword() != null) {
       String passwordHash = encryptor.decrypt(user.getPassword());
       if (BCrypt.checkpw(password, passwordHash)) {
-        return user.getUsername();
+        return user;
       }
     }
     return null;

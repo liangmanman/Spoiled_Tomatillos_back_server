@@ -1,28 +1,37 @@
 import * as React from 'react';
-import NavBar from "../components/NavBar";
-import Cookies from 'universal-cookie';
+import { observer, inject } from 'mobx-react';
+import {withRouter} from "react-router-dom";
 
+@inject(stores => {
+    let { account } = stores.store;
+    return {
+        username: account.username,
+        password: account.password,
+        account: account.account,
+        errorMessage: account.errorMessage,
+        setUsername: account.setUsername,
+        setPassword: account.setPassword,
+        login: account.login,
+    }
+})
+@observer
+@withRouter
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.account);
     this.state = {
-      isLoading: false,
-      username: 'Not Logged In',
+        isLoading: false,
+        fullName: this.props.account.fullName,
     };
   }
 
-  componentDidMount() {
-    const cookies = new Cookies();
-    this.setState({username: cookies.get('username')});
-  }
 
   render() {
     return (
-        <div>
-          <NavBar/>
-          <h2>User Logged In: {this.state.username}</h2>
-        </div>
+      <div>
+          <h3>Hello {this.state.fullName}!</h3>
+      </div>
     );
   }
 }

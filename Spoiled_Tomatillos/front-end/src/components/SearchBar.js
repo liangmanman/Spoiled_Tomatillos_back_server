@@ -1,6 +1,6 @@
-import * as React from 'react';
-import styles from '../styles/SearchBar.css';
-import {withRouter} from "react-router-dom";
+import React from 'react';
+import { withRouter } from "react-router-dom";
+import '../styles/SearchBar.css';
 
 class SearchBar extends React.Component {
 

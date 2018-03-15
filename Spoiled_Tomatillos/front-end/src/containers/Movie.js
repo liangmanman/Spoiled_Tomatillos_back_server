@@ -1,9 +1,24 @@
 import * as React from 'react';
-import NavBar from "../components/NavBar";
 import MovieInfo from '../components/MovieInfo';
 import {omdb_axios} from "../api/_axios";
 import {OMDB_API_KEY} from "../constants";
 import '../styles/Movie.css';
+import {axios,} from '../api/_axios';
+// import NavBar from "../components/NavBar";
+import greyThumbsUp from "../img/greyup-64x64.png";
+import greenThumbsUp from "../img/greenup-64x64.png";
+import greyThumbsDown from "../img/greydown-64x64.png";
+import redThumbsDown from "../img/reddown-64x64.png";
+
+function ThumbsUp(props) {
+  let tu_img = props.userRating ? greenThumbsUp : greyThumbsUp;
+  return <button><img src={tu_img}/></button>;
+}
+
+function ThumbsDown(props) {
+  let td_img = (props.userRating != null && !props.userRating) ? redThumbsDown : greyThumbsDown;
+  return <button><img src={td_img}/></button>;
+}
 
 class Movie extends React.Component {
   constructor(props) {
@@ -11,11 +26,25 @@ class Movie extends React.Component {
     this.state = {
       result: undefined,
       isLoading: true,
+      userRating: true
     };
   }
 
+  postMovie = () => {
+    console.log(this.state.result);
+    axios.post('api/movie/insert/',
+        this.state.result)
+        .then((response) => {
+          console.log(response);
+          //this.setState({movies: response.data, isLoading: false,});
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  };
+
   searchById = (params) => {
-    const url2 = OMDB_API_KEY + '&i='+ params.id;
+    const url2 = OMDB_API_KEY + '&i=' + params.id;
     omdb_axios.get(url2)
         .then((response) => {
           this.setState({
@@ -27,10 +56,11 @@ class Movie extends React.Component {
           console.log(error);
         });
   };
+  
 
   componentDidMount() {
-    let { location: { movie }, match: { params } } = this.props;
-    movie? this.setState({ result : movie, isLoading: false }) : this.searchById(params);
+    let {location: {movie}, match: {params}} = this.props;
+    movie ? this.setState({result: movie, isLoading: false}) : this.searchById(params);
   }
 
   render() {
@@ -40,14 +70,20 @@ class Movie extends React.Component {
     }
     return (
         <div>
-          <NavBar/>
+            {/*<NavBar/>*/}
           <div className="movie">
             <MovieInfo movie={result} key={result.imdbID}/>
+            <button onClick={this.postMovie}>Like</button>
+          </div>
+          <div>
+            <ThumbsUp userRating={this.state.userRating}/>
+            <ThumbsDown userRating={this.state.userRating}/>
           </div>
 
         </div>
     );
-  }
+  };
+
 }
 
 export default Movie;
