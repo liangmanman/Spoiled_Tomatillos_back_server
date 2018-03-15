@@ -1,7 +1,6 @@
 import { action, observable } from 'mobx'
 import { axios } from '../api/_axios';
 import { SIGNUP_API, SIGNIN_API } from '../api/constants';
-import querystring from 'querystring';
 
 class Account {
     @observable username = '';
@@ -22,10 +21,10 @@ class Account {
     @action login() {
 
         return axios.post(SIGNIN_API,
-            querystring.stringify({
+            {
                 username: self.username,
                 password: self.password,
-            })
+            }
         ).then(res => {
             self.account = res.data;
             self.errorMessage = null;

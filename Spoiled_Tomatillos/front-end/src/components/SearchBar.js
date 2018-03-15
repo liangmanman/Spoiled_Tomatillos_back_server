@@ -12,7 +12,10 @@ class SearchBar extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const searchContent = e.target.elements.searchContent.value.trim();
+
     if (searchContent) {
+      // this.props.history.push('/search?query=' + searchContent);
+      // window.location.reload();
       this.props.history.push({
         pathname: '/search',
         search: '?query='+searchContent

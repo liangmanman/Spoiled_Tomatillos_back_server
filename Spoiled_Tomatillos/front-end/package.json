@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",
@@ -19,10 +20,12 @@
     "mobx-react": "^5.0.0",
     "popper.js": "^1.12.9",
     "prop-types": "^15.6.1",
+    "query-string": "^5.1.0",
     "querystring": "^0.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
+    "universal-cookie": "^2.1.2",
     "validator": "^9.4.1"
   },
   "devDependencies": {

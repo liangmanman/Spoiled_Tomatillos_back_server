@@ -2,7 +2,6 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import {withRouter} from "react-router-dom";
 
-
 @inject(stores => {
     let { account } = stores.store;
     return {
@@ -27,8 +26,6 @@ class HomePage extends React.Component {
     };
   }
 
-  componentDidMount() {
-  }
 
   render() {
     return (

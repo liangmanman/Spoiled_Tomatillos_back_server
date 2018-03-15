@@ -4,26 +4,23 @@ import SignupForm from "../components/SignupForm";
 // import NavBar from "../components/NavBar";
 
 class SignupPage extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            isLoading: false,
-        };
-    }
+  constructor(props) {
+    super(props);
 
-    componentDidMount() {
-    }
-
-    render() {
-        return (
-            <div>
-                {/*<NavBar/>*/}
-                <SignupForm />
-                <Link to={'/'}>Go Back</Link>
-            </div>
-        );
-    }
+    this.state = {
+      isLoading: false,
+    };
+  }
+  render() {
+    return (
+        <div>
+          {/*<NavBar/>*/}
+          <SignupForm />
+          <Link to={'/'}>Go Back</Link>
+        </div>
+    );
+  }
 }
 
 export default SignupPage;

@@ -22,6 +22,7 @@ import '../styles/NavBar.css';
 })
 @observer
 class NavBar extends React.Component {
+
     constructor(props) {
         super(props);
     };
@@ -50,4 +51,5 @@ class NavBar extends React.Component {
         );
     }
 }
+
 export default NavBar;
