@@ -5,6 +5,21 @@ import {omdb_axios} from "../api/_axios";
 import {OMDB_API_KEY} from "../constants";
 import '../styles/Movie.css';
 
+//import greyup from '../../img/greyup-64x64.png'
+//import greydown from '../../img/greydown-64x64.png'
+
+/*
+const thumbsup = {
+    src: greyup,
+    alt: 'You like this movie!'
+}
+
+const thumbsdown = {
+    src: greydown,
+    alt: "You don't like this movie"
+}
+*/
+
 class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +58,10 @@ class Movie extends React.Component {
           <NavBar/>
           <div className="movie">
             <MovieInfo movie={result} key={result.imdbID}/>
+          </div>
+          <div>
+            <img src={require("../../img/greyup-64x64.png")} alt={"You like it"}/>
+              <img src={require("../../img/greydown-64x64.png")} alt={"You don't like it"}/>
           </div>
 
         </div>
