@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import {SIGNUP_URI} from "../containers/routesContainer/uriConstants";
+import Cookies from "universal-cookie";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class SignupForm extends React.Component {
       fullName: null,
       username: null,
       email: null,
-      password: null
+      password: null,
     };
   }
 
@@ -45,6 +46,7 @@ class SignupForm extends React.Component {
 
   handleSignup(event) {
     event.preventDefault();
+
     axios.post(SIGNUP_URI, {
       fullName: this.state.fullName,
       username: this.state.username,

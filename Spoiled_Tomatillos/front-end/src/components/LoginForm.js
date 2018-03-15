@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { withRouter } from 'react-router-dom';
-import {LOGIN_URI} from "../containers/routesContainer/uriConstants";
+import { LOGIN_URI } from "../containers/routesContainer/uriConstants";
 
 class LoginForm extends React.Component {
 
@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
       isLoading: false,
       failedLogin: false,
       username: null,
-      password: null
+      password: null,
     };
   }
 
@@ -37,13 +37,14 @@ class LoginForm extends React.Component {
     );
   }
 
-
   handleLogin(event) {
     const cookies = new Cookies();
-
     event.preventDefault();
-    console.log(event);
-    axios.get(LOGIN_URI + '?username=' + this.state.username + '&password=' + this.state.password)
+
+    axios.post(LOGIN_URI, {
+      username: this.state.username,
+      password: this.state.password
+    })
         .then((response) => {
           if (response.data) {
             cookies.set('username', response.data, {path: '/'});

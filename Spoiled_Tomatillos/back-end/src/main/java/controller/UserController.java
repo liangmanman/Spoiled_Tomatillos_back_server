@@ -4,44 +4,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dao.IUserDao;
-import facade.CreateUserFacade;
+import facade.UserFacade;
 import model.User;
 import model.UserType;
+import service.UserService;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
   @Autowired
-  private IUserDao userDao;
+  private UserService userService;
 
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public String loginUser(@RequestParam("username") String username,
-                          @RequestParam("password") String password) {
-    User user = userDao.findCredentialsByUsername(username);
-
-    if (user.getPassword() != null && user.getPassword().equals(password)) {
-      return user.getUsername();
-    }
-    else {
-      return null;
-    }
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String loginUser(@RequestBody UserFacade userFacade) {
+    return userService.loginUser(userFacade.getUsername(), userFacade.getPassword());
   }
 
-  @RequestMapping("/create")
-  public String createUser(@RequestBody CreateUserFacade createUserFacade) {
-    User userToCreate = new User(createUserFacade.getUsername(),
-            createUserFacade.getPassword(),
-            createUserFacade.getEmail(),
-            createUserFacade.getFullName(),
+  @RequestMapping(value = "/create", method = RequestMethod.POST)
+  public String createUser(@RequestBody UserFacade userFacade) {
+    User userToCreate = new User(userFacade.getUsername(),
+            null,
+            userFacade.getEmail(),
+            userFacade.getFullName(),
             new UserType("STANDARD"));
 
-    userDao.createUser(userToCreate);
-
-    return "Account successfully created!";
+    return userService.createUser(userToCreate, userFacade.getPassword());
   }
 }

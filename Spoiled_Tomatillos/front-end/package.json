@@ -22,7 +22,8 @@
     "validator": "^9.4.1",
     "universal-cookie": "^2.1.2",
     "prop-types": "^15.6.1",
-    "query-string": "^5.1.0"
+    "query-string": "^5.1.0",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
