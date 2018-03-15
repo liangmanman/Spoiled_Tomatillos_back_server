@@ -5,6 +5,20 @@ import {OMDB_API_KEY} from "../constants";
 import '../styles/Movie.css';
 import {axios,} from '../api/_axios';
 // import NavBar from "../components/NavBar";
+import greyThumbsUp from "../img/greyup-64x64.png";
+import greenThumbsUp from "../img/greenup-64x64.png";
+import greyThumbsDown from "../img/greydown-64x64.png";
+import redThumbsDown from "../img/reddown-64x64.png";
+
+function ThumbsUp(props) {
+  let tu_img = props.userRating ? greenThumbsUp : greyThumbsUp;
+  return <button><img src={tu_img}/></button>;
+}
+
+function ThumbsDown(props) {
+  let td_img = (props.userRating != null && !props.userRating) ? redThumbsDown : greyThumbsDown;
+  return <button><img src={td_img}/></button>;
+}
 
 class Movie extends React.Component {
   constructor(props) {
@@ -12,6 +26,7 @@ class Movie extends React.Component {
     this.state = {
       result: undefined,
       isLoading: true,
+      userRating: true
     };
   }
 
@@ -41,6 +56,7 @@ class Movie extends React.Component {
           console.log(error);
         });
   };
+  
 
   componentDidMount() {
     let {location: {movie}, match: {params}} = this.props;
@@ -59,10 +75,15 @@ class Movie extends React.Component {
             <MovieInfo movie={result} key={result.imdbID}/>
             <button onClick={this.postMovie}>Like</button>
           </div>
+          <div>
+            <ThumbsUp userRating={this.state.userRating}/>
+            <ThumbsDown userRating={this.state.userRating}/>
+          </div>
 
         </div>
     );
-  }
+  };
+
 }
 
 export default Movie;
