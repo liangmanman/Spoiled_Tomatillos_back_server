@@ -28,7 +28,7 @@ class SignOutButton extends React.Component {
     }
 }
 
-SignInForm.propTypes = {
+SignOutButton.propTypes = {
     logOut: PropTypes.func.isRequired,
 };
 

@@ -14,7 +14,7 @@ class MovieList extends React.Component {
 
   componentDidMount() {
     this.setState({isLoading: true,});
-    axios.get('api/movies')
+    axios.get('api/movies/list')
         .then((response) => {
           this.setState({movies: response.data, isLoading: false,});
         })

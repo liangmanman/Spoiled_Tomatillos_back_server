@@ -16,7 +16,7 @@ import '../styles/NavBar.css';
 @inject(stores => {
     let { account } = stores.store;
     return {
-        account: account.account,
+      userInfo: account.userInfo,
         logOut: account.logout,
     }
 })
@@ -28,8 +28,8 @@ class NavBar extends React.Component {
     };
 
     render() {
-        const { account } = this.props;
-        if (_.isNil(account)) {
+        const { userInfo } = this.props;
+        if (_.isNil(userInfo)) {
             return (
                 <div className="topNav">
                     <h3 className="title">Spoiled Tomatillos</h3>

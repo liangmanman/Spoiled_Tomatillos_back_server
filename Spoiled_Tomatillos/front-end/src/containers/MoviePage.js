@@ -9,6 +9,7 @@ import greyThumbsUp from "../img/greyup-64x64.png";
 import greenThumbsUp from "../img/greenup-64x64.png";
 import greyThumbsDown from "../img/greydown-64x64.png";
 import redThumbsDown from "../img/reddown-64x64.png";
+import { inject, observer } from "mobx-react/index";
 
 function ThumbsUp(props) {
   let tu_img = props.userRating ? greenThumbsUp : greyThumbsUp;
@@ -20,7 +21,16 @@ function ThumbsDown(props) {
   return <button><img src={td_img}/></button>;
 }
 
-class Movie extends React.Component {
+
+@inject(stores => {
+  let { account, movies } = stores.store;
+  return {
+    userInfo: account.userInfo,
+    postLikeMovie: movies.postLikeMovie,
+  }
+})
+@observer
+class MoviePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,22 +38,19 @@ class Movie extends React.Component {
       isLoading: true,
       userRating: true
     };
+    this.postLikedMovie = this.postLikedMovie.bind(this);
   }
 
-  postMovie = () => {
-    console.log(this.state.result);
-    axios.post('api/movie/insert/',
-        this.state.result)
-        .then((response) => {
-          console.log(response);
-          //this.setState({movies: response.data, isLoading: false,});
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+  postLikedMovie() {
+    let { postLikeMovie, userInfo } = this.props;
+    let { userId } = userInfo;
+    postLikeMovie({
+      userId,
+      movie: this.state.result
+    });
   };
 
-  searchById = (params) => {
+  searchById(params) {
     const url2 = OMDB_API_KEY + '&i=' + params.id;
     omdb_axios.get(url2)
         .then((response) => {
@@ -70,10 +77,9 @@ class Movie extends React.Component {
     }
     return (
         <div>
-            {/*<NavBar/>*/}
           <div className="movie">
             <MovieInfo movie={result} key={result.imdbID}/>
-            <button onClick={this.postMovie}>Like</button>
+            <button onClick={this.postLikedMovie}>Like</button>
           </div>
           <div>
             <ThumbsUp userRating={this.state.userRating}/>
@@ -86,4 +92,4 @@ class Movie extends React.Component {
 
 }
 
-export default Movie;
+export default MoviePage;

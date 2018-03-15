@@ -19,7 +19,6 @@ import {withRouter} from "react-router-dom";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.account);
     this.state = {
         isLoading: false,
         fullName: this.props.account.fullName,

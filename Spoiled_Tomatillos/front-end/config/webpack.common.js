@@ -9,7 +9,7 @@ const assetsPath = path.resolve(rootPath, "./src/assets");
 const HTML_TITLE = 'Spoiled Tomatillos';
 
 module.exports = {
-  entry: path.join(__dirname, '../src/app.js'),
+  entry: ['babel-polyfill', path.join(__dirname, '../src/app.js')],
   devtool: 'inline-source-map',
   plugins: [
     new CleanWebpackPlugin([buildPath],

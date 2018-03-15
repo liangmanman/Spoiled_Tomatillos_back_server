@@ -1,5 +1,5 @@
 import React, { Component, } from 'react';
-import {MOVIE_URI} from "../containers/routesContainer/uriConstants";
+import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
 import { Link } from 'react-router-dom';
 
 class MovieInfo extends Component {
@@ -19,7 +19,7 @@ class MovieInfo extends Component {
           </div>
           <div className="col-sm-8 card-right card-title">
             <h5>
-              <Link to={{ pathname: `${MOVIE_URI}/${result.imdbID}`, 'movie': result }}>
+              <Link to={{ pathname: `${MOVIE_DETAIL_URI}/${result.imdbID}`, 'movie': result }}>
                 Title: {result.Title}
               </Link>
             </h5>

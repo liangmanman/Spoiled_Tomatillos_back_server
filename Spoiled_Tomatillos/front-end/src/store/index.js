@@ -1,13 +1,10 @@
 import account from './account';
+import movies from './movies';
 
-// class RootStore {
-//     constructor() {
-//         this.account = new Account();
-//     }
-// }
 
 const stores = {
-    account,
+  account,
+  movies,
 };
 
 export default stores;
