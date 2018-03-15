@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import SignupForm from "../components/SignupForm";
-import NavBar from "../components/NavBar";
+// import NavBar from "../components/NavBar";
 
 class SignupPage extends React.Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class SignupPage extends React.Component {
     render() {
         return (
             <div>
-                <NavBar/>
+                {/*<NavBar/>*/}
                 <SignupForm />
                 <Link to={'/'}>Go Back</Link>
             </div>

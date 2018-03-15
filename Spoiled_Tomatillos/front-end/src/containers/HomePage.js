@@ -1,12 +1,29 @@
 import * as React from 'react';
-import NavBar from '../components/NavBar';
+import { observer, inject } from 'mobx-react';
+import {withRouter} from "react-router-dom";
 
+
+@inject(stores => {
+    let { account } = stores.store;
+    return {
+        username: account.username,
+        password: account.password,
+        account: account.account,
+        errorMessage: account.errorMessage,
+        setUsername: account.setUsername,
+        setPassword: account.setPassword,
+        login: account.login,
+    }
+})
+@observer
+@withRouter
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.account);
     this.state = {
-      isLoading: false,
+        isLoading: false,
+        fullName: this.props.account.fullName,
     };
   }
 
@@ -16,7 +33,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <NavBar/>
+          <h3>Hello {this.state.fullName}!</h3>
       </div>
     );
   }
