@@ -5,10 +5,8 @@ import {withRouter} from "react-router-dom";
 class SearchBar extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = {
-      results: [],
-    };
+      super(props);
+      this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleSubmit = (e) => {
@@ -16,19 +14,23 @@ class SearchBar extends React.Component {
     const searchContent = e.target.elements.searchContent.value.trim();
 
     if (searchContent) {
-      this.props.history.push('/search?query=' + searchContent);
-      window.location.reload();
+      // this.props.history.push('/search?query=' + searchContent);
+      // window.location.reload();
+      this.props.history.push({
+        pathname: '/search',
+        search: '?query='+searchContent
+      });
     }
   };
 
   render() {
     return (
-        <div>
-          <form className="searchBar" onSubmit={this.handleSubmit}>
-            <input className="searchText" type="search" name="searchContent"></input>
-            <button className="btn btn-primary searchButton ">search</button>
-          </form>
-        </div>
+      <div>
+        <form className="searchBar" onSubmit={ this.handleSubmit }>
+          <input className="searchText" type="search" name="searchContent"></input>
+          <button className="btn btn-primary searchButton ">search</button>
+        </form>
+      </div>
     );
   }
 }
