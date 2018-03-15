@@ -1,31 +1,30 @@
 import * as React from 'react';
-import { axios, } from '../api/_axios';
+import { axios } from '../api/_axios';
 import NavBar from '../components/NavBar';
 
 class MovieList extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            movies: [],
-            isLoading: false,
-        };
-    }
+    this.state = {
+      movies: [],
+      isLoading: false,
+    };
+  }
 
-    componentDidMount() {
-        this.setState({isLoading: true,});
-        axios.get('api/movies')
-            .then((response) => {
-
-                this.setState({movies: response.data, isLoading: false,});
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+  componentDidMount() {
+    this.setState({isLoading: true,});
+    axios.get('api/movies')
+        .then((response) => {
+          this.setState({movies: response.data, isLoading: false,});
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
 
     render() {
-        const {movies, isLoading,} = this.state;
+        const {movies, isLoading} = this.state;
 
         if (isLoading) {
             return <p>Loading...</p>;

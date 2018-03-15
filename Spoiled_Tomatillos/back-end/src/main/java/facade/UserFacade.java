@@ -1,6 +1,6 @@
 package facade;
 
-public class CreateUserFacade {
+public class UserFacade {
 
   private String fullName;
   private String username;
@@ -31,9 +31,7 @@ public class CreateUserFacade {
     this.email = email;
   }
 
-  public String getPassword() {
-    return password;
-  }
+  public String getPassword() { return password; }
 
   public void setPassword(String password) {
     this.password = password;

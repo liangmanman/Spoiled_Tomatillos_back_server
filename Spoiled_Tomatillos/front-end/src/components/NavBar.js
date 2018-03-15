@@ -5,6 +5,7 @@ import {MOVIE_LIST_URI, SIGNUP_URI} from '../containers/routesContainer/uriConst
 import '../styles/NavBar.css';
 
 class NavBar extends React.Component {
+
     constructor(props) {
         super(props);
     };
@@ -13,7 +14,7 @@ class NavBar extends React.Component {
         return (
             <div className="topNav">
                 <h3 className="title">Spoiled Tomatillos</h3>
-                <Link className="active" to="#home">Home</Link>
+                <Link className="active" to="/">Home</Link>
                 <Link to={SIGNUP_URI}>Profile</Link>
                 <Link to="#recommendations">Recommendations</Link>
                 <Link to={MOVIE_LIST_URI}>Movies</Link>
@@ -22,4 +23,5 @@ class NavBar extends React.Component {
         );
     }
 }
+
 export default NavBar;

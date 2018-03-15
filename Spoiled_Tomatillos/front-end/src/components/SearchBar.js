@@ -1,5 +1,6 @@
-import React from 'react';
-import { withRouter } from "react-router-dom";
+import * as React from 'react';
+import styles from '../styles/SearchBar.css';
+import {withRouter} from "react-router-dom";
 
 class SearchBar extends React.Component {
 
@@ -11,7 +12,10 @@ class SearchBar extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const searchContent = e.target.elements.searchContent.value.trim();
+
     if (searchContent) {
+      // this.props.history.push('/search?query=' + searchContent);
+      // window.location.reload();
       this.props.history.push({
         pathname: '/search',
         search: '?query='+searchContent
