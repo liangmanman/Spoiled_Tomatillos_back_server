@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import {MOVIE_URI} from "../containers/routesContainer/uriConstants";
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 class MovieInfo extends Component {
   constructor(props) {
@@ -8,7 +8,18 @@ class MovieInfo extends Component {
     this.state = {
       result: this.props.movie
     };
+    this.renderTitle = this.renderTitle.bind(this);
   }
+
+  renderTitle = () => {
+    const {result} = this.state;
+    if (this.props.location.pathname.startsWith("/movie")) {
+      return <a>{result.Title}</a>
+    }
+    return <Link to={{ pathname: `${MOVIE_URI}/${result.imdbID}`, 'movie': result }}>
+      {result.Title}
+    </Link>
+  };
 
   render() {
     const {result} = this.state;
@@ -19,9 +30,7 @@ class MovieInfo extends Component {
           </div>
           <div className="col-sm-8 card-right card-title">
             <h5>
-              <Link to={{ pathname: `${MOVIE_URI}/${result.imdbID}`, 'movie': result }}>
-                Title: {result.Title}
-              </Link>
+              {this.renderTitle()}
             </h5>
             <p>Year: {result.Year}</p>
             <p>{result.Plot}</p>
@@ -45,5 +54,5 @@ class MovieInfo extends Component {
   }
 }
 
-export default MovieInfo;
+export default withRouter(MovieInfo);
 

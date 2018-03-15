@@ -4,6 +4,7 @@ import { omdb_axios } from '../api/_axios';
 import _ from 'lodash';
 import NavBar from '../components/NavBar';
 import MovieInfo from '../components/MovieInfo';
+import qs from "query-string";
 
 class SearchResult extends React.Component {
 
@@ -17,8 +18,8 @@ class SearchResult extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const searchBy = nextProps.location.search;
-    this.searchByKeyWord(searchBy.substr(7));
+    const searchContent = qs.parse(nextProps.location.search).query;
+    this.searchByKeyWord(searchContent);
   }
 
   searchByKeyWord = (searchContent) => {
@@ -53,8 +54,8 @@ class SearchResult extends React.Component {
   };
 
   componentDidMount() {
-    const searchBy = this.props.location.search;
-    this.searchByKeyWord(searchBy.substr(7));
+    const searchContent = qs.parse(this.props.location.search).query;
+    this.searchByKeyWord(searchContent);
   }
 
 

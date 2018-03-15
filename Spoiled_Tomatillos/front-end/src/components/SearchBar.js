@@ -5,17 +5,16 @@ import {withRouter} from "react-router-dom";
 class SearchBar extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.handleSubmit = this.handleSubmit.bind(this);
+    super(props);
+    this.state = { searchContent: '' };
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const searchContent = e.target.elements.searchContent.value.trim();
-
-    if (searchContent) {
-      // this.props.history.push('/search?query=' + searchContent);
-      // window.location.reload();
+    if (searchContent && searchContent !== this.state.searchContent) {
+      this.setState({ searchContent });
       this.props.history.push({
         pathname: '/search',
         search: '?query='+searchContent

@@ -8,4 +8,4 @@ if (process.env.NODE_ENV === 'production') {
 
 export const API_ENDPOINT = apiEndpoint;
 export const OMDB_API = 'http://www.omdbapi.com';
-export const OMDB_API_KEY = '/?apikey=e05e044b&s=';
+export const OMDB_API_KEY = '/?apikey=e05e044b&';
