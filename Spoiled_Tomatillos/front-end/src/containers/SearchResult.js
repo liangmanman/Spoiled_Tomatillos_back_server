@@ -2,7 +2,6 @@ import * as React from 'react';
 import { OMDB_API_KEY } from '../constants';
 import { omdb_axios } from '../api/_axios';
 import _ from 'lodash';
-import NavBar from '../components/NavBar';
 import MovieInfo from '../components/MovieInfo';
 
 class SearchResult extends React.Component {
@@ -65,7 +64,6 @@ class SearchResult extends React.Component {
     }
     return (
         <div>
-          <NavBar/>
           <div className="result-list">
             <h1>Search Result</h1>
             {results.map((result) => {
