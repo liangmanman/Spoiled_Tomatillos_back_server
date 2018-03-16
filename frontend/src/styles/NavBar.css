@@ -1,0 +1,46 @@
+.topNav {
+    background-color: #1f3d7a;
+    overflow: hidden;
+    margin-left: calc(50% - 50vw);
+    width: 100vw;
+}
+
+.signOutButton {
+    color: #f2f2f2 !important;
+}
+
+.topNav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    margin-top: 2px;
+    padding: 16px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topNav a.active {
+    background-color: #7094db;
+    color: white;
+}
+
+.topNav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.title {
+    float: left;
+    margin-top: 3px;
+    padding: 8px 16px;
+    color: #f2f2f2;
+}
+
+.SearchBar {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

@@ -33,14 +33,9 @@ module.exports = function (app, passport) {
 
     // Configure corse
     app.use(cors());
-    app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
 
     // Static files middleware
-    app.use(express.static(config.root + '/public'));
+    app.use(express.static(config.root + '/frontend/build'));
 
     // Use winston on production
     let log = 'dev';
@@ -87,6 +82,7 @@ module.exports = function (app, passport) {
     // use passport session
     app.use(passport.initialize());
     app.use(passport.session());
+
 
     if (env === 'development') {
         app.locals.pretty = true;
