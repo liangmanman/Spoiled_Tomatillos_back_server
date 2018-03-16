@@ -1,27 +1,19 @@
 jobs:
   include:
   - stage: unit tests
-    script: Running unit tests (1)
+    script: test
   - stage: deploy to staging
     script: skip
-    deploy:
-      provider: heroku
-      app: sf-stages-staging
-      api_key: "$HEROKU_AUTH_TOKEN"
   - stage: test staging
     script: curl http://sf-stages-staging.herokuapp.com
   - stage: deploy to production
     script: skip
     deploy:
+      api_key:
+        secure: XeXoYYt+/tyROekKqX2ogZGQwGU2pJA89diSKWRjQIgZ6ihdKK9ceoy5APuOK6XfVOYB8a0TB+PKsvM/67C006NujZh5wDNyiwFi9cvUKwoSqOLN8ukHz2XpGBNMYgi1ummtKgXHlfjwX0hHUKOrxdoD9ubpQpol+aPK18Fj0r7OiO35+lyVEzkMoxH3f1fIvlihgX4tVbJcLIxgCUwtGSgdFUCLdxc2jEZIcvc9DvfkA9ODPjQwCRmnd6hTk+nyzn1iJtIgaGDm4hSjtNhoCtf5Pv1HYYmV3zEuPjcoJNEfHWHPVtk6tJnCEg2Ap/nfjPgco3gH56nE3/PxvXOb/QTBoRB6Uc5GX7VGxMT+LTjWPdspzME0dbQOX0DyG8JIyiQ/Qd3ocsMKcrNXBQbImbQP/O8HKCOFwaXcfQ+5bQpcCXYb9lKbepvUvHKfmqNCFxDLdMbNOkhXknx8tFnoRKQDVKc20UILFaaW2CAEM0f1019Wo5mTpPd3vhwDDMaSU0zWaQNwSxO0FvVMWcmoXPvK6/zr2CmwnG4bIK5mEMgWPuu+n6IH1zE/O+/BLvDIa6p7vXwAl44JklaY9/TwrerHt5sTNHQkOVXHc2UkjKY64Il6mKJD8I5Da1+nYy3XY3fcG+JBiT50BCg7/m52SF3pSweekyXPmOy11oIcrw8=
       provider: heroku
-      app: sf-stages-production
-      api_key: "$HEROKU_AUTH_TOKEN"
-  - stage: test production
-    script: curl http://sf-stages-production.herokuapp.com
+      on: master
 language: node_js
 node_js:
 - iojs
 - '9'
-deploy:
-  api_key:
-    secure: XeXoYYt+/tyROekKqX2ogZGQwGU2pJA89diSKWRjQIgZ6ihdKK9ceoy5APuOK6XfVOYB8a0TB+PKsvM/67C006NujZh5wDNyiwFi9cvUKwoSqOLN8ukHz2XpGBNMYgi1ummtKgXHlfjwX0hHUKOrxdoD9ubpQpol+aPK18Fj0r7OiO35+lyVEzkMoxH3f1fIvlihgX4tVbJcLIxgCUwtGSgdFUCLdxc2jEZIcvc9DvfkA9ODPjQwCRmnd6hTk+nyzn1iJtIgaGDm4hSjtNhoCtf5Pv1HYYmV3zEuPjcoJNEfHWHPVtk6tJnCEg2Ap/nfjPgco3gH56nE3/PxvXOb/QTBoRB6Uc5GX7VGxMT+LTjWPdspzME0dbQOX0DyG8JIyiQ/Qd3ocsMKcrNXBQbImbQP/O8HKCOFwaXcfQ+5bQpcCXYb9lKbepvUvHKfmqNCFxDLdMbNOkhXknx8tFnoRKQDVKc20UILFaaW2CAEM0f1019Wo5mTpPd3vhwDDMaSU0zWaQNwSxO0FvVMWcmoXPvK6/zr2CmwnG4bIK5mEMgWPuu+n6IH1zE/O+/BLvDIa6p7vXwAl44JklaY9/TwrerHt5sTNHQkOVXHc2UkjKY64Il6mKJD8I5Da1+nYy3XY3fcG+JBiT50BCg7/m52SF3pSweekyXPmOy11oIcrw8=
