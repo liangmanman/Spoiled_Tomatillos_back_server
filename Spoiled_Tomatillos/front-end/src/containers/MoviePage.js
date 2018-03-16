@@ -9,7 +9,7 @@ import greyThumbsUp from "../img/greyup-64x64.png";
 import greenThumbsUp from "../img/greenup-64x64.png";
 import greyThumbsDown from "../img/greydown-64x64.png";
 import redThumbsDown from "../img/reddown-64x64.png";
-import { inject, observer } from "mobx-react/index";
+import { inject, observer } from "mobx-react";
 
 function ThumbsUp(props) {
   let tu_img = props.userRating ? greenThumbsUp : greyThumbsUp;
@@ -78,7 +78,7 @@ class MoviePage extends React.Component {
     return (
         <div>
           <div className="movie">
-            <MovieInfo movie={result} key={result.imdbID}/>
+            <MovieInfo imdbID={result.imdbID} key={result.imdbID}/>
             <button onClick={this.postLikedMovie}>Like</button>
           </div>
           <div>

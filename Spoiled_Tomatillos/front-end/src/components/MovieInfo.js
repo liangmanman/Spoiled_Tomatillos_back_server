@@ -1,17 +1,58 @@
 import React, { Component, } from 'react';
-import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
+import { observer, inject } from "mobx-react";
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
+
+@inject(stores => {
+  let { omdb } = stores.store;
+  return {
+    movieList: omdb.movieList,
+    getMovieById: omdb.getMovieById,
+  }
+})@observer
 class MovieInfo extends Component {
   constructor(props) {
     super(props);
+    this.getMovie = this.getMovie.bind(this);
     this.state = {
-      result: this.props.movie
+      loading: true,
+      result: null,
+      error: null,
     };
   }
 
+  componentWillMount() {
+    this.getMovie();
+  }
+
+  async getMovie(){
+    try {
+      const { getMovieById, imdbID } = this.props;
+      const movieInfo = await getMovieById(imdbID);
+      this.setState({
+        result: movieInfo,
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({
+        error: err,
+        loading: false,
+      });
+    }
+  }
+
   render() {
-    const {result} = this.state;
+    const { result, loading, error } = this.state;
+
+    if (loading) {
+      return (<div></div>);
+    }
+    if (error) {
+      return (<div></div>);
+    }
+
     return (
         <div className="row Card">
           <div className="col-sm-4">
@@ -44,6 +85,11 @@ class MovieInfo extends Component {
     );
   }
 }
+
+
+MovieInfo.propTypes = {
+  imdbID: PropTypes.string.isRequired,
+};
 
 export default MovieInfo;
 

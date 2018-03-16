@@ -67,7 +67,7 @@ class SearchResult extends React.Component {
           <div className="result-list">
             <h1>Search Result</h1>
             {results.map((result) => {
-              return <MovieInfo movie={result} key={result.imdbID}/>
+              return <MovieInfo imdbID={result.imdbID} key={result.imdbID}/>
             })}
           </div>
         </div>

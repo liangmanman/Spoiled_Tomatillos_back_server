@@ -1,47 +1,47 @@
 import * as React from 'react';
-import { axios, } from '../api/_axios';
-// import NavBar from "../components/NavBar";
+import _ from 'lodash';
+import MovieInfo from '../components/MovieInfo';
+import {inject, observer} from "mobx-react";
 
+
+@inject(stores => {
+  let { movies } = stores.store;
+  return {
+    fetchMovieList: movies.fetchMovieList,
+    movieList: movies.movieList.toJS(),
+  }
+})
+@observer
 class MovieList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      movies: [],
-      isLoading: false,
-    };
+    this.renderMoveInfoList = this.renderMoveInfoList.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({isLoading: true,});
-    axios.get('api/movies/list')
-        .then((response) => {
-          this.setState({movies: response.data, isLoading: false,});
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+  componentWillMount() {
+    this.props.fetchMovieList();
   }
 
-    render() {
-        const {movies, isLoading} = this.state;
+  renderMoveInfoList() {
+    const { movieList } = this.props;
 
-        if (isLoading) {
-            return <p>Loading...</p>;
-        }
+      return _.map(movieList, (movie) => {
+        return <MovieInfo key={movie.apiMovieId} imdbID={movie.apiMovieId}/>;
+      });
 
-        return (
-            <div>
-                {/*<NavBar/>*/}
-                <h2>Movie List</h2>
-                {movies.map((movie) =>
-                    <div key={movie.apiMovieId}>
-                        {movie.apiMovieId}
-                    </div>
-                )}
-            </div>
-        );
-    }
+
+  }
+
+
+  render() {
+
+    return (
+        <div>
+          <h2>Movie List</h2>
+          {this.renderMoveInfoList()}
+        </div>
+    );
+  }
 }
 
 export default MovieList;
