@@ -21,4 +21,8 @@ module.exports = function (app) {
     const movieRouter = require('./movies');
     apiRouter.use('/movies', movieRouter);
 
+    // like router
+    const likeRouter = require('./likes');
+    apiRouter.use('/likes', likeRouter);
+
 };

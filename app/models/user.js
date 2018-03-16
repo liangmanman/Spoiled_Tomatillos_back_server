@@ -23,7 +23,6 @@ const UserSchema = new Schema({
     hashed_password: { type: String, default: '' },
     salt: { type: String, default: '' },
     fullName: { type: String, default: '' },
-    likedMovies: [ { type: mongoose.Schema.ObjectId, ref: movieSchemaString } ],
     // authToken: { type: String, default: '' },
 });
 

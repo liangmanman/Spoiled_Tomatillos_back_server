@@ -9,9 +9,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const { incrementVersionNumberForQuery,
-    incrementVersionNumberForSchema } = require('./utils');
-
-const { userSchemaString } = require('./user');
+  incrementVersionNumberForSchema } = require('./utils');
 
 const Schema = mongoose.Schema;
 
@@ -23,22 +21,21 @@ const movieSchemaString = 'Movie';
  */
 
 const MovieSchema = new Schema({
-    title: { type: String, required: true },
-    imdbID: { type: String, required: true, unique: true, index: true },
-    posterImgPath: { type: String, required: true },
-    releaseYear: { type: String, required: true },
-    briefDescription: { type: String, required: true },
-    likedByUsers: [ { type: mongoose.Schema.ObjectId, ref: userSchemaString } ],
+  title: { type: String, required: true },
+  imdbID: { type: String, required: true, unique: true, index: true },
+  posterImgPath: { type: String, required: true },
+  releaseYear: { type: String, required: true },
+  briefDescription: { type: String, required: true },
 }, {
-    timestamps: true,
+  timestamps: true,
 });
 
 const JoiMovieSchema = Joi.object().keys({
-    title: Joi.string(),
-    imdbID: Joi.string(),
-    posterImgPath: Joi.string(),
-    releaseYear: Joi.string(),
-    briefDescription: Joi.string(),
+  title: Joi.string(),
+  imdbID: Joi.string(),
+  posterImgPath: Joi.string(),
+  releaseYear: Joi.string(),
+  briefDescription: Joi.string(),
 });
 
 /**
@@ -47,23 +44,23 @@ const JoiMovieSchema = Joi.object().keys({
 
 // the below 5 validations only apply if you are signing up traditionally
 MovieSchema.path('title').validate(function (title) {
-    return title.length;
+  return title.length;
 }, 'Title cannot be blank');
 
 MovieSchema.path('imdbID').validate(function (imdbID) {
-    return imdbID.length;
+  return imdbID.length;
 }, 'imdbID cannot be blank');
 
 MovieSchema.path('posterImgPath').validate(function (posterImgPath) {
-    return posterImgPath.length;
+  return posterImgPath.length;
 }, 'posterImgPath cannot be blank');
 
 MovieSchema.path('releaseYear').validate(function (releaseYear) {
-    return releaseYear.length;
+  return releaseYear.length;
 }, 'releaseYear cannot be blank');
 
 MovieSchema.path('briefDescription').validate(function (briefDescription) {
-    return briefDescription.length;
+  return briefDescription.length;
 }, 'briefDescription cannot be blank');
 
 
@@ -73,6 +70,13 @@ MovieSchema.path('briefDescription').validate(function (briefDescription) {
  */
 
 MovieSchema.statics = {
+  findAllWithIdList: async function(idList) {
+    return await this.find({
+      _id: {
+        $in: idList,
+      },
+    });
+  },
 };
 
 /**
@@ -88,6 +92,6 @@ MovieSchema.pre('findOneAndUpdate', incrementVersionNumberForQuery);
 mongoose.model(movieSchemaString, MovieSchema);
 
 module.exports = {
-    JoiMovieSchema,
-    movieSchemaString,
+  JoiMovieSchema,
+  movieSchemaString,
 };
