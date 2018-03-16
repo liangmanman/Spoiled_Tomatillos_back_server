@@ -17,7 +17,7 @@ class SignupPage extends React.Component {
         <div>
           {/*<NavBar/>*/}
           <SignupForm />
-          <Link to={'/'}>Go Back</Link>
+          {/*<Link to={'/'}>Go Back</Link>*/}
         </div>
     );
   }

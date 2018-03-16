@@ -28,7 +28,7 @@ public class UserController {
     JSONObject response = new JSONObject();
 
     if (user != null) {
-      response.put("accountId", user.getId());
+      response.put("userId", user.getId());
       response.put("fullName", user.getFullName());
       return new ResponseEntity<>(response, HttpStatus.OK);
     }

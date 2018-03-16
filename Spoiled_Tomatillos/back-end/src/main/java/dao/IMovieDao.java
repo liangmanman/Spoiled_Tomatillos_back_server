@@ -8,4 +8,6 @@ public interface IMovieDao {
   List<Movie> findAllMovies();
 
   void insertMovie(Movie movie);
+
+  Movie findMovieByApiMovieId(String apiMovieId);
 }

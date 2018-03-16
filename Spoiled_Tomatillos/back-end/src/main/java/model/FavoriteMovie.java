@@ -14,14 +14,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 
-/**
- * User represents the cached information that represents a User's favorite movie.
- * A favorite movie is created and stored in database when it is created from
- * a user
- */
-
 @Entity
-@Table(name="Review")
+@Table(name="FavoriteMovie")
 public class FavoriteMovie implements Serializable {
 
     @Id
@@ -29,11 +23,11 @@ public class FavoriteMovie implements Serializable {
     @Column(name = "Id")
     private Long id;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "Username")
-    private String username;
+//    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "UserId")
+    private Long userId;
 
-    @ManyToOne(targetEntity = Movie.class)
+//    @ManyToOne(targetEntity = Movie.class)
     @JoinColumn(name = "ApiMovieId")
     private String apiMovieId;
 
@@ -55,8 +49,8 @@ public class FavoriteMovie implements Serializable {
 
     public FavoriteMovie() {}
 
-    public FavoriteMovie(String username, String apiMovieId) {
-        this.username = username;
+    public FavoriteMovie(Long userId, String apiMovieId) {
+        this.userId = userId;
         this.apiMovieId = apiMovieId;
     }
 
@@ -68,12 +62,12 @@ public class FavoriteMovie implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getApiMovieId() {

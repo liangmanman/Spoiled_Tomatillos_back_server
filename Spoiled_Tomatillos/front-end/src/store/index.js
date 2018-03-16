@@ -1,13 +1,12 @@
 import account from './account';
+import movies from './movies';
+import omdb from './omdb';
 
-// class RootStore {
-//     constructor() {
-//         this.account = new Account();
-//     }
-// }
 
 const stores = {
-    account,
+  account,
+  movies,
+  omdb,
 };
 
 export default stores;

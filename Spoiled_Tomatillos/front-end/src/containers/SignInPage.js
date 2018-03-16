@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 
-
 import SignInForm from "../components/SignInForm";
 
 @inject(stores => {
@@ -11,7 +10,7 @@ import SignInForm from "../components/SignInForm";
     return {
         username: account.username,
         password: account.password,
-        account: account.account,
+      userInfo: account.userInfo,
         errorMessage: account.errorMessage,
         setUsername: account.setUsername,
         setPassword: account.setPassword,
@@ -36,7 +35,7 @@ class SignInPage extends React.Component {
         let {
             username,
             password,
-            account,
+          userInfo,
             errorMessage,
             setUsername,
             setPassword,
@@ -48,13 +47,13 @@ class SignInPage extends React.Component {
                 <SignInForm
                     username={username}
                     password={password}
-                    account={account}
+                    userInfo={userInfo}
                     errorMessage={errorMessage}
                     setUsername={setUsername}
                     setPassword={setPassword}
                     login={login}
                 />
-                <Link to={'/'}>Go Back</Link>
+                {/*<Link to={'/'}>Go Back</Link>*/}
             </div>
         );
     }

@@ -33,7 +33,7 @@ public class Movie implements Serializable {
   private String posterImgPath;
 
   @Column(name = "ReleaseYear")
-  private Long releaseYear;
+  private String releaseYear;
 
   @Column(name = "BriefDescription")
   private String briefDescription;
@@ -69,7 +69,7 @@ public class Movie implements Serializable {
   /**
    * Create a movie with an initialized api movie id, title, release year, and description
    */
-  public Movie(String apiMovieId, String title, Long releaseYear, String briefDescription) {
+  public Movie(String apiMovieId, String title, String releaseYear, String briefDescription) {
     this.apiMovieId = apiMovieId;
     this.title = title;
     this.releaseYear = releaseYear;
@@ -128,7 +128,7 @@ public class Movie implements Serializable {
    * Gets the year that the movie was released
    * @return release year of the movie as a Long
    */
-  public Long getReleaseYear() {
+  public String getReleaseYear() {
     return releaseYear;
   }
 
@@ -136,7 +136,7 @@ public class Movie implements Serializable {
    * Sets the year that the movie was released
    * @param releaseYear release year of the movie
    */
-  public void setReleaseYear(Long releaseYear) {
+  public void setReleaseYear(String releaseYear) {
     this.releaseYear = releaseYear;
   }
 
