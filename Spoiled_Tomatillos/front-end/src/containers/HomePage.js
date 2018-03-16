@@ -7,7 +7,7 @@ import {withRouter} from "react-router-dom";
     return {
         username: account.username,
         password: account.password,
-        account: account.account,
+        userInfo: account.userInfo,
         errorMessage: account.errorMessage,
         setUsername: account.setUsername,
         setPassword: account.setPassword,
@@ -21,7 +21,7 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
         isLoading: false,
-        fullName: this.props.account.fullName,
+        fullName: this.props.userInfo.fullName,
     };
   }
 
