@@ -1,12 +1,33 @@
 import { action, observable } from 'mobx'
+import Cookies from 'universal-cookie';
+import _ from 'lodash';
+
 import { axios } from '../api/_axios';
-import { SIGNUP_API, SIGNIN_API } from '../api/constants';
+import { SIGNIN_API } from '../api/constants';
+
+const cookies = new Cookies();
 
 class Account {
     @observable username = '';
     @observable password = '';
     @observable errorMessage = null;
-    @observable account = null;
+    @observable userInfo = null;
+
+    constructor () {
+        let userInfoFromCookie = cookies.get('userInfo');
+        if (!_.isNil(userInfoFromCookie)) {
+            this.userInfo = userInfoFromCookie;
+        }
+    }
+
+    @action setUserInfo(userInfo) {
+        self.userInfo = userInfo;
+        if (_.isNil(userInfo)) {
+            cookies.remove('userInfo');
+        } else {
+          cookies.set('userInfo', userInfo);
+        }
+    }
 
     @action setUsername(username) {
         // console.log(username);
@@ -19,18 +40,17 @@ class Account {
     }
 
     @action login() {
-
         return axios.post(SIGNIN_API,
             {
                 username: self.username,
                 password: self.password,
             }
         ).then(res => {
-            self.account = res.data;
+            self.setUserInfo(res.data);
             self.errorMessage = null;
             self.username = '';
             self.password = '';
-            console.log(account);
+            console.log(self.userInfo);
         }).catch(err => {
             self.errorMessage = err.message;
             console.log(err);
@@ -38,7 +58,7 @@ class Account {
     }
 
     @action logout() {
-        self.account = null;
+      self.setUserInfo(null);
         self.errorMessage = null;
 
     }
