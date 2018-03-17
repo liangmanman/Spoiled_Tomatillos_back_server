@@ -37,7 +37,9 @@ router.post('/register', async function(req, res) {
     try {
         const savedUser = await newUser.save();
         // create a token
-        const token = usersModule.generateJwtTokenForUser(savedUser);
+        const token = usersModule.generateJwtTokenForUser({
+          userId: savedUser._id,
+        });
 
         res.json({
             success: true,
@@ -57,7 +59,7 @@ router.get('/isLoggedIn', async function(req, res) {
     }
 
     try {
-        await usersModule.getMe(token);
+        await usersModule.getUser(token);
         return res.status(200).send({ auth: true});
     } catch (error) {
         return res.status(500).send({ auth: false, message: error.message });
@@ -75,7 +77,9 @@ router.post('/login', async function(req, res) {
         if (!passwordIsValid) {
             return res.status(401).send({ auth: false, token: null });
         }
-        const token = usersModule.generateJwtTokenForUser(user);
+        const token = usersModule.generateJwtTokenForUser({
+          userId: user._id,
+        });
         res.status(200).send({ auth: true, token: token });
     } catch (error) {
         return res.status(500).send('Error on the server.');

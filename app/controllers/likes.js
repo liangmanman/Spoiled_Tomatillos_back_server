@@ -5,7 +5,7 @@ const Joi = require('joi');
 
 const router = express.Router();
 
-const { like, unlike, findUserLikedMovies } = require('../module/likes');
+const { like, unlike, findUserLikedMovies, findMovieLikedByUsers } = require('../module/likes');
 const { JoiLikeSchema } = require('../models/like');
 const { sendJoiValidationError } = require('../utils/joi');
 
@@ -32,7 +32,7 @@ router.post('/like', async function (req, res) {
   try {
     // if not exist, don't create a new one.
     const newLike = await like({
-      userId: userInfo.id,
+      userId: userInfo.userId,
       imdbID: newLikeBody.imdbID,
     });
     res.sendStatus(200);
@@ -62,7 +62,7 @@ router.post('/unlike', async function (req, res) {
   try {
     // if not exist, don't create a new one.
     const like = await unlike({
-      userId: userInfo.id,
+      userId: userInfo.userId,
       imdbID: newLikeBody.imdbID,
     });
     res.sendStatus(200);
@@ -72,13 +72,13 @@ router.post('/unlike', async function (req, res) {
 
 });
 
-router.get('/myMovieList', async function (req, res) {
+router.get('/movies/my', async function (req, res) {
   const userInfo = req.decodedToken;
 
   try {
     // if not exist, don't create a new one.
     const movieList = await findUserLikedMovies({
-      userId: userInfo.id,
+      userId: userInfo.userId,
     });
     res.json(movieList);
 
@@ -89,7 +89,7 @@ router.get('/myMovieList', async function (req, res) {
 });
 
 
-router.get('/userMovieList/:userId', async function (req, res) {
+router.get('/movies/:userId', async function (req, res) {
 
   const userId = req.params.userId;
 
@@ -104,6 +104,23 @@ router.get('/userMovieList/:userId', async function (req, res) {
     res.status(500).send(error.message);
   }
 
-})
+});
+
+router.get('/users/:movieId', async function (req, res) {
+
+  const movieId = req.params.movieId;
+
+  try {
+    // if not exist, don't create a new one.
+    const userList = await findMovieLikedByUsers({
+      movieId: movieId,
+    });
+    res.json(userList);
+
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+
+});
 
 module.exports = router;

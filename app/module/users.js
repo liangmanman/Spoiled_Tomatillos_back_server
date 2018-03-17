@@ -1,6 +1,10 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const mongoose = require('mongoose');
+
+const { userSchemaString } = require('../models/user');
+const User = mongoose.model(userSchemaString);
 
 
 /**
@@ -21,8 +25,8 @@ async function decodeToken(token) {
 }
 
 
-function generateJwtTokenForUser({_id, email, fullName}) {
-    return jwt.sign({ id: _id, email, fullName }, config.secret, {
+function generateJwtTokenForUser({ userId }) {
+    return jwt.sign({ userId }, config.secret, {
         expiresIn: 60 * 60 * 24 * 7, // expires in a week
     });
 }
@@ -30,7 +34,7 @@ function generateJwtTokenForUser({_id, email, fullName}) {
 async function verifyMe({ _id }, token) {
     try {
         const decodedToken = await decodeToken(token);
-        if (_id === decodedToken.id) {
+        if (_id === decodedToken.userId) {
             return {
                 auth: true,
             };
@@ -48,12 +52,13 @@ async function verifyMe({ _id }, token) {
     }
 }
 
-async function getMe(token) {
-    return await decodeToken(token);
+async function getUser({ userId }) {
+    return await User.getUserWithoutSensitiveInformation({ userId });
 }
 
 module.exports = {
+    decodeToken,
     generateJwtTokenForUser,
     verifyMe,
-    getMe,
+  getUser,
 };

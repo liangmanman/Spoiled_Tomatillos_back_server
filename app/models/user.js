@@ -170,6 +170,17 @@ UserSchema.statics = {
             .select(options.select)
             .exec(cb);
     },
+
+    getUserWithoutSensitiveInformation: async function ({userId}) {
+      let user = await this.findOne({
+        _id: userId,
+      });
+      user = user.toObject()
+      delete user['hashed_password'];
+      delete user['salt'];
+      delete user['email'];
+      return user;
+    },
 };
 
 mongoose.model(userSchemaString, UserSchema);

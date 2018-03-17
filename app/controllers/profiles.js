@@ -9,17 +9,26 @@ const authorization = require('../middlewares/authorization');
 router.use(authorization.requiresLogin);
 
 router.get('/me', async function (req, res) {
-    const token = req.headers['x-access-token'];
-    if (!token) {
-        return res.status(401).send({ auth: false, message: 'No token provided.' });
-    }
+    const { userId } = req.decodedToken;
 
     try {
-        const decodedToken = await usersModule.getMe(token);
-        return res.status(200).send(decodedToken);
+        const user = await usersModule.getUser({ userId });
+        return res.status(200).send(user);
     } catch (error) {
         return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
     }
+});
+
+router.get('/:userId', async function (req, res) {
+  const { userId } = req.params;
+
+  try {
+    const user = await usersModule.getUser({ userId });
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+  }
+
 });
 
 router.get('/privateProfile', async function (req, res) {

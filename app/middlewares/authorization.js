@@ -11,7 +11,7 @@ const requiresLogin = async function(req, res, next) {
     }
 
     try {
-        req.decodedToken = await usersModule.getMe(token);
+        req.decodedToken = await usersModule.decodeToken(token);
         return next();
     } catch (error) {
         return res.status(401).send({ auth: false, message: error.message });

@@ -57,6 +57,37 @@ LikeSchema.path('likedMovies').validate(function (likedMovies) {
  */
 
 LikeSchema.statics = {
+  findLikeOrCreateIfNotExist: async function({ userId }) {
+    let like = await this.findOne({
+      userId: userId,
+    });
+
+    if (_.isNil(like)) {
+      // create new like
+      like = new this();
+      like.userId = userId;
+      await like.save();
+    }
+
+    return like;
+  },
+  findUserLikedMovies: async function({ userId }) {
+    await this.findLikeOrCreateIfNotExist({ userId });
+    const like = await this.findOne({
+      userId: userId,
+    }).populate('likedMovies');
+    return like.likedMovies;
+  },
+  findMovieLikedByUsers: async function({ movieId }) {
+    let movieList = [movieId];
+    const likeList = await this.find({
+      likedMovies: {
+        $in: movieList,
+      },
+    });
+
+    return likeList;
+  },
 };
 
 /**
