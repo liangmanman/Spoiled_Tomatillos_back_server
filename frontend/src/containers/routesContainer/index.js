@@ -23,6 +23,11 @@ class RoutesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.renderRouter = this.renderRouter.bind(this);
+
+        //Here ya go
+        this.props.history.listen((location, action) => {
+            console.log(location);
+        });
     }
 
 

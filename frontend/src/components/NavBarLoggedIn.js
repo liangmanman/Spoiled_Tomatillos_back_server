@@ -27,7 +27,7 @@ class NavBarLoggedIn extends React.Component {
             {
                 'to': '/home',
                 'title': 'Home',
-                'active': false,
+                'active': true,
             },
             {
                 'to': generateUserURI(_id, USER_PROFILE_URI),
@@ -37,7 +37,7 @@ class NavBarLoggedIn extends React.Component {
             {
                 'to': MOVIE_LIST_URI,
                 'title': 'Movies',
-                'active': true,
+                'active': false,
             }
         ];
         this.state = {

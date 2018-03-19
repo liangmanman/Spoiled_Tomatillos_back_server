@@ -6,6 +6,10 @@ import { Provider } from 'mobx-react'
 import stores from '../store/index';
 
 class IndexContainer extends Component {
+    constructor(props) {
+        super(props);
+    }
+
    render() {
      return (
          <Provider {...stores}>
