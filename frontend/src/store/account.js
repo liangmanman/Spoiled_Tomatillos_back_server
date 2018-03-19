@@ -9,7 +9,6 @@ class Account {
     @observable email = '';
     @observable password = '';
     @observable errorMessage = null;
-    @observable userInfo = null;
 
     constructor () {
     }
@@ -38,7 +37,6 @@ class Account {
             self.email = '';
             self.password = '';
         } catch (err) {
-            debugger;
             self.errorMessage = err.message;
 
         }

@@ -17,7 +17,7 @@ router.post('/like', async function (req, res) {
   const fieldList = ['imdbID'];
   const newLikeBody = _.pick(req.body, fieldList);
 
-  const joiResult  = Joi.validate(JoiLikeSchema, newLikeBody, {
+  const joiResult  = Joi.validate(newLikeBody, JoiLikeSchema, {
     presence: 'required',
     abortEarly: false,
   });

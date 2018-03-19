@@ -1,5 +1,7 @@
 import Cookies from 'universal-cookie';
 import _ from 'lodash';
+import queryString from 'query-string';
+
 import { axios } from '../api/_axios';
 
 const cookies = new Cookies();
@@ -21,4 +23,17 @@ export const setXAccessToken = (token) => {
     }
 
     changeAxiosInstanceXAccessTokenHeader(token);
+};
+
+export const parseQueryString = (location) => {
+    return queryString.parse(this.props.location.search);
+
+};
+
+export const generateUserURI = (userId, uri) => {
+    return _.replace(uri, ':userId', userId);
+};
+
+export const generateMovieURI = (movieId, uri) => {
+    return _.replace(uri, ':movieId', movieId);
 };

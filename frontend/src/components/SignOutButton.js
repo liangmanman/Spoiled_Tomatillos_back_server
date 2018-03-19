@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import '../styles/SearchBar.css';
 import { observer } from 'mobx-react';
 import PropTypes from "prop-types";
@@ -20,7 +20,7 @@ class SignOutButton extends React.Component {
 
     render() {
         return (
-                <a className={'signOutButton'} onClick={this.handleSignOut}>Logout</a>
+                <Link className='nav-link' to={'#'} onClick={this.handleSignOut}>Logout</Link>
         );
     }
 }

@@ -23,10 +23,15 @@ function ThumbsDown(props) {
 
 
 @inject(stores => {
-  let { account, movies } = stores;
+  let { account, movies, likes } = stores;
   return {
     userInfo: account.userInfo,
     postLikeMovie: movies.postLikeMovie,
+      likeMovie: likes.likeMovie,
+      unlikeMovie: likes.unlikeMovie,
+      isMovieLikedByUser: likes.isMovieLikedByUser,
+      currentUserLikedMovies: likes.currentUserLikedMovies,
+      updateCurrentUserLikedMovies: likes.updateCurrentUserLikedMovies,
   }
 })
 @observer
@@ -39,14 +44,44 @@ class MoviePage extends React.Component {
       userRating: true
     };
     this.postLikedMovie = this.postLikedMovie.bind(this);
+    this.unLikeMovie = this.unLikeMovie.bind(this);
+    this.renderLikeButton = this.renderLikeButton.bind(this);
   }
 
-  postLikedMovie() {
-    let { postLikeMovie } = this.props;
-    postLikeMovie({
-      movie: this.state.result
+  componentWillMount() {
+    this.props.updateCurrentUserLikedMovies();
+  }
+
+  async postLikedMovie() {
+    let { postLikeMovie, likeMovie } = this.props;
+    let { result } = this.state;
+    await postLikeMovie({
+      movie: result,
     });
+    await likeMovie({
+        imdbID: result.imdbID,
+    })
   };
+
+  async unLikeMovie() {
+      let { unlikeMovie } = this.props;
+      let { imdbID } = this.state.result;
+
+      await unlikeMovie({
+          imdbID: imdbID,
+      })
+  }
+
+  renderLikeButton() {
+    let { isMovieLikedByUser, currentUserLikedMovies } = this.props;
+      let { imdbID } = this.state.result;
+
+      if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
+          return (<button onClick={this.unLikeMovie}>Unlike</button>);
+      } else {
+          return (<button onClick={this.postLikedMovie}>Like</button>);
+      }
+  }
 
   searchById(params) {
     const url2 = OMDB_API_KEY + '&i=' + params.id;
@@ -77,7 +112,7 @@ class MoviePage extends React.Component {
         <div>
           <div className="movie">
             <MovieInfo imdbID={result.imdbID} key={result.imdbID}/>
-            <button onClick={this.postLikedMovie}>Like</button>
+              {this.renderLikeButton()}
           </div>
           <div>
             <ThumbsUp userRating={this.state.userRating}/>

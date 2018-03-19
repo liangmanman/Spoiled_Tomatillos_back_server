@@ -6,10 +6,11 @@ import _ from 'lodash';
 import HomePage from '../HomePage';
 import SearchResult from '../SearchResult';
 import SignUpPage from '../SignupPage';
-import {SIGN_IN_URI, SIGN_UP_URI, SEARCH_RESULT_URI, MOVIE_URI} from "./uriConstants";
+import {SIGN_IN_URI, SIGN_UP_URI, SEARCH_RESULT_URI, MOVIE_URI, USER_URI} from "./uriConstants";
 import SignInPage from "../SignInPage";
 import NavBar from "../../components/NavBar";
 import MovieRoute from './movieRoute';
+import ProfileRoute from './profileRoute';
 
 @inject(stores => {
     let { session } = stores;
@@ -39,6 +40,7 @@ class RoutesContainer extends React.Component {
 
         return (
             <Switch>
+                <Route key={USER_URI} path={`${USER_URI}/:id`} component={ProfileRoute}/>
                 <Route key={MOVIE_URI} path={MOVIE_URI} component={MovieRoute}/>
                 <Route key={SEARCH_RESULT_URI} path={SEARCH_RESULT_URI} component={SearchResult}/>
                 {/*<Route key={MOVIE_URI} path={`${MOVIE_URI}/:id`} component={Movie}/>*/}

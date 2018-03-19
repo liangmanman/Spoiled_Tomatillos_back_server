@@ -2,13 +2,18 @@ import * as React from 'react';
 import SearchBar from './SearchBar';
 import { Link, withRouter } from 'react-router-dom'
 import {inject, observer} from "mobx-react/index";
+import _ from 'lodash';
 
 import {
     MOVIE_LIST_URI,
     SIGN_UP_URI,
-    SIGN_IN_URI
-} from '../containers/routesContainer/uriConstants'
-import SignOutButton from './SignOutButton'
+    SIGN_IN_URI,
+    USER_PROFILE_URI
+} from '../containers/routesContainer/uriConstants';
+
+import { generateUserURI } from '../util';
+import SignOutButton from './SignOutButton';
+import NavBarLoggedIn from './NavBarLoggedIn';
 
 import '../styles/NavBar.css';
 
@@ -28,7 +33,7 @@ class NavBar extends React.Component {
     };
 
     render() {
-        const { userInfo } = this.props;
+        const { userInfo, logOut } = this.props;
         if (_.isNil(userInfo)) {
             return (
                 <div className="topNav">
@@ -39,16 +44,7 @@ class NavBar extends React.Component {
             );
         }
 
-        return (
-            <div className="topNav">
-                <h3 className="title">Spoiled Tomatillos</h3>
-                <Link className="active" to="/home">Home</Link>
-                <Link to="/recommendations">Recommendations</Link>
-                <Link to={MOVIE_LIST_URI}>Movies</Link>
-                <SearchBar className="searchBar"/>
-                <SignOutButton logOut={this.props.logOut}/>
-            </div>
-        );
+        return <NavBarLoggedIn userInfo={userInfo} logOut={logOut}/>
     }
 }
 

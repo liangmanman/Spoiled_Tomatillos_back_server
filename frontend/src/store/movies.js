@@ -15,8 +15,6 @@ class Movies {
   }
 
   @action async postLikeMovie({movie}) {
-    //TODO add the api of post liked movie
-    console.log(movie);
     axios.post(POST_MOVIE_API, {
         imdbID: movie.imdbID,
         title: movie.Title,
