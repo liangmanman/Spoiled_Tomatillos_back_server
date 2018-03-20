@@ -94,7 +94,13 @@ async function findUserLikedMovies({ userId }) {
 }
 
 async function findMovieLikedByUsers({ movieId }) {
-  return await Like.findMovieLikedByUsers({ movieId });
+  const likeList = await Like.findMovieLikedByUsers({ movieId });
+
+  const userIdList = _.map(likeList, (like) => {
+    return like.userId;
+  });
+
+  return await User.findUserWithUserIdList(userIdList);
 
 }
 

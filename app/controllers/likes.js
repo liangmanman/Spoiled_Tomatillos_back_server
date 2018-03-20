@@ -31,7 +31,7 @@ router.post('/like', async function (req, res) {
 
   try {
     // if not exist, don't create a new one.
-    const newLike = await like({
+    await like({
       userId: userInfo.userId,
       imdbID: newLikeBody.imdbID,
     });
@@ -61,7 +61,7 @@ router.post('/unlike', async function (req, res) {
 
   try {
     // if not exist, don't create a new one.
-    const like = await unlike({
+    await unlike({
       userId: userInfo.userId,
       imdbID: newLikeBody.imdbID,
     });
@@ -100,6 +100,21 @@ router.get('/movies/:userId', async function (req, res) {
     });
     res.json(movieList);
 
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+
+});
+
+router.get('/movies/:userId/length', async function (req, res) {
+
+  const userId = req.params.userId;
+
+  try {
+    const response = await findUserLikedMovies({
+      userId: userId,
+    });
+    res.json({'length': response.length});
   } catch (error) {
     res.status(500).send(error.message);
   }

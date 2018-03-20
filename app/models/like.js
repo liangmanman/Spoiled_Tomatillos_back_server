@@ -71,6 +71,11 @@ LikeSchema.statics = {
 
     return like;
   },
+  /**
+   * return movies liked by userId
+   * @param userId
+   * @returns {Promise<*[]|*|likedMovies|{$in}>}
+   */
   findUserLikedMovies: async function({ userId }) {
     await this.findLikeOrCreateIfNotExist({ userId });
     const like = await this.findOne({
@@ -78,6 +83,11 @@ LikeSchema.statics = {
     }).populate('likedMovies');
     return like.likedMovies;
   },
+  /**
+   * return users who like movie with movieId
+   * @param movieId
+   * @returns {Promise<*>}
+   */
   findMovieLikedByUsers: async function({ movieId }) {
     let movieList = [movieId];
     const likeList = await this.find({
