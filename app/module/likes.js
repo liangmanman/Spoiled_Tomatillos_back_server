@@ -85,16 +85,24 @@ async function unlike({ userId, imdbID }) {
   return like;
 }
 
-async function findUserLikedMovies({ userId }) {
+async function findMoviesLikedByUserId({ userId }) {
   const user = await findUserWithId({userId});
 
-  const movieList = await Like.findUserLikedMovies({ userId: user._id });
+  const movieList = await Like.findMoviesLikedByUserId({ userId: user._id });
 
   return movieList;
 }
 
-async function findMovieLikedByUsers({ movieId }) {
-  const likeList = await Like.findMovieLikedByUsers({ movieId });
+async function findUsersLikeMovieId({ imdbID }) {
+
+  const movie = await Movie.findOne({
+    imdbID,
+  });
+
+  if (_.isNil(movie)) {
+    throw new Error(`Cannot find movie with imdbID: ${movieId}.`);
+  }
+  const likeList = await Like.findUsersLikeMovieId({ movieId: movie._id});
 
   const userIdList = _.map(likeList, (like) => {
     return like.userId;
@@ -104,7 +112,7 @@ async function findMovieLikedByUsers({ movieId }) {
 
 }
 
-// Like.findMovieLikedByUsers({
+// Like.findUsersLikeMovieId({
 //   movieId: '5aabfeb6a6a48e001347b11f',
 // });
 
@@ -115,6 +123,6 @@ async function findMovieLikedByUsers({ movieId }) {
 module.exports = {
   like,
   unlike,
-  findUserLikedMovies,
-  findMovieLikedByUsers,
+  findMoviesLikedByUserId,
+  findUsersLikeMovieId,
 };

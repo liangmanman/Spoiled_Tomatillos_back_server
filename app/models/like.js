@@ -76,7 +76,7 @@ LikeSchema.statics = {
    * @param userId
    * @returns {Promise<*[]|*|likedMovies|{$in}>}
    */
-  findUserLikedMovies: async function({ userId }) {
+  findMoviesLikedByUserId: async function({ userId }) {
     await this.findLikeOrCreateIfNotExist({ userId });
     const like = await this.findOne({
       userId: userId,
@@ -88,14 +88,13 @@ LikeSchema.statics = {
    * @param movieId
    * @returns {Promise<*>}
    */
-  findMovieLikedByUsers: async function({ movieId }) {
+  findUsersLikeMovieId: async function({ movieId }) {
     let movieList = [movieId];
     const likeList = await this.find({
       likedMovies: {
         $in: movieList,
       },
     });
-
     return likeList;
   },
 };

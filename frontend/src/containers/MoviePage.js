@@ -27,11 +27,11 @@ function ThumbsDown(props) {
   return {
     userInfo: account.userInfo,
     postLikeMovie: movies.postLikeMovie,
-      likeMovie: likes.likeMovie,
-      unlikeMovie: likes.unlikeMovie,
-      isMovieLikedByUser: likes.isMovieLikedByUser,
-      currentUserLikedMovies: likes.currentUserLikedMovies,
-      updateCurrentUserLikedMovies: likes.updateCurrentUserLikedMovies,
+    likeMovie: likes.likeMovie,
+    unlikeMovie: likes.unlikeMovie,
+    isMovieLikedByUser: likes.isMovieLikedByUser,
+    currentUserLikedMovies: likes.currentUserLikedMovies,
+    updateMoviesLikedByUserId: likes.updateMoviesLikedByUserId,
   }
 })
 @observer
@@ -49,7 +49,7 @@ class MoviePage extends React.Component {
   }
 
   componentWillMount() {
-    this.props.updateCurrentUserLikedMovies();
+    this.props.updateMoviesLikedByUserId();
   }
 
   async postLikedMovie() {
@@ -59,28 +59,28 @@ class MoviePage extends React.Component {
       movie: result,
     });
     await likeMovie({
-        imdbID: result.imdbID,
+      imdbID: result.imdbID,
     })
   };
 
   async unLikeMovie() {
-      let { unlikeMovie } = this.props;
-      let { imdbID } = this.state.result;
+    let { unlikeMovie } = this.props;
+    let { imdbID } = this.state.result;
 
-      await unlikeMovie({
-          imdbID: imdbID,
-      })
+    await unlikeMovie({
+      imdbID: imdbID,
+    })
   }
 
   renderLikeButton() {
     let { isMovieLikedByUser, currentUserLikedMovies } = this.props;
-      let { imdbID } = this.state.result;
+    let { imdbID } = this.state.result;
 
-      if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
-          return (<button onClick={this.unLikeMovie}>Unlike</button>);
-      } else {
-          return (<button onClick={this.postLikedMovie}>Like</button>);
-      }
+    if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
+      return (<button onClick={this.unLikeMovie}>Unlike</button>);
+    } else {
+      return (<button onClick={this.postLikedMovie}>Like</button>);
+    }
   }
 
   searchById(params) {
@@ -96,7 +96,7 @@ class MoviePage extends React.Component {
           console.log(error);
         });
   };
-  
+
 
   componentDidMount() {
     let {location: {movie}, match: {params}} = this.props;

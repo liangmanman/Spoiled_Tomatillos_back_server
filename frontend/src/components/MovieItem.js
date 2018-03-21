@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
 import MovieLikeButton from './Button/MovieLikeButton';
 import '../styles/MovieItem.css';
+import CountLikeButton from "./Button/CountLikeButton";
 
 
 @inject(stores => {
@@ -62,8 +63,9 @@ class MovieItem extends Component {
           </div>
           <div className="col-sm-8 card-right card-title">
             <div>
-              <div className="likeButton">
+              <div className="movieButtons">
                 <MovieLikeButton imdbID={result.imdbID}/>
+                <CountLikeButton imdbID={result.imdbID}/>
               </div>
               <h5>
                 <Link to={{ pathname: `${MOVIE_DETAIL_URI}/${result.imdbID}`, 'movie': result }}>

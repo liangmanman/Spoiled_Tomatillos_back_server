@@ -5,7 +5,7 @@ const Joi = require('joi');
 
 const router = express.Router();
 
-const { like, unlike, findUserLikedMovies, findMovieLikedByUsers } = require('../module/likes');
+const { like, unlike, findMoviesLikedByUserId, findUsersLikeMovieId } = require('../module/likes');
 const { JoiLikeSchema } = require('../models/like');
 const { sendJoiValidationError } = require('../utils/joi');
 
@@ -77,7 +77,7 @@ router.get('/movies/my', async function (req, res) {
 
   try {
     // if not exist, don't create a new one.
-    const movieList = await findUserLikedMovies({
+    const movieList = await findMoviesLikedByUserId({
       userId: userInfo.userId,
     });
     res.json(movieList);
@@ -95,7 +95,7 @@ router.get('/movies/:userId', async function (req, res) {
 
   try {
     // if not exist, don't create a new one.
-    const movieList = await findUserLikedMovies({
+    const movieList = await findMoviesLikedByUserId({
       userId: userId,
     });
     res.json(movieList);
@@ -111,7 +111,7 @@ router.get('/movies/:userId/length', async function (req, res) {
   const userId = req.params.userId;
 
   try {
-    const response = await findUserLikedMovies({
+    const response = await findMoviesLikedByUserId({
       userId: userId,
     });
     res.json({'length': response.length});
@@ -127,10 +127,27 @@ router.get('/users/:movieId', async function (req, res) {
 
   try {
     // if not exist, don't create a new one.
-    const userList = await findMovieLikedByUsers({
+    const userList = await findUsersLikeMovieId({
       movieId: movieId,
     });
     res.json(userList);
+
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+
+});
+
+router.get('/users/:movieId/length', async function (req, res) {
+
+  const imdbID = req.params.movieId;
+
+  try {
+    // if not exist, don't create a new one.
+    const userList = await findUsersLikeMovieId({
+      imdbID: imdbID,
+    });
+    res.json(res.json({'length': userList.length}));
 
   } catch (error) {
     res.status(500).send(error.message);
