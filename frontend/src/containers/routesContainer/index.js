@@ -26,7 +26,6 @@ class RoutesContainer extends React.Component {
 
         //Here ya go
         this.props.history.listen((location, action) => {
-            console.log(location);
         });
     }
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { OMDB_API_KEY } from '../constants';
 import { omdb_axios } from '../api/_axios';
 import _ from 'lodash';
-import MovieInfo from '../components/MovieInfo';
+import MovieItem from '../components/MovieItem';
 
 class SearchResult extends React.Component {
 
@@ -67,7 +67,7 @@ class SearchResult extends React.Component {
           <div className="result-list">
             <h1>Search Result</h1>
             {results.map((result) => {
-              return <MovieInfo imdbID={result.imdbID} key={result.imdbID}/>
+              return <MovieItem imdbID={result.imdbID} key={result.imdbID}/>
             })}
           </div>
         </div>

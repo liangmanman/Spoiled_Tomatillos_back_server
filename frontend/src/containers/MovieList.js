@@ -1,6 +1,6 @@
 import * as React from 'react';
 import _ from 'lodash';
-import MovieInfo from '../components/MovieInfo';
+import MovieItem from '../components/MovieItem';
 import {inject, observer} from "mobx-react";
 
 
@@ -26,7 +26,7 @@ class MovieList extends React.Component {
     const { movieList } = this.props;
 
       return _.map(movieList, (movie) => {
-        return <MovieInfo key={movie.imdbID} imdbID={movie.imdbID}/>;
+        return <MovieItem imdbID={movie.imdbID} key={movie.imdbID}/>
       });
 
 

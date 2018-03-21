@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MovieInfo from '../components/MovieInfo';
+import MovieItem from '../components/MovieItem';
 import {omdb_axios} from "../api/_axios";
 import {OMDB_API_KEY} from "../constants";
 import '../styles/Movie.css';
@@ -111,8 +111,7 @@ class MoviePage extends React.Component {
     return (
         <div>
           <div className="movie">
-            <MovieInfo imdbID={result.imdbID} key={result.imdbID}/>
-              {this.renderLikeButton()}
+            <MovieItem imdbID={result.imdbID}/>
           </div>
           <div>
             <ThumbsUp userRating={this.state.userRating}/>
