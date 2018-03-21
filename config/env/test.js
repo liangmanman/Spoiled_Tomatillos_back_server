@@ -5,13 +5,6 @@
  */
 
 module.exports = {
-    mongodb: process.env.MONGO_DB_URI,
-    mysql: {
-        "username": process.env.MYSQL_USERNAME,
-        "password": process.env.MYSQL_PASSWORD,
-        "database": process.env.MYSQL_DATABASE,
-        "host": process.env.MYSQL_HOST,
-        "dialect": "mysql",
-    },
+    mongodb: 'mongodb://admin:admin@ds121189.mlab.com:21189/spoiled-tomatillos-test',
     secret: "Spring is coming",
 };
