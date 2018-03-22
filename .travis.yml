@@ -6,7 +6,7 @@ services:
   - mongodb
 addons:
   sonarcloud:
-    organization: "Spoiled-Tomatillos" # the key of the org you chose at step #3
+    organization: "spoiled-tomatillos" # the key of the org you chose at step #3
     token:
       secure: $SONAR_TOKEN # encrypted value of your token
 env:
