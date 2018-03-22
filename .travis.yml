@@ -4,6 +4,11 @@ node_js:
 dist: trusty
 services:
   - mongodb
+addons:
+  sonarcloud:
+    organization: "Spoiled-Tomatillos" # the key of the org you chose at step #3
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
 env:
   - NODE_ENV=test PORT=3000
 cache:
@@ -21,6 +26,6 @@ jobs:
         - nohup npm run start &
         - sleep 3
         - npm run test
-    - stage: deploy
-      ixf: branch = master
-      script: ./deploy
+    - stage: sonarcloud
+      script:
+      - sonar-scanner
