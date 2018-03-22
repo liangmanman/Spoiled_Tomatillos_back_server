@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 @inject((stores) => {
   const { likes } = stores;
@@ -15,8 +16,17 @@ class CountLikeButton extends React.Component {
     super(props);
     this.state = {
       count: 0,
-    }
+    };
+    this.linkToMovieLikedByPage = this.linkToMovieLikedByPage.bind(this);
   }
+
+  linkToMovieLikedByPage = (e) => {
+    e.preventDefault();
+
+    this.props.history.push({
+      pathname: '/movie/'+this.props.imdbID+ '/likedBy',
+    });
+};
 
   async getUsersLengthLikedMovieId() {
     const { getUsersLengthLikedMovieId, imdbID } = this.props;
@@ -35,7 +45,7 @@ class CountLikeButton extends React.Component {
 
   render() {
     let { count } = this.state;
-    return (<button>{count}</button>);
+    return (<button onClick={this.linkToMovieLikedByPage}>{count}</button>);
   }
 
 }
@@ -44,4 +54,4 @@ CountLikeButton.propTypes = {
   imdbID: PropTypes.string.isRequired,
 };
 
-export default CountLikeButton;
+export default withRouter(CountLikeButton);

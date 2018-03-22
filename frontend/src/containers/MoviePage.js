@@ -1,15 +1,12 @@
 import * as React from 'react';
+import { inject, observer } from "mobx-react";
+
 import MovieItem from '../components/MovieItem';
-import {omdb_axios} from "../api/_axios";
-import {OMDB_API_KEY} from "../constants";
 import '../styles/Movie.css';
-import {axios,} from '../api/_axios';
-// import NavBar from "../components/NavBar";
 import greyThumbsUp from "../img/greyup-64x64.png";
 import greenThumbsUp from "../img/greenup-64x64.png";
 import greyThumbsDown from "../img/greydown-64x64.png";
 import redThumbsDown from "../img/reddown-64x64.png";
-import { inject, observer } from "mobx-react";
 
 function ThumbsUp(props) {
   let tu_img = props.userRating ? greenThumbsUp : greyThumbsUp;
@@ -23,95 +20,31 @@ function ThumbsDown(props) {
 
 
 @inject(stores => {
-  let { account, movies, likes } = stores;
+  let { account } = stores;
   return {
     userInfo: account.userInfo,
-    postLikeMovie: movies.postLikeMovie,
-    likeMovie: likes.likeMovie,
-    unlikeMovie: likes.unlikeMovie,
-    isMovieLikedByUser: likes.isMovieLikedByUser,
-    currentUserLikedMovies: likes.currentUserLikedMovies,
-    updateMoviesLikedByUserId: likes.updateMoviesLikedByUserId,
   }
 })
 @observer
 class MoviePage extends React.Component {
   constructor(props) {
     super(props);
+
+    const { match } = this.props;
+    let imdbID =  match.params.movieId;
     this.state = {
-      result: undefined,
-      isLoading: true,
+      imdbID,
       userRating: true
     };
-    this.postLikedMovie = this.postLikedMovie.bind(this);
-    this.unLikeMovie = this.unLikeMovie.bind(this);
-    this.renderLikeButton = this.renderLikeButton.bind(this);
-  }
 
-  componentWillMount() {
-    this.props.updateMoviesLikedByUserId();
-  }
-
-  async postLikedMovie() {
-    let { postLikeMovie, likeMovie } = this.props;
-    let { result } = this.state;
-    await postLikeMovie({
-      movie: result,
-    });
-    await likeMovie({
-      imdbID: result.imdbID,
-    })
-  };
-
-  async unLikeMovie() {
-    let { unlikeMovie } = this.props;
-    let { imdbID } = this.state.result;
-
-    await unlikeMovie({
-      imdbID: imdbID,
-    })
-  }
-
-  renderLikeButton() {
-    let { isMovieLikedByUser, currentUserLikedMovies } = this.props;
-    let { imdbID } = this.state.result;
-
-    if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
-      return (<button onClick={this.unLikeMovie}>Unlike</button>);
-    } else {
-      return (<button onClick={this.postLikedMovie}>Like</button>);
-    }
-  }
-
-  searchById(params) {
-    const url2 = OMDB_API_KEY + '&i=' + params.id;
-    omdb_axios.get(url2)
-        .then((response) => {
-          this.setState({
-            result: response.data,
-            isLoading: false
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-  };
-
-
-  componentDidMount() {
-    let {location: {movie}, match: {params}} = this.props;
-    movie ? this.setState({result: movie, isLoading: false}) : this.searchById(params);
   }
 
   render() {
-    const {result, isLoading,} = this.state;
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
+    const { imdbID } = this.state;
     return (
         <div>
           <div className="movie">
-            <MovieItem imdbID={result.imdbID}/>
+            <MovieItem imdbID={imdbID}/>
           </div>
           <div>
             <ThumbsUp userRating={this.state.userRating}/>

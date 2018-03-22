@@ -7,6 +7,7 @@ import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
 import MovieLikeButton from './Button/MovieLikeButton';
 import '../styles/MovieItem.css';
 import CountLikeButton from "./Button/CountLikeButton";
+import { generateMovieURI } from '../util'
 
 
 @inject(stores => {
@@ -68,7 +69,7 @@ class MovieItem extends Component {
                 <CountLikeButton imdbID={result.imdbID}/>
               </div>
               <h5>
-                <Link to={{ pathname: `${MOVIE_DETAIL_URI}/${result.imdbID}`, 'movie': result }}>
+                <Link to={generateMovieURI(result.imdbID, MOVIE_DETAIL_URI)}>
                   Title: {result.Title}
                 </Link>
               </h5>

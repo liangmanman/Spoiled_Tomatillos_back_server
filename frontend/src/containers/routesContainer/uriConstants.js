@@ -6,7 +6,8 @@ export const SIGN_IN_URI = '/account/signIn';
 // Movie Route URI
 export const MOVIE_URI = '/movie';
 export const MOVIE_LIST_URI = MOVIE_URI + '/list';
-export const MOVIE_DETAIL_URI = MOVIE_URI + '/detail';
+export const MOVIE_DETAIL_URI = MOVIE_URI + '/:movieId/detail';
+export const MOVIE_LIKED_BY_URI = MOVIE_URI + '/:movieId/likedBy';
 
 // Profile Route URI
 export const USER_URI = '/user/:userId';

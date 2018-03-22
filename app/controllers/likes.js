@@ -121,14 +121,14 @@ router.get('/movies/:userId/length', async function (req, res) {
 
 });
 
-router.get('/users/:movieId', async function (req, res) {
+router.get('/users/:imdbID', async function (req, res) {
 
-  const movieId = req.params.movieId;
+  const { imdbID } = req.params;
 
   try {
     // if not exist, don't create a new one.
     const userList = await findUsersLikeMovieId({
-      movieId: movieId,
+      imdbID,
     });
     res.json(userList);
 
@@ -138,9 +138,9 @@ router.get('/users/:movieId', async function (req, res) {
 
 });
 
-router.get('/users/:movieId/length', async function (req, res) {
+router.get('/users/:imdbID/length', async function (req, res) {
 
-  const imdbID = req.params.movieId;
+  const imdbID = req.params.imdbID;
 
   try {
     // if not exist, don't create a new one.
