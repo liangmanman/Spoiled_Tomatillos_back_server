@@ -14,23 +14,16 @@ class OmdbApi {
   }
 
   @action async getMovieBySearch(searchBy) {
-    this.setMovieList([]);
+    self.setMovieList([]);
     const url = OMDB_API_KEY + '&s='+ searchBy;
-    let result = [];
-    omdb_axios.get(url)
-        .then((response) => {
-          let movies = response.data.Search;
-          movies = _.uniqBy(movies, function (m) {
-            return m.imdbID;
-          });
-          movies.map((movie) => {
-            self.addMovieById(movie.imdbID)
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    self.setMovieList(result);
+    const response = await omdb_axios.get(url);
+    let movies = response.data.Search;
+    movies = _.uniqBy(movies, function (m) {
+      return m.imdbID;
+    });
+    movies.map((movie) => {
+      self.addMovieById(movie.imdbID);
+    });
   }
 
   @action async addMovieById(id) {
@@ -62,16 +55,6 @@ class OmdbApi {
   @action addMovie(movie) {
     self.movieList = [...self.movieList, movie]
   }
-
-  // @action async fetchMovieList() {
-  //   try {
-  //     const res = await axios.get(MOVIE_LIST_API);
-  //     self.setMovieList(res.data);
-  //   } catch (err) {
-  //     self.errorMessage = err.message;
-  //     console.log(err);
-  //   }
-  // }
 
 }
 

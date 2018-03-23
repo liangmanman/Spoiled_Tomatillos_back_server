@@ -2,6 +2,7 @@ const API = '/api';
 
 export const SIGNUP_API = API + '/users/register';
 export const SIGNIN_API = API + '/users/login';
+export const SEARCH_USER_API = API + '/users/search';
 
 export const PROFILE_ME_API = API + '/profiles/me';
 

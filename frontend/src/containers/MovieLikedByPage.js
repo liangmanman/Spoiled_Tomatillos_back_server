@@ -42,7 +42,6 @@ class MovieLikedByPage extends React.Component {
   }
   renderUsers () {
     const { users } = this.state;
-    console.log(users);
     return _.map(users, (user) => {
       return <li key={user._id}>{user.fullName}</li>
     })

@@ -161,7 +161,6 @@ UserSchema.statics = {
    * @param {Function} cb
    * @api private
    */
-
   load: function (options, cb) {
     options.select = options.select || 'name username';
     return this.findOne(options.criteria)
@@ -193,6 +192,19 @@ UserSchema.statics = {
       });
     return userList;
   },
+
+  findUsersBySearch: async function ({searchBy}) {
+    var matcher = new RegExp(searchBy, 'i');
+    let userList = await this.find({
+        fullName: { $regex: matcher, $options: '<options>' },
+      },
+      {
+        hashed_password: 0,
+        salt: 0,
+        email: 0,
+      });
+    return userList;
+  }
 };
 
 mongoose.model(userSchemaString, UserSchema);
