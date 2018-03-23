@@ -5,17 +5,14 @@ import '../styles/SearchBar.css';
 class SearchBar extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.handleSubmit = this.handleSubmit.bind(this);
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const searchContent = e.target.elements.searchContent.value.trim();
-
     if (searchContent) {
-      // this.props.history.push('/search?query=' + searchContent);
-      // window.location.reload();
       this.props.history.push({
         pathname: '/search',
         search: '?query='+searchContent

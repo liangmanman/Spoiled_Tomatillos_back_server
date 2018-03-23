@@ -100,7 +100,7 @@ async function findUsersLikeMovieId({ imdbID }) {
   });
 
   if (_.isNil(movie)) {
-    throw new Error(`Cannot find movie with imdbID: ${movieId}.`);
+    return [];
   }
   const likeList = await Like.findUsersLikeMovieId({ movieId: movie._id});
 

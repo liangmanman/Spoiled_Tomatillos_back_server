@@ -147,7 +147,7 @@ router.get('/users/:imdbID/length', async function (req, res) {
     const userList = await findUsersLikeMovieId({
       imdbID: imdbID,
     });
-    res.json(res.json({'length': userList.length}));
+    res.json({'length': userList.length});
 
   } catch (error) {
     res.status(500).send(error.message);
