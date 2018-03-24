@@ -25,4 +25,8 @@ module.exports = function (app) {
     const likeRouter = require('./likes');
     apiRouter.use('/likes', likeRouter);
 
+    // review router
+    const reviewRouter = require('./reviews');
+    apiRouter.use('/reviews', reviewRouter);
+
 };
