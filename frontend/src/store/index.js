@@ -6,6 +6,7 @@ import session from './session';
 import likes from './likes';
 import profiles from './profiles';
 import users from './users';
+import reviews from './reviews';
 
 const stores = {
   account,
@@ -16,6 +17,7 @@ const stores = {
   likes,
   profiles,
   users,
+  reviews,
 };
 
 export default stores;

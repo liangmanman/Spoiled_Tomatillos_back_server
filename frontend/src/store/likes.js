@@ -17,6 +17,7 @@ import {
 class Likes {
   @observable currentUserLikedMovies = [];
   @observable errorMessage = null;
+  @observable usersLengthLikedMovies = [];
 
   @action
   async updateMoviesLikedByUserId() {
@@ -38,9 +39,32 @@ class Likes {
   }
 
   @action
-  async getUsersLengthLikedMovieId({ imdbID }) {
+  async fetchUsersLengthLikedMovieId({ imdbID }) {
     const res = await axios.get(generateMovieURI(imdbID, USERS_LENGTH_LIKE_MOVIEID_API));
-    return res.data;
+    const length = res.data.length ? res.data.length : 0;
+    self.setUsersLengthLikedMovieId({
+      imdbID,
+      length: length
+    });
+  }
+
+  @action setUsersLengthLikedMovieId({imdbID, length}) {
+    const index = _.findIndex(self.usersLengthLikedMovies, {imdbID});
+    if (index == -1) {
+      self.usersLengthLikedMovies = [...self.usersLengthLikedMovies, {imdbID, length}]
+    } else {
+      self.usersLengthLikedMovies[index] = {imdbID, length};
+    }
+  }
+
+  @action getUsersLengthLikedMovieId({usersLengthLikedMovies, imdbID}) {
+    const lengthObject = _.find(usersLengthLikedMovies, (o) => {
+      return o.imdbID === imdbID;
+    });
+    if (lengthObject) {
+      return lengthObject.length;
+    }
+    return 0;
   }
 
   @action isMovieLikedByUser({ currentUserLikedMovies, imdbID }) {
@@ -57,6 +81,7 @@ class Likes {
       imdbID,
     });
     await self.updateMoviesLikedByUserId();
+    await self.fetchUsersLengthLikedMovieId({imdbID});
   }
 
   @action
@@ -65,6 +90,7 @@ class Likes {
       imdbID,
     });
     await self.updateMoviesLikedByUserId();
+    await self.fetchUsersLengthLikedMovieId({imdbID});
   }
 }
 

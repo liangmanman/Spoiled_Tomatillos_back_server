@@ -112,14 +112,6 @@ async function findUsersLikeMovieId({ imdbID }) {
 
 }
 
-// Like.findUsersLikeMovieId({
-//   movieId: '5aabfeb6a6a48e001347b11f',
-// });
-
-// User.getUserWithoutPassword({
-//   userId: '5aab385601662b0013bd3ca2',
-// });
-
 module.exports = {
   like,
   unlike,

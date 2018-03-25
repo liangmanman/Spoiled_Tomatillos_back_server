@@ -25,8 +25,8 @@ const reviewSchemaString = 'review';
 
 const ReviewSchema = new Schema({
     movieId: {
-        type: mongoose.Schema.ObjectId,
-        ref: movieSchemaString ,
+        type: String,
+        ref: movieSchemaString,
         index: true,
         required: true,
     },
@@ -44,8 +44,27 @@ const ReviewSchema = new Schema({
     timestamps: true,
 });
 
+// virtual
+ReviewSchema.virtual('movie', {
+  ref: movieSchemaString,
+  localField: 'movieId',
+  foreignField: 'imdbID',
+  justOne: true
+});
+
+ReviewSchema.virtual('user', {
+  ref: userSchemaString,
+  localField: 'userId',
+  foreignField: '_id',
+  justOne: true
+});
+
 // create unique compound index, each user can only comment on the same movie once.
-ReviewSchema.index({ movieId: 1, userId: 1 }, { unique: true});
+ReviewSchema.index({ movieId: 1, userId: 1 }, { unique: true });
+
+// set virtuals on toObject or toJson.
+ReviewSchema.set('toObject', { virtuals: true });
+ReviewSchema.set('toJson', { virtuals: true });
 
 
 const JoiReviewSchema = Joi.object().keys({
@@ -74,12 +93,12 @@ ReviewSchema.statics = {
         })
     },
     populateMoveAndUser: async function(queryResponse) {
-        const reviewList =  await queryResponse.populate({
-            path: 'userId',
+        const reviewList =  await queryResponse
+          .populate({
+            path: 'user',
             select: '-hashed_password -salt',
-        }).populate({
-            path: 'movieId',
-        });
+          })
+          .populate('movie');
         return this.filterNullReview(reviewList);
     },
     findReviewByUserIdAndMovieId: async function({ userId, movieId }) {
