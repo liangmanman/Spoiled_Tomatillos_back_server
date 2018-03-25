@@ -8,16 +8,16 @@ import { withRouter } from 'react-router-dom';
 
   return {
     getUsersLengthLikedMovieId: likes.getUsersLengthLikedMovieId,
+    fetchUsersLengthLikedMovieId: likes.fetchUsersLengthLikedMovieId,
+    usersLengthLikedMovies: likes.usersLengthLikedMovies.toJS(),
   }
 })
 @observer
 class CountLikeButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 0,
-    };
     this.linkToMovieLikedByPage = this.linkToMovieLikedByPage.bind(this);
+    this.renderCount = this.renderCount.bind(this);
   }
 
   linkToMovieLikedByPage = (e) => {
@@ -28,24 +28,26 @@ class CountLikeButton extends React.Component {
     });
 };
 
-  async getUsersLengthLikedMovieId() {
-    const { getUsersLengthLikedMovieId, imdbID } = this.props;
+  renderCount() {
+    const { getUsersLengthLikedMovieId, imdbID, usersLengthLikedMovies } = this.props;
+    return getUsersLengthLikedMovieId({
+      usersLengthLikedMovies,
+      usersLengthLikedMovies,
+      imdbID
+    });
+  }
 
-    const response = await getUsersLengthLikedMovieId({
+  componentWillMount() {
+
+    const { fetchUsersLengthLikedMovieId, imdbID } = this.props;
+
+    fetchUsersLengthLikedMovieId({
       imdbID,
     });
-    this.setState({
-      count: response.length ? response.length : 0,
-    })
-
-  }
-  componentWillMount() {
-    this.getUsersLengthLikedMovieId();
   }
 
   render() {
-    let { count } = this.state;
-    return (<button onClick={this.linkToMovieLikedByPage}>{count}</button>);
+    return (<button onClick={this.linkToMovieLikedByPage}>{this.renderCount()}</button>);
   }
 
 }
