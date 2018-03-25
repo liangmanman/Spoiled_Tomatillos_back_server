@@ -82,6 +82,13 @@ ReviewSchema.statics = {
         });
         return this.filterNullReview(reviewList);
     },
+    findReviewByUserIdAndMovieId: async function({ userId, movieId }) {
+        const queryResponse = this.find({
+            userId,
+            movieId,
+        });
+        return await this.populateMoveAndUser(queryResponse);
+    },
     findReviewByUserId: async function({ userId }) {
         const queryResponse = this.find({
             userId,
@@ -92,6 +99,10 @@ ReviewSchema.statics = {
         const queryResponse = this.find({
             movieId,
         });
+        return await this.populateMoveAndUser(queryResponse);
+    },
+    findAllReviews: async function() {
+        const queryResponse = this.find();
         return await this.populateMoveAndUser(queryResponse);
     },
     updateReviewOrCreateIfNotExist: async function({ movieId, userId, content}) {
@@ -107,10 +118,15 @@ ReviewSchema.statics = {
             upsert: true,
         })
     },
-    deleteReview: async function({ movieId, userId }) {
+    deleteReviewByMovieIdAndUserId: async function({ movieId, userId }) {
         return await this.remove({
             movieId,
             userId,
+        });
+    },
+    deleteReviewById: async function({ reviewId }) {
+        return await this.remove({
+            reviewId,
         });
     },
 };
