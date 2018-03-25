@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
 import MovieLikeButton from './Button/MovieLikeButton';
-import '../styles/MovieItem.css';
 import CountLikeButton from "./Button/CountLikeButton";
-import { generateMovieURI } from '../util'
+import Reviews from "./Reviews";
+import { generateMovieURI } from '../util';
+import '../styles/MovieItem.css';
 
 
 @inject(stores => {
@@ -89,6 +90,7 @@ class MovieItem extends Component {
               <li>Runtime: {result.Runtime}</li>
               <li>Production:	{result.Production}</li>
             </ul>
+            <Reviews imdbID={result.imdbID}/>
 
           </div>
         </div>
