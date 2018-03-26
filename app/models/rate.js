@@ -70,7 +70,7 @@ RateSchema.set('toJson', { virtuals: true });
 const JoiRateSchema = Joi.object().keys({
     userId: Joi.string(),
     movieId: Joi.string(),
-    rate: Joi.number(),
+    rate: Joi.number().integer().min(0).max(10),
 });
 
 /**

@@ -47,8 +47,23 @@ async function findRateQuery({ userId, movieId }) {
     return rateList;
 }
 
+async function calculateRateOfMovie({ movieId }) {
+    let rateList = await findRateQuery({ movieId });
+    if (rateList.length === 0) {
+        return 0;
+    }
+
+    let sum = _.sumBy(rateList, (rate) => {
+        return rate.rate;
+    });
+
+    let calculatedRate = sum / rateList.length;
+    return _.round(calculatedRate, 1);
+}
+
 module.exports = {
     updateRateOrCreateIfNotExist,
     deleteRateByUserIdAndMovieId,
     findRateQuery,
+    calculateRateOfMovie,
 };

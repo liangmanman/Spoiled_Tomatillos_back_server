@@ -2,7 +2,7 @@ import * as React from 'react';
 import { inject, observer } from "mobx-react";
 
 import MovieItem from '../components/MovieItem';
-import Reviews from "../components/Reviews";
+import Reviews from '../components/Reviews';
 import '../styles/Movie.css';
 import greyThumbsUp from "../img/greyup-64x64.png";
 import greenThumbsUp from "../img/greenup-64x64.png";
@@ -52,7 +52,6 @@ class MoviePage extends React.Component {
             <ThumbsUp userRating={this.state.userRating}/>
             <ThumbsDown userRating={this.state.userRating}/>
           </div>
-
         </div>
     );
   };
