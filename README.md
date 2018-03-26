@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/liangmanman/Spoiled_Tomatillos_back_server.svg?branch=master)](https://travis-ci.org/liangmanman/Spoiled_Tomatillos_back_server)
+
 ##  Setup Environment
 
 ```sh
@@ -20,5 +22,4 @@ node index.js
 ## Build for Production
 ```sh
 npm run build
-npm deploy
 ```
