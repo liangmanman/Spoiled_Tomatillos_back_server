@@ -29,4 +29,8 @@ module.exports = function (app) {
     const reviewRouter = require('./reviews');
     apiRouter.use('/reviews', reviewRouter);
 
+    // rate router
+    const rateRouter = require('./rates');
+    apiRouter.use('/rates', rateRouter);
+
 };

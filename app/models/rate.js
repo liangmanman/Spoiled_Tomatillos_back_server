@@ -16,14 +16,14 @@ const { movieSchemaString } = require('./movie');
 
 const Schema = mongoose.Schema;
 
-const reviewSchemaString = 'review';
+const rateSchemaString = 'rate';
 
 
 /**
- * Review Schema
+ * Rate Schema
  */
 
-const ReviewSchema = new Schema({
+const RateSchema = new Schema({
     movieId: {
         type: String,
         ref: movieSchemaString,
@@ -36,8 +36,8 @@ const ReviewSchema = new Schema({
         index: true,
         required: true,
     },
-    content: {
-        type: String,
+    rate: {
+        type: Number,
         required: true,
     },
 }, {
@@ -45,107 +45,107 @@ const ReviewSchema = new Schema({
 });
 
 // virtual
-ReviewSchema.virtual('movie', {
-  ref: movieSchemaString,
-  localField: 'movieId',
-  foreignField: 'imdbID',
-  justOne: true,
+RateSchema.virtual('movie', {
+    ref: movieSchemaString,
+    localField: 'movieId',
+    foreignField: 'imdbID',
+    justOne: true,
 });
 
-ReviewSchema.virtual('user', {
-  ref: userSchemaString,
-  localField: 'userId',
-  foreignField: '_id',
-  justOne: true,
+RateSchema.virtual('user', {
+    ref: userSchemaString,
+    localField: 'userId',
+    foreignField: '_id',
+    justOne: true,
 });
 
 // create unique compound index, each user can only comment on the same movie once.
-ReviewSchema.index({ movieId: 1, userId: 1 }, { unique: true });
+RateSchema.index({ movieId: 1, userId: 1 }, { unique: true });
 
 // set virtuals on toObject or toJson.
-ReviewSchema.set('toObject', { virtuals: true });
-ReviewSchema.set('toJson', { virtuals: true });
+RateSchema.set('toObject', { virtuals: true });
+RateSchema.set('toJson', { virtuals: true });
 
 
-const JoiReviewSchema = Joi.object().keys({
+const JoiRateSchema = Joi.object().keys({
     userId: Joi.string(),
     movieId: Joi.string(),
-    content: Joi.string(),
+    rate: Joi.number(),
 });
 
 /**
  * Validations
  */
 
-ReviewSchema.path('content').validate(function (content) {
+RateSchema.path('rate').validate(function (rate) {
     // check unique movie list
-    return content.length > 0;
-}, 'content cannot be blank');
+    return rate >= 0 && rate <= 10;
+}, 'rate must be in the rage of [0,10]');
 
 /**
  * Statics
  */
 
-ReviewSchema.statics = {
-    filterNullReview(reviewList) {
-        return _.filter(reviewList, (review) =>{
-            return !_.isNil(review.userId) && !_.isNil(review.movieId);
+RateSchema.statics = {
+    filterNullRate(rateList) {
+        return _.filter(rateList, (rate) =>{
+            return !_.isNil(rate.userId) && !_.isNil(rate.movieId);
         })
     },
     populateMoveAndUser: async function(queryResponse) {
-        const reviewList =  await queryResponse
-          .populate({
-            path: 'user',
-            select: '-hashed_password -salt',
-          })
-          .populate('movie');
-        return this.filterNullReview(reviewList);
+        const rateList =  await queryResponse
+            .populate({
+                path: 'user',
+                select: '-hashed_password -salt',
+            })
+            .populate('movie');
+        return this.filterNullRate(rateList);
     },
-    findReviewByUserIdAndMovieId: async function({ userId, movieId }) {
+    findRateByUserIdAndMovieId: async function({ userId, movieId }) {
         const queryResponse = this.find({
             userId,
             movieId,
         });
         return await this.populateMoveAndUser(queryResponse);
     },
-    findReviewByUserId: async function({ userId }) {
+    findRateByUserId: async function({ userId }) {
         const queryResponse = this.find({
             userId,
         });
         return await this.populateMoveAndUser(queryResponse);
     },
-    findReviewByMovieId: async function({ movieId }) {
+    findRateByMovieId: async function({ movieId }) {
         const queryResponse = this.find({
             movieId,
         });
         return await this.populateMoveAndUser(queryResponse);
     },
-    findAllReviews: async function() {
+    findAllRates: async function() {
         const queryResponse = this.find();
         return await this.populateMoveAndUser(queryResponse);
     },
-    updateReviewOrCreateIfNotExist: async function({ movieId, userId, content}) {
+    updateRateOrCreateIfNotExist: async function({ movieId, userId, rate}) {
         return await this.findOneAndUpdate({
             movieId,
             userId,
         }, {
             movieId,
             userId,
-            content,
+            rate,
         }, {
             new: true,
             upsert: true,
         })
     },
-    deleteReviewByMovieIdAndUserId: async function({ movieId, userId }) {
+    deleteRateByMovieIdAndUserId: async function({ movieId, userId }) {
         return await this.remove({
             movieId,
             userId,
         });
     },
-    deleteReviewById: async function({ reviewId }) {
+    deleteRateById: async function({ rateId }) {
         return await this.remove({
-            reviewId,
+            rateId,
         });
     },
 };
@@ -155,15 +155,15 @@ ReviewSchema.statics = {
  * pre
  */
 
-ReviewSchema.pre('save', incrementVersionNumberForSchema);
+RateSchema.pre('save', incrementVersionNumberForSchema);
 
 // LikeSchema.pre('findOneAndUpdate', incrementVersionNumberForQuery);
 
 // LikeSchema.pre('update', incrementVersionNumberForQuery);
 
-mongoose.model(reviewSchemaString, ReviewSchema);
+mongoose.model(rateSchemaString, RateSchema);
 
 module.exports = {
-    JoiReviewSchema,
-    reviewSchemaString,
+    JoiRateSchema,
+    rateSchemaString,
 };
