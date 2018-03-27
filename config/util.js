@@ -6,6 +6,10 @@ const requiredEnvList = [
 ];
 
 function checkRequiredEnv() {
+    if (process.env['NODE_ENV'] === 'test' || process.env['NODE_ENV'] === 'CI') {
+        return;
+    }
+
     const unsetEnv = _.filter(requiredEnvList, (envString) => {
         return _.isNil(process.env[envString])
     });

@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { decodeToken } = require('../app/module/users')
 
 describe('Array', function() {
   describe('#indexOf()', function() {
@@ -6,4 +7,11 @@ describe('Array', function() {
       assert.equal([1,2,3].indexOf(4), -1);
     });
   });
+
+  describe('check decodeToken', function() {
+    it('should decode token', function() {
+      assert(decodeToken('hello'), 'hello');
+    });
+  });
+
 });
