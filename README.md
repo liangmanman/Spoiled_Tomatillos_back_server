@@ -1,4 +1,25 @@
-# team-13-spring18
-Project repository for team 13
+[![Build Status](https://travis-ci.org/liangmanman/Spoiled_Tomatillos_back_server.svg?branch=master)](https://travis-ci.org/liangmanman/Spoiled_Tomatillos_back_server)
 
-Page_URL: http://ec2-18-217-211-130.us-east-2.compute.amazonaws.com:8080/#/
+##  Setup Environment
+
+```sh
+npm install
+cd frontend
+npm install
+```
+
+## Run Frontend Locally
+```sh
+cd frontend
+npm start
+```
+
+## Run Backend Locally
+```sh
+node index.js
+```
+
+## Build for Production
+```sh
+npm run build
+```

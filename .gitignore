@@ -20,3 +20,8 @@
 .project
 .settings
 .springBeans
+
+node_modules/
+.monitor
+config/env/env.json
+.env
