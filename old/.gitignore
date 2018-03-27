@@ -1,0 +1,27 @@
+# For IntelliJ
+.idea
+*.name
+*.iml
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+/.metadata/
+
+# Log file
+*.log
+
+# For Mac
+*.DS_Store
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+node_modules/
+.monitor
+config/env/env.json
+.env
