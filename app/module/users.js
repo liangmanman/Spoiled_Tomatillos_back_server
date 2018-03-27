@@ -59,7 +59,12 @@ async function findUsersBySearch({ searchBy }) {
   return userList;
 }
 
+function test() {
+  return 'hello';
+}
+
 module.exports = {
+  test,
   decodeToken,
   generateJwtTokenForUser,
   verifyMe,
