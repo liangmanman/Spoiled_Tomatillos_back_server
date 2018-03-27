@@ -33,4 +33,6 @@ jobs:
     - stage: sonarCloud
       script: sonar-scanner
     - stage: quality
-      script: ./scripts/sonar-gate.sh
+      script:
+        - chmod +x ./scripts/sonar-gate.sh
+        - ./scripts/sonar-gate.sh
