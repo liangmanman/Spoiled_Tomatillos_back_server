@@ -21,18 +21,18 @@ cache:
 
 jobs:
   include:
-#    - stage: install
-#      script:
-#        - npm install
-#        - npm run build
-#    - stage: test
-#      script:
-#        - nohup npm run start &
-#        - sleep 3
-#        - npm run test
+    - stage: install
+      script:
+        - npm install
+        - npm run build
+    - stage: test
+      script:
+        - nohup npm run start &
+        - sleep 3
+        - npm run test
     - stage: sonarCloud
       script: sonar-scanner
-    - stage: quality
-      script:
-        - chmod +x ./scripts/sonar-gate.sh
-        - ./scripts/sonar-gate.sh
+#    - stage: quality
+#      script:
+#        - chmod +x ./scripts/sonar-gate.sh
+#        - ./scripts/sonar-gate.sh
