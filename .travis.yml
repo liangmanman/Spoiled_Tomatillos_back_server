@@ -32,7 +32,6 @@ jobs:
         - npm run test
     - stage: sonarCloud
       script: sonar-scanner
-#    - stage: quality
-#      script:
-#        - chmod +x ./scripts/sonar-gate.sh
-#        - ./scripts/sonar-gate.sh
+    - stage: quality
+      script:
+        - npm run SonarCloudCheck

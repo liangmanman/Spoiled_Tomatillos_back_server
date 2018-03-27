@@ -8,7 +8,8 @@
     "test": "./node_modules/.bin/mocha",
     "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "lint": "./node_modules/.bin/eslint --ext .js ./",
-    "fix": "./node_modules/.bin/eslint --ext .js ./ --fix"
+    "fix": "./node_modules/.bin/eslint --ext .js ./ --fix",
+    "SonarCloudCheck": "./node_modules/.bin/mocha ./scripts/sonarCheck.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "ajv": "^6.3.0",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cloudinary": "^1.11.0",
     "compression": "^1.7.2",
