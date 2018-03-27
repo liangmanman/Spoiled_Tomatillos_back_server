@@ -31,7 +31,9 @@ jobs:
 #        - sleep 3
 #        - npm run test
     - stage: sonarCloud
-      script: sonar-scanner
+      script:
+        - npm run nyc
+        - sonar-scanner
     - stage: quality
       script:
         - npm run SonarCloudCheck

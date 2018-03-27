@@ -3,20 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "config": {
-    "mocha-sonar-reporter": {
-      "classname": "Test",
-      "testdir": "test",
-      "outputfile": "report/TEST-all.xml"
-    }
-  },
   "scripts": {
     "start": "node index.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --no-warnings",
+    "nyc": "./node_modules/.bin/nyc --reporter=lcov --reporter=lcov npm test",
     "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "lint": "./node_modules/.bin/eslint --ext .js ./",
-    "fix": "./node_modules/.bin/eslint --ext .js ./ --fix",
-    "SonarCloudCheck": "./node_modules/.bin/mocha ./scripts/sonarCheck.js"
+    "fix": "./node_modules/.bin/eslint --ext .js ./ --fix"
   },
   "author": "",
   "license": "ISC",

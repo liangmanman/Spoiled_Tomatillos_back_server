@@ -15,6 +15,8 @@ describe('Array', function() {
   });
 
   describe('test', function() {
-    assert.equal(test(), 'hello');
+    it('test function', function() {
+      assert.equal(test(), 'hello');
+    });
   })
 });
