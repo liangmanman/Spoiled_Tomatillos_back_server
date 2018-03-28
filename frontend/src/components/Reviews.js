@@ -45,14 +45,14 @@ class Reviews extends React.Component {
 
   renderResponse() {
     const { response, setResponse } = this.props;
-    if (response && response.status == 200) {
+    if (response && response.status === 200) {
       window.setTimeout(() => {
         setResponse(null);
       }, 1000);
       const successMessage = "Succeed to review movie!";
       return <SuccessMessage successMessage={ successMessage } />;
     }
-    return <div></div>;
+    return <div/>;
   }
 
   renderReviews() {
@@ -61,7 +61,7 @@ class Reviews extends React.Component {
       <ul className="reviews">{_.map(reviewList, (review) => {
         return <li className="review" key={review._id}>
           {/*<Link to={generateUserURI(review.userId, USER_PROFILE_URI)}>{review.user.fullName}</Link>*/}
-          <Link to='/'>{review.user.fullName}</Link>  {review.content}</li>;
+          <Link to={generateUserURI(review.userId, USER_PROFILE_URI)}>{review.user.fullName}</Link>  {review.content}</li>;
       })}</ul>
     </div>
   }
@@ -72,7 +72,7 @@ class Reviews extends React.Component {
         {this.renderReviews()}
         {this.renderResponse()}
         <form className="input-group" onSubmit={this.handleReview}>
-          <textarea className="form-control" aria-label="With textarea" name="reviewContent"></textarea>
+          <textarea className="form-control" aria-label="With textarea" name="reviewContent"/>
           <div className="input-group-prepend">
             <button className="input-group-text btn " >Post</button>
           </div>
