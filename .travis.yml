@@ -15,23 +15,21 @@ cache:
   directories:
     - node_modules
     - frontend/node_modules
-#install:
-#  - npm install
-#  - npm run build
+install:
+  - npm install
+  - npm run build
 
 jobs:
   include:
-#    - stage: install
-#      script:
-#        - npm install
-#        - npm run build
-#    - stage: test
-#      script:
-#        - nohup npm run start &
-#        - sleep 3
-#        - npm run test
+    - stage: test
+      script:
+        - nohup npm run start &
+        - sleep 3
+        - npm run test
     - stage: sonarCloud
-      script: sonar-scanner
+      script:
+        - npm run nyc
+        - sonar-scanner
     - stage: quality
       script:
         - npm run SonarCloudCheck

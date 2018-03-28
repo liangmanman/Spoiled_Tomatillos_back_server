@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { MOVIE_DETAIL_URI } from "../containers/routesContainer/uriConstants";
 import MovieLikeButton from './Button/MovieLikeButton';
 import CountLikeButton from "./Button/CountLikeButton";
+import Rate from '../components/Rate';
 import { generateMovieURI } from '../util';
 import '../styles/MovieItem.css';
 
@@ -73,6 +74,7 @@ class MovieItem extends Component {
                   Title: {result.Title}
                 </Link>
               </h5>
+              <Rate movieId={result.imdbID}/>
             </div>
             <p>Year: {result.Year}</p>
             <p>{result.Plot}</p>

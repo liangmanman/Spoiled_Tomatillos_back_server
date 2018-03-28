@@ -1,5 +1,11 @@
 const assert = require('assert');
-const { decodeToken, test } = require('../app/module/users')
+const {
+  decodeToken,
+  generateJwtTokenForUser,
+  verifyMe,
+  getUser,
+  findUsersBySearch,
+} = require('../app/module/users')
 
 describe('Array', function() {
   describe('#indexOf()', function() {
@@ -12,9 +18,18 @@ describe('Array', function() {
     it('should decode token', function() {
       assert(decodeToken('hello'), 'hello');
     });
-  });
+    it('generateJwtTokenForUser', function() {
+      assert(generateJwtTokenForUser({userId: "hello"}), 'hello');
+    });
+    it('verifyMe', function() {
+      assert(verifyMe({userId: "hi"}), 'hello');
+    });
+    it('getUser', function() {
+      assert(getUser({userId: "hi"}), 'hello');
+    });
+    it('findUsersBySearch', function() {
+      assert(findUsersBySearch({searchBy:'fullName'}), 'hello');
+    })
 
-  describe('test', function() {
-    assert.equal(test(), 'hello');
-  })
+  });
 });
