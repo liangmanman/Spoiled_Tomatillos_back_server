@@ -1,6 +1,5 @@
 const assert = require('assert');
 const {
-  test,
   decodeToken,
   generateJwtTokenForUser,
   verifyMe,
@@ -33,10 +32,4 @@ describe('Array', function() {
     })
 
   });
-
-  describe('test', function() {
-    it('test function', function() {
-      assert.equal(test(), 'hello');
-    });
-  })
 });

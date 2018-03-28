@@ -10,6 +10,7 @@ const {
     updateRateOrCreateIfNotExist,
     findRateQuery,
     deleteRateByUserIdAndMovieId,
+    calculateRateOfMovie,
 } = require('../module/rates');
 const { sendJoiValidationError } = require('../utils/joi');
 const { validateUserHasPermission, sendPermissionError } = require('../utils/permission');
@@ -122,6 +123,28 @@ router.get('/', async function(req, res) {
         res.status(500).send(error.message);
     }
 
+});
+
+router.get('/calculate', async function(req, res) {
+    const fieldList = ['movieId'];
+
+    const newRateQuery = _.pick(req.query, fieldList);
+
+    const joiResult  = Joi.validate(newRateQuery, JoiRateQuerySchema, {
+        abortEarly: false,
+    });
+    const joiError = joiResult.error;
+
+    if (!_.isNil(joiError)) {
+        return sendJoiValidationError(joiError, res);
+    }
+
+    try {
+        const rate = await calculateRateOfMovie(newRateQuery);
+        res.json(rate);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 module.exports = router;

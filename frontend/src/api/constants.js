@@ -19,4 +19,8 @@ export const USERS_LENGTH_LIKE_MOVIEID_API = API + '/likes/users/:movieId/length
 export const REVIEW_MOVIE_API = API + '/reviews/review';
 export const REVIEWS_OF_MOVIE_API = API + '/reviews/?movieId=';
 
+export const RATE_MOVIE_API = API + '/rates/rate';
+export const RATE_OF_MOVIE_API = API + '/rates';
+export const RATE_CALCULATE_RAGE_OF_MOVIE_API = API + '/rates/calculate';
+
 export const PROFILE_USER_INFO = API + '/profiles/:userId';
