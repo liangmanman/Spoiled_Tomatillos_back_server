@@ -157,10 +157,6 @@ ReviewSchema.statics = {
 
 ReviewSchema.pre('save', incrementVersionNumberForSchema);
 
-// LikeSchema.pre('findOneAndUpdate', incrementVersionNumberForQuery);
-
-// LikeSchema.pre('update', incrementVersionNumberForQuery);
-
 mongoose.model(reviewSchemaString, ReviewSchema);
 
 module.exports = {

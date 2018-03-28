@@ -41,9 +41,14 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
-      { test: /\.(svg|png|jpg|gif)$/,
+      { test: /\.(png|jpg|gif)$/,
         loader: 'file-loader'
-      }],
+      },
+      {
+        test: /\.svg$/,
+        loader: "react-svg-loader",
+      }
+    ],
 
   },
 };

@@ -8,6 +8,7 @@ import profiles from './profiles';
 import users from './users';
 import reviews from './reviews';
 import rates from './rates';
+import friends from './friends';
 
 const stores = {
   account,
@@ -19,7 +20,8 @@ const stores = {
   profiles,
   users,
   reviews,
-    rates,
+  rates,
+  friends,
 };
 
 export default stores;
