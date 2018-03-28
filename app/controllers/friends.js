@@ -20,8 +20,8 @@ router.use(authorization.requiresLogin);
 // add friend
 router.post('/', async function (req, res) {
   const fieldList = ['fromUserId', 'toUserId'];
-  const newFriendQuery = _.pick(req.query, fieldList);
-  const joiResult  = Joi.validate(newFriendQuery, JoiFriendSchema, {
+  const newFriendBody = _.pick(req.body, fieldList);
+  const joiResult  = Joi.validate(newFriendBody, JoiFriendSchema, {
     presence: 'required',
     abortEarly: false,
   });
@@ -32,16 +32,16 @@ router.post('/', async function (req, res) {
   const userInfo = req.decodedToken;
   const hasPermission = validateUserHasPermission({
     userInfo,
-    userId: newFriendQuery.fromUserId,
+    userId: newFriendBody.fromUserId,
   });
   if (!hasPermission) {
     return sendPermissionError({
-      userId: newFriendQuery.fromUserId,
+      userId: newFriendBody.fromUserId,
       res,
     })
   }
 
-  const { toUserId } = newFriendQuery;
+  const { toUserId } = newFriendBody;
   try {
     usersModule.getUser({
       userId: toUserId
@@ -51,7 +51,7 @@ router.post('/', async function (req, res) {
   }
 
   try {
-    await friendsModule.updateFriendOrCreateIfNotExist(newFriendQuery);
+    await friendsModule.updateFriendOrCreateIfNotExist(newFriendBody);
     res.sendStatus(200);
   } catch (error) {
     res.status(500).send(error.message);
@@ -59,7 +59,7 @@ router.post('/', async function (req, res) {
 
 });
 
-router.delete('/friend', async function (req, res) {
+router.delete('/unFriend', async function (req, res) {
   const fieldList = ['fromUserId', 'toUserId'];
   const newFriendQuery = _.pick(req.query, fieldList);
 
@@ -76,12 +76,12 @@ router.delete('/friend', async function (req, res) {
 
   const hasPermission = validateUserHasPermission({
     userInfo,
-    userId: newReviewQuery.userId,
+    userId: newFriendQuery.fromUserId,
   });
 
   if (!hasPermission) {
     return sendPermissionError({
-      userId: newReviewQuery.userId,
+      userId: newFriendQuery.fromUserId,
       res,
     })
   }

@@ -45,7 +45,7 @@ const JoiFriendSchema = Joi.object().keys({
  */
 FriendSchema.virtual('user', {
   ref: userSchemaString,
-  localField: 'user',
+  localField: 'fromUserId',
   foreignField: '_id',
   justOne: true,
 });
@@ -80,12 +80,23 @@ FriendSchema.pre('save', incrementVersionNumberForSchema);
  * Statics
  */
 FriendSchema.statics = {
-
+  populateUserInfo: async function(queryResponse) {
+    return queryResponse
+      .populate({
+        path: 'user',
+        select: '-hashed_password -salt',
+      })
+      .populate({
+        path: 'toUser',
+        select: '-hashed_password -salt',
+      });
+  },
   getFriendStatus: async function({ fromUserId, toUserId }) {
-    return await this.findOne({
+    let query = this.findOne({
       fromUserId,
       toUserId,
-    })
+    });
+    return await this.populateUserInfo(query);
   },
 
   deleteFriend: async function({ fromUserId, toUserId }) {
@@ -96,7 +107,7 @@ FriendSchema.statics = {
   },
 
   updateFriendOrCreateIfNotExist: async function({ fromUserId, toUserId }) {
-    return await this.findOneAndUpdate({
+    let query = this.findOneAndUpdate({
       fromUserId,
       toUserId,
     }, {
@@ -105,10 +116,9 @@ FriendSchema.statics = {
     }, {
       new: true,
       upsert: true,
-    })
+    });
+    return await this.populateUserInfo(query);
   },
-
-
 };
 
 mongoose.model(friendSchemaString, FriendSchema);

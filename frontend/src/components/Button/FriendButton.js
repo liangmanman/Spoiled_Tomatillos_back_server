@@ -1,28 +1,68 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
+import * as MaterialDesign from 'react-icons/lib/md'
+
+
 
 @inject((stores) => {
   const { friends } = stores;
 
   return {
     addFriend: friends.addFriend,
-    postNotFriend: friends.postNotFriend,
+    unFriend: friends.unFriend,
+    fetchFriendStatus: friends.fetchFriendStatus,
+    fetchOtherStatus: friends.fetchOtherStatus,
   }
 })
 @observer
 class FriendButton extends React.Component {
   constructor(props) {
     super(props);
-    this.postNotFriend = this.postNotFriend.bind(this);
+    this.state = {
+      isFriend: false,
+      isOtherFriend: false,
+    };
+    this.unFriend = this.unFriend.bind(this);
     this.addFriend = this.addFriend.bind(this);
+    this.fetchFriendStatus = this.fetchFriendStatus.bind(this);
+    this.renderFriendButton = this.renderFriendButton.bind(this);
   }
 
-  async postNotFriend() {
-    let { postNotFriend, userId } = this.props;
-    await postNotFriend({
+  componentWillMount() {
+    this.fetchFriendStatus();
+    this.fetchOtherStatus();
+  }
+
+  async fetchOtherStatus() {
+    const { fetchOtherStatus, userId } = this.props;
+
+    let isOtherFriend = await fetchOtherStatus({
       userId,
-    })
+    });
+    this.setState({
+      isOtherFriend,
+    });
+  }
+
+  async fetchFriendStatus() {
+    const { fetchFriendStatus, userId } = this.props;
+
+    let isFriend = await fetchFriendStatus({
+      userId,
+    });
+    this.setState({
+      isFriend,
+    });
+  }
+
+  async unFriend() {
+    let { unFriend, userId } = this.props;
+    await unFriend({
+      userId,
+    });
+    this.fetchFriendStatus();
+    this.fetchOtherStatus();
   };
 
   async addFriend() {
@@ -30,17 +70,31 @@ class FriendButton extends React.Component {
 
     await addFriend({
       userId,
-    })
+    });
+    this.fetchFriendStatus();
+    this.fetchOtherStatus();
+  }
+
+
+  renderFriendButton() {
+    let { isFriend, isOtherFriend } = this.state;
+    if (isFriend && isOtherFriend) {
+      return <button onClick={this.unFriend}>
+        <MaterialDesign.MdPeople size={28}/> UnFriend
+      </button>;
+    }
+    if (isFriend) {
+      return <button onClick={this.unFriend}>
+        <MaterialDesign.MdPersonOutline size={28}/> UnFriend
+      </button>;
+    }
+    return <button onClick={this.addFriend}>
+      <MaterialDesign.MdPersonAdd size={28}/> Add friend
+    </button>;
   }
 
   render() {
-    return <h1>test Add friend</h1>
-    // let { isMovieLikedByUser, imdbID, currentUserLikedMovies } = this.props;
-    // if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
-    //   return (<button onClick={this.unLikeMovie}>Unlike</button>);
-    // } else {
-    //   return (<button onClick={this.postLikedMovie}>Like</button>);
-    // }
+    return this.renderFriendButton();
   }
 
 }
