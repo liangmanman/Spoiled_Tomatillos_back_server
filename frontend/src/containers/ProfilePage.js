@@ -4,6 +4,8 @@ import { withRouter, Link} from "react-router-dom";
 
 import { USER_LIKES_URI } from './routesContainer/uriConstants';
 import { generateUserURI }  from '../util';
+import FriendButton from '../components/Button/FriendButton';
+
 
 @inject(stores => {
     let { profiles, session } = stores;
@@ -45,6 +47,7 @@ class ProfilePage extends React.Component {
             <div>
                 <h2> You are logged in as {fullName}</h2>
                 <h2>This is the Profile Page of User:  {profileUserName}</h2>
+                <FriendButton userId={ profileUserId }/>
                 <Link to={generateUserURI(profileUserId, USER_LIKES_URI)}>Likes</Link>
             </div>
         );
