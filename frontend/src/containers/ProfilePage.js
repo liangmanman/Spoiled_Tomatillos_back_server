@@ -41,6 +41,14 @@ class ProfilePage extends React.Component {
     this.fetchUserProfile();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { userId } = nextProps.match.params;
+    this.state = {
+      profileUserId: userId,
+    };
+    this.fetchUserProfile();
+  }
+
   renderFriendButton() {
     let { _id } = this.props.userInfo;
     let { profileUserId } = this.state;
