@@ -157,10 +157,6 @@ RateSchema.statics = {
 
 RateSchema.pre('save', incrementVersionNumberForSchema);
 
-// LikeSchema.pre('findOneAndUpdate', incrementVersionNumberForQuery);
-
-// LikeSchema.pre('update', incrementVersionNumberForQuery);
-
 mongoose.model(rateSchemaString, RateSchema);
 
 module.exports = {

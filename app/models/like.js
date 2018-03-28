@@ -105,10 +105,6 @@ LikeSchema.statics = {
 
 LikeSchema.pre('save', incrementVersionNumberForSchema);
 
-// LikeSchema.pre('findOneAndUpdate', incrementVersionNumberForQuery);
-
-// LikeSchema.pre('update', incrementVersionNumberForQuery);
-
 mongoose.model(likeSchemaString, LikeSchema);
 
 module.exports = {
