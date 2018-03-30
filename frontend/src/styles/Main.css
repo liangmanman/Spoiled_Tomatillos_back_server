@@ -1,0 +1,20 @@
+.boxed {
+    margin-top: 20px;
+    padding: 10px 15px 20px 15px;
+    border: 3px solid #6788C8;
+    border-radius: 15px;
+    background-color: #6788C8;
+}
+
+label, h1, h2, h3, h4, h5, h6, .text-muted {
+    color: #FFFFFF !important;
+}
+
+body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    background-color: #1f3d7a !important;
+    border-color: #1f3d7a !important;
+}
+
+.btn-primary:hover {
+    background-color: #142C5B !important;
+}

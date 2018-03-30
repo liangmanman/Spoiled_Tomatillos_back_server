@@ -1,6 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import styles from '../styles/SignInForm.css';
+import stylesMain from '../styles/Main.css'
 
 @observer
 class SignInForm extends React.Component {
@@ -40,7 +42,8 @@ class SignInForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="boxed">
+                <h2>Sign in</h2>
                 <form>
                     {this.renderErrorMessage()}
                     <div className="form-group">
