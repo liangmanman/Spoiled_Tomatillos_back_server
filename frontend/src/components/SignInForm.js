@@ -54,7 +54,7 @@ class SignInForm extends React.Component {
                                className="form-control"
                                id="exampleInputEmail1"
                                aria-describedby="emailHelp"
-                               placeholder="Enter email"/>
+                               placeholder="Email"/>
                         <small id="emailHelp"
                                className="form-text text-muted">
                             We'll never share your email with anyone else.
