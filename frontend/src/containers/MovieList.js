@@ -37,7 +37,7 @@ class MovieList extends React.Component {
   render() {
 
     return (
-        <div class="boxed">
+        <div className="boxed">
           <h2>Movie List</h2>
           {this.renderMoveInfoList()}
         </div>

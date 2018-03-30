@@ -62,7 +62,7 @@ class ProfilePage extends React.Component {
     let { fullName, _id } = this.props.userInfo;
     let { profileUserName, profileUserId } = this.state;
     return (
-      <div>
+      <div className="boxed">
         <h2> You are logged in as {fullName}</h2>
         <h2>This is the Profile Page of User:  {profileUserName}</h2>
         {this.renderFriendButton()}

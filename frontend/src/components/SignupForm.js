@@ -35,7 +35,7 @@ class SignUpForm extends React.Component {
     render() {
         const { errorMessage, email, password, fullName } = this.props;
         return (
-            <div class="boxed">
+            <div className="boxed">
                 <h2>Create an Account</h2>
                 <form>
                     <ErrorMessage errorMessage={errorMessage} />

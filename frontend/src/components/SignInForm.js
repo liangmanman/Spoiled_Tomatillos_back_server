@@ -42,7 +42,7 @@ class SignInForm extends React.Component {
 
     render() {
         return (
-            <div class="boxed">
+            <div className="boxed">
                 <h2>Sign in</h2>
                 <form>
                     {this.renderErrorMessage()}

@@ -3,7 +3,16 @@
     float: right;
 }
 
+.movie-title {
+    text-decoration: underline;
+}
+
+.movie-title:hover {
+    color: #1f3d7a;
+}
+
 img {
-    margin-top: 40px;
+    margin-top: 50px;
     border: 4px inset black;
 }
+
