@@ -2,6 +2,7 @@ import * as React from 'react';
 import _ from 'lodash';
 import MovieItem from '../components/MovieItem';
 import {inject, observer} from "mobx-react";
+import stylesMain from '../styles/Main.css'
 
 
 @inject(stores => {
@@ -36,7 +37,7 @@ class MovieList extends React.Component {
   render() {
 
     return (
-        <div>
+        <div class="boxed">
           <h2>Movie List</h2>
           {this.renderMoveInfoList()}
         </div>

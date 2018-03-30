@@ -74,7 +74,7 @@ class Rate extends React.Component {
         <div className={'star'}>
           <div className="d-flex flex-row">
             <div className="p-2">
-              <h3>My Rate: </h3>
+              <h3>My Rating: </h3>
             </div>
             <div className="p-8">
               <StarRatingComponent

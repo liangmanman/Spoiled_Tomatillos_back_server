@@ -9,6 +9,7 @@ import CountLikeButton from "./Button/CountLikeButton";
 import Rate from '../components/Rate';
 import { generateMovieURI } from '../util';
 import '../styles/MovieItem.css';
+import '../styles/Main.css';
 
 
 @inject(stores => {
@@ -59,7 +60,7 @@ class MovieItem extends Component {
     }
 
     return (
-        <div className="row Card">
+        <div className="inside-boxed row Card">
           <div className="col-sm-4">
             <img className="img-fluid" alt="Responsive image" src={result.Poster} />
           </div>

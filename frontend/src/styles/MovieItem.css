@@ -2,3 +2,8 @@
     position: relative;
     float: right;
 }
+
+img {
+    margin-top: 40px;
+    border: 4px inset black;
+}

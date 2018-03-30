@@ -5,7 +5,7 @@
     background-color: #6788C8;
 }
 
-label, h1, h2, h3, h4, h5, h6, .text-muted {
+label, h1, h2, h3, h4, h5, h6, p, ul, .text-muted {
     color: #FFFFFF !important;
 }
 
@@ -16,4 +16,11 @@ body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus
 
 .btn-primary:hover {
     background-color: #142C5B !important;
+}
+
+.inside-boxed {
+    border-radius: 15px;
+    border: 2px outset #1f3d7a;
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 5px;
 }
