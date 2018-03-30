@@ -1,19 +1,32 @@
 .boxed {
     margin-top: 20px;
     padding: 10px 15px 20px 15px;
-    border-radius: 15px;
-    background-color: #6788C8;
+    border-radius: 12px;
+    background-color: #8fa7d6;
 }
 
-label, h1, h2, h3, h4, h5, h6, .text-muted {
+label, h1, h2, h3, h4, h5, h6, p, ul, div {
+    color: #FFFFFF;
+}
+
+.text-muted {
     color: #FFFFFF !important;
 }
 
 body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
     background-color: #1f3d7a !important;
-    border-color: #1f3d7a !important;
+    border-color: #CCCCCC !important;
+    padding: 2px;
 }
 
 .btn-primary:hover {
     background-color: #142C5B !important;
+}
+
+.inside-boxed {
+    border-radius: 12px;
+    background-color: #6989c9;
+    border: 3px solid #CCCCCC;
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 5px;
 }

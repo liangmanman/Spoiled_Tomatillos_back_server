@@ -8,9 +8,9 @@
     width: 25vw;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
     margin-top: -5px;
-    background-color: #7094db !important;
+    padding: 5px;
     height: 36px;
     font-family: Arial;
 }

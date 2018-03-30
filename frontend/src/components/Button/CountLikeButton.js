@@ -47,7 +47,7 @@ class CountLikeButton extends React.Component {
   }
 
   render() {
-    return (<button onClick={this.linkToMovieLikedByPage}>{this.renderCount()}</button>);
+    return (<button className="btn-primary" onClick={this.linkToMovieLikedByPage}>{this.renderCount()}</button>);
   }
 
 }
