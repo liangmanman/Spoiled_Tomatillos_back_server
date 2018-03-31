@@ -81,7 +81,7 @@ class MyLikesPage extends React.Component {
   render() {
     const { pageUserName } = this.state;
     return (
-        <div>
+        <div className="boxed">
           <h2>Movies Liked by {pageUserName}</h2>
           {this.renderMoveInfoList()}
         </div>

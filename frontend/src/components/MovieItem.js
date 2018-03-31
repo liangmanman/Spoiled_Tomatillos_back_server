@@ -9,6 +9,7 @@ import CountLikeButton from "./Button/CountLikeButton";
 import Rate from '../components/Rate';
 import { generateMovieURI } from '../util';
 import '../styles/MovieItem.css';
+import '../styles/Main.css';
 
 
 @inject(stores => {
@@ -59,7 +60,7 @@ class MovieItem extends Component {
     }
 
     return (
-        <div className="row Card">
+        <div className="inside-boxed row Card">
           <div className="col-sm-4">
             <img className="img-fluid" alt="Responsive image" src={result.Poster} />
           </div>
@@ -71,7 +72,7 @@ class MovieItem extends Component {
               </div>
               <h5>
                 <Link to={generateMovieURI(result.imdbID, MOVIE_DETAIL_URI)}>
-                  Title: {result.Title}
+                  <h3 className="movie-title">{result.Title}</h3>
                 </Link>
               </h5>
               <Rate movieId={result.imdbID}/>
@@ -79,9 +80,10 @@ class MovieItem extends Component {
             <p>Year: {result.Year}</p>
             <p>{result.Plot}</p>
             <div>{result.Ratings.map((rate, id) => {
-              return <div key={id}> {rate.Source}: {rate.Value} </div>
+              return <div key={id}>{rate.Source}: {rate.Value}</div>
             })}
             </div>
+            <br/>
             <ul>
               <li>Genre:	{result.Genre}</li>
               <li>Directed By:	{result.Director}</li>
