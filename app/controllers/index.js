@@ -37,5 +37,9 @@ module.exports = function (app) {
   const friendRouter = require('./friends');
   apiRouter.use('/friends', friendRouter);
 
+  //group router
+  const groupRouter = require('./groups');
+  apiRouter.use('/groups', groupRouter);
+
 
 };
