@@ -22,7 +22,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="boxed">
           <h3>Hello {this.state.fullName}!</h3>
       </div>
     );

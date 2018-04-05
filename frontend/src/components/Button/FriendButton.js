@@ -79,16 +79,16 @@ class FriendButton extends React.Component {
   renderFriendButton() {
     let { isFriend, isOtherFriend } = this.state;
     if (isFriend && isOtherFriend) {
-      return <button onClick={this.unFriend}>
+      return <button className="btn-primary" onClick={this.unFriend}>
         <MaterialDesign.MdPeople size={28}/> UnFriend
       </button>;
     }
     if (isFriend) {
-      return <button onClick={this.unFriend}>
+      return <button className="btn-primary" onClick={this.unFriend}>
         <MaterialDesign.MdPersonOutline size={28}/> UnFriend
       </button>;
     }
-    return <button onClick={this.addFriend}>
+    return <button className="btn-primary" onClick={this.addFriend}>
       <MaterialDesign.MdPersonAdd size={28}/> Add friend
     </button>;
   }

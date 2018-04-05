@@ -57,24 +57,24 @@ class Reviews extends React.Component {
 
   renderReviews() {
     const { reviewList } = this.props;
-    return <div className="reviewSection">
+    return <div className="boxed reviewSection">
       <ul className="reviews">{_.map(reviewList, (review) => {
         return <li className="review" key={review._id}>
-          {/*<Link to={generateUserURI(review.userId, USER_PROFILE_URI)}>{review.user.fullName}</Link>*/}
-          <Link to={generateUserURI(review.userId, USER_PROFILE_URI)}>{review.user.fullName}</Link>  {review.content}</li>;
+          <Link to={generateUserURI(review.userId, USER_PROFILE_URI)}>{review.user.fullName}:</Link>   {review.content}</li>;
       })}</ul>
     </div>
   }
 
   render() {
     return (
-      <div>
+      <div className="inside-boxed">
+        <h4>Reviews</h4>
         {this.renderReviews()}
         {this.renderResponse()}
         <form className="input-group" onSubmit={this.handleReview}>
           <textarea className="form-control" aria-label="With textarea" name="reviewContent"/>
           <div className="input-group-prepend">
-            <button className="input-group-text btn " >Post</button>
+            <button className="post-btn btn-primary input-group-text btn" >Post</button>
           </div>
         </form>
       </div>
