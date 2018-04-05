@@ -33,7 +33,7 @@ class SignInPage extends React.Component {
         let {
             email,
             password,
-          userInfo,
+            userInfo,
             errorMessage,
             setEmail,
             setPassword,
@@ -41,7 +41,6 @@ class SignInPage extends React.Component {
         } = this.props;
         return (
             <div>
-                {/*<NavBar/>*/}
                 <SignInForm
                     email={email}
                     password={password}
@@ -50,7 +49,6 @@ class SignInPage extends React.Component {
                     setPassword={setPassword}
                     login={login}
                 />
-                {/*<Link to={'/'}>Go Back</Link>*/}
             </div>
         );
     }

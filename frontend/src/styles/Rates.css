@@ -2,3 +2,8 @@
     font-size: 24px;
     display: flex;
 }
+
+.rating {
+    margin-left: -9px;
+    margin-top: -5px;
+}

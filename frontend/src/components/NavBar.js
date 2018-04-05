@@ -30,6 +30,12 @@ class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
+        this.redirectToHome = this.redirectToHome.bind(this);
+    };
+
+
+    redirectToHome() {
+        window.location = "/";
     };
 
     render() {
@@ -37,7 +43,7 @@ class NavBar extends React.Component {
         if (_.isNil(userInfo)) {
             return (
                 <div className="topNav">
-                    <h3 className="title">Spoiled Tomatillos</h3>
+                    <h3 className="title" onClick={this.redirectToHome}>Spoiled Tomatillos</h3>
                     <Link to={SIGN_UP_URI}>Register</Link>
                     <Link to={SIGN_IN_URI}>Login</Link>
                 </div>
