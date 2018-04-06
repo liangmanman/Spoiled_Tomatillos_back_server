@@ -27,4 +27,10 @@ export const ADD_FRIEND_API = API + '/friends';
 export const DELETE_FRIEND_API = API + '/friends/unFriend';
 export const IS_FRIEND_API = API + '/friends/isFriend?';
 
+export const CREATE_GROUP_API = API + '/groups/create';
+export const GROUPS_OF_USER_API = API + '/groups/groups';
+export const LEAVE_GROUP_API = API + '/groups/leave';
+export const ADD_USERS_TO_GROUP_API = API + '/groups/add';
+export const REMOVE_USERS_FROM_GROUP_API = API + '/groups/remove';
+
 export const PROFILE_USER_INFO = API + '/profiles/:userId';

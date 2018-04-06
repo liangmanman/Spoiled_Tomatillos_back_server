@@ -1,7 +1,11 @@
 import * as React from 'react';
 import _ from 'lodash';
-import MovieItem from '../components/MovieItem';
 import {inject, observer} from "mobx-react";
+import { Link } from 'react-router-dom';
+
+import MovieItem from '../components/MovieItem';
+import {generateUserURI} from "../util";
+import {USER_PROFILE_URI} from "./routesContainer/uriConstants";
 
 
 @inject(stores => {
@@ -46,7 +50,7 @@ class SearchResult extends React.Component {
     const { userList } = this.props;
 
     return _.map(userList, (user) => {
-      return <h5 key={user._id}>{user.fullName}</h5>
+      return <li key={user._id}><Link to={generateUserURI(user._id, USER_PROFILE_URI)}>{user.fullName}</Link></li>
     });
   }
 

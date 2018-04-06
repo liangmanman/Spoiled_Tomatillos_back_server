@@ -8,6 +8,9 @@ const _ = require('lodash');
 const usersModule = require('../module/users');
 const { sendJoiValidationError } = require('../utils/joi');
 const { JoiUserSchema } = require('../models/user');
+const JoiUserSearchSchema = Joi.object().keys({
+  searchBy: Joi.string(),
+});
 
 const router = express.Router();
 
@@ -85,11 +88,23 @@ router.post('/login', async function(req, res) {
   }
 });
 
-router.post('/search', async function (req, res) {
-  const { searchBy } = req.body;
+router.get('/search', async function (req, res) {
+  const fieldList = ['searchBy'];
+  const searchQuery =  _.pick(req.query, fieldList);
+
+  const joiResult  = Joi.validate(searchQuery, JoiUserSearchSchema, {
+    presence: 'required',
+    abortEarly: false,
+  });
+  const joiError = joiResult.error;
+
+  if (!_.isNil(joiError)) {
+    return sendJoiValidationError(joiError, res);
+  }
+
   try {
     const userList = await usersModule.findUsersBySearch({
-      searchBy
+      searchBy: searchQuery.searchBy,
     });
     res.json(userList);
 

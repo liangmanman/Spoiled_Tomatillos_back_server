@@ -53,8 +53,8 @@ class MyLikesPage extends React.Component {
     this.setState({
       userLikedMovieList,
     })
-
   }
+
   componentWillMount() {
     this.props.updateMoviesLikedByUserId();
     this.getPageUserName();
@@ -67,15 +67,11 @@ class MyLikesPage extends React.Component {
     return _.map(userLikedMovieList, (movie) => {
       return (
           <div key={movie.title}>
-            {/*<Link to={}>*/}
             <h1>{movie.title} </h1>
             <MovieItem imdbID={movie.imdbID}/>
-            {/*</Link>*/}
           </div>
       );
     });
-
-
   }
 
   render() {

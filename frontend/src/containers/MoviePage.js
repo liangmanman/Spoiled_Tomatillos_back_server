@@ -20,13 +20,6 @@ function ThumbsDown(props) {
   return <button className="btn-primary"><img src={td_img}/></button>;
 }
 
-
-@inject(stores => {
-  let { account } = stores;
-  return {
-    userInfo: account.userInfo,
-  }
-})
 @observer
 class MoviePage extends React.Component {
   constructor(props) {

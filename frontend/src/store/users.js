@@ -13,10 +13,13 @@ class Users {
 
   @action async getUserBySearch(searchBy) {
     self.setUserList([]);
-    const res = await axios.post(SEARCH_USER_API, {
-      searchBy: searchBy
+    const res = await axios.get(SEARCH_USER_API, {
+      params: {
+        searchBy: searchBy,
+      }
     });
     self.setUserList(res.data);
+    return res.data;
   }
 }
 

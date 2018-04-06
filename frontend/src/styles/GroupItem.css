@@ -1,0 +1,94 @@
+.groupItem {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: block;
+    box-sizing: border-box;
+    max-height: 18rem;
+    margin-bottom: 1.5rem;
+}
+
+.groups {
+    display:flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+
+.groupCard {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+}
+
+.groupHeader {
+    background: none;
+    padding: 0.5rem 1.5rem;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 3.5rem;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+}
+
+.groupFooter {
+    background: none;
+    padding: 0.5rem 1.5rem;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 3.5rem;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+    color: #6e7687;
+}
+
+.groupMembers {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 1.5rem 1.5rem;
+    position: relative;
+    overflow: scroll;
+}
+
+.Selector {
+    max-width: 100%;
+    width: 27em;
+}
+
+.group-add-button {
+    position: relative;
+    float: right;
+}
+
+.outer-selector {
+    display: inline-block;
+    width: 100%;
+}
+
+.groupButton {
+    position: relative;
+    float: right;
+}
+
+/*.btn-primary {*/
+    /*max-height: 2em;*/
+/*}*/
+
+.memberRow {
+    min-height: 2em;
+}

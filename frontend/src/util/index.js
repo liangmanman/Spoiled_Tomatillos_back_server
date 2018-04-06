@@ -1,8 +1,5 @@
 import Cookies from 'universal-cookie';
 import _ from 'lodash';
-import queryString from 'query-string';
-
-
 
 const cookies = new Cookies();
 
@@ -32,4 +29,8 @@ export const generateUserURI = (userId, uri) => {
 
 export const generateMovieURI = (movieId, uri) => {
     return _.replace(uri, ':movieId', movieId);
+};
+
+export const generateNewTabURI = (uri) => {
+    return '/#'+uri;
 };

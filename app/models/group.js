@@ -70,7 +70,7 @@ GroupSchema.statics = {
   populateUsersInfo: async function(queryResponse) {
     const group =  await queryResponse
       .populate({
-        path: 'groupAdminId',
+        path: 'groupAdmin',
         select: '-hashed_password -salt',
       })
       .populate({
@@ -85,15 +85,9 @@ GroupSchema.statics = {
     });
   },
   createGroup: async function({ users, userId }) {
-    let query = this.findOneAndUpdate({
+    let query = this.create({
       groupAdminId: userId,
       users,
-    }, {
-      groupAdminId: userId,
-      users,
-    }, {
-      new: true,
-      upsert: true,
     });
     return query;
   },

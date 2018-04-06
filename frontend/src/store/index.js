@@ -9,6 +9,7 @@ import users from './users';
 import reviews from './reviews';
 import rates from './rates';
 import friends from './friends';
+import groups from './groups';
 
 const stores = {
   account,
@@ -22,6 +23,7 @@ const stores = {
   reviews,
   rates,
   friends,
+  groups
 };
 
 export default stores;

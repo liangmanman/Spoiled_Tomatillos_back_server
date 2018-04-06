@@ -13,3 +13,8 @@ export const MOVIE_LIKED_BY_URI = MOVIE_URI + '/:movieId/likedBy';
 export const USER_URI = '/user/:userId';
 export const USER_LIKES_URI = USER_URI + '/likes';
 export const USER_PROFILE_URI = USER_URI + '/profiles';
+
+// Group Route URI
+export const GROUP_URI = '/group';
+export const GROUP_LIST_URI = GROUP_URI + '/list';
+export const GROUP_DETAIL_URI = GROUP_URI + '/:groupId/detail';

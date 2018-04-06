@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 
 import {
   MOVIE_LIST_URI,
-  USER_PROFILE_URI
+  USER_PROFILE_URI,
+  GROUP_LIST_URI,
 } from '../containers/routesContainer/uriConstants';
 
 import { generateUserURI } from '../util';
@@ -43,7 +44,12 @@ class NavBarLoggedIn extends React.Component {
         'to': MOVIE_LIST_URI,
         'title': 'Movies',
         'active': false,
-      }
+      },
+      {
+        'to': GROUP_LIST_URI,
+        'title': 'Groups',
+        'active': false,
+      },
     ];
     this.state = {
       links

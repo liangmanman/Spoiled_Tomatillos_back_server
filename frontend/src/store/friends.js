@@ -47,7 +47,6 @@ class Friends {
         toUserId: _id,
       }
     });
-    console.log(!!res.data);
     return !!res.data;
   }
 
