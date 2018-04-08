@@ -1,8 +1,7 @@
-
+"use strict";
 // definitions
-
-
 const assert = require('assert');
+
 const {
   decodeToken,
   generateJwtTokenForUser,
@@ -23,6 +22,15 @@ const express = require('express');
 const getuserfun = require('../app/module/users').getUser;
 const getusernbysearch = require('../app/module/users').findUsersBySearch;
 const testConfig = 'mongodb://james_test:password@ds121189.mlab.com:21189/spoiled-tomatillos-test';
+var options = {
+  server: {
+    socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 },
+    // sets how many times to try reconnecting
+    reconnectTries: Number.MAX_VALUE,
+    // sets the delay between every retry (milliseconds)
+    reconnectInterval: 1000
+  }
+};
 const user_example = {
     email: 'jjy@jj.com',
     fullName: 'Joey Joey',
@@ -63,8 +71,8 @@ describe("User Modules", function () {
 
   //tests interacting with the database
   before(function(done) {
-    mongoose.connect(testConfig);
-    const db = mongoose.connection
+    mongoose.connect(testConfig, options);
+    const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function() {
       console.log('Connected to Database');
