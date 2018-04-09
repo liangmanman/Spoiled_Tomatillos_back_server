@@ -1,83 +1,134 @@
-
-
-const assert = require('assert');
-const {
-      updateRateOrCreateIfNotExist,
-      deleteRateByUserIdAndMovieId,
-      findRateQuery,
-      calculateRateOfMovie,
-} = require('../app/module/rates')
-
 const mongoose = require('mongoose');
-var MongoClient = require('mongodb').MongoClient;
+const ObjectId = mongoose.Types.ObjectId;
+const chai = require('chai')
+  , expect = chai.expect;
 
+const { testConfig, options } = require('./constant');
+const ratesModule = require('../app/module/rates');
+const { movieSchemaString } = require('../app/models/movie');
+const Movie = mongoose.model(movieSchemaString);
 const { rateSchemaString } = require('../app/models/rate');
 const Rate = mongoose.model(rateSchemaString);
-const testConfig = 'mongodb://james_test:password@ds121189.mlab.com:21189/spoiled-tomatillos-test';
-const method_updateRateOrCreateIfNotExist = require('../app/module/rates').updateRateOrCreateIfNotExist;
-const method_deleteRateByUserIdAndMovieId = require('../app/module/rates').deleteRateByUserIdAndMovieId;
-const method_findRateQuery = require('../app/module/rates').findRateQuery;
-const method_calculateRateOfMovie = require('../app/module/rates').calculateRateOfMovie;
+
+const userId = new ObjectId;
+const movieId = new ObjectId;
+const movie_example = {
+  _id: movieId,
+  title: 'testMovieTitle',
+  imdbID: 'testImdbId',
+  posterImgPath: 'testImgPath',
+  releaseYear: 'testReleaseYear',
+  briefDescription: 'testDescription',
+};
 
 describe("Rate Modules", function () {
 
-  it("updateRateorCreateIfNotExist", function(done) {
-    const temp = {
-      movieId: "5abe84d7c4fd37766e2b3d09",
-      userId: "5abe84d7c4fd37766e2b3d0b",
-      rate: 3,
-    }
-    var f = method_updateRateOrCreateIfNotExist(temp);
-    done();
-  });
-
-  it("DeleteRateByUser", function(done) {
-    const temp = {
-      movieId: "5abe84d7c4fd37766e2b3d09",
-      userId: "5abe84d7c4fd37766e2b3d0b",
-    }
-    var f = method_deleteRateByUserIdAndMovieId(temp);
-    done();
-  });
-
-  it("FindRateQuery", function(done) {
-      const temp = {
-        movieId: "5abe84d7c4fd37766e2b3d09",
-        userId: "5abe84d7c4fd37766e2b3d0b",
-      }
-      var f = method_findRateQuery(temp);
+  //tests interacting with the database
+  before(function(done) {
+    mongoose.connect(testConfig, options);
+    const db = mongoose.connection;
+    Movie.collection.drop();
+    db.dropDatabase();
+    db.on('error', console.error.bind(console, 'connection error'));
+    db.once('open', function() {
+      console.log('Connected to Database');
       done();
+    });
   });
 
+  beforeEach(async () => {
+    await new Movie(movie_example).save();
+  });
 
+  afterEach(() => {
+    Movie.collection.drop();
+  });
 
-  it("CalculateRateByMovie", function(done) {
+  after(function(done){
+    mongoose.connection.db.dropDatabase(function(){
+      mongoose.connection.close(done);
+    });
+  });
+
+  it("updateRateorCreateIfNotExist", async function() {
+    const rate = await ratesModule.updateRateOrCreateIfNotExist({
+      movieId,
+      userId,
+      rate: 3,
+    });
+    expect(rate.rate).to.equal(3);
+  });
+
+  it("FindRateQuery with UserId and movieId", async function() {
     const temp = {
-      movieId: "5abe84d7c4fd37766e2b3d09",
-    }
-    var f = method_deleteRateByUserIdAndMovieId(temp);
-    done();
+      movieId,
+      userId,
+    };
+    const result = await ratesModule.findRateQuery(temp);
+    expect(result.length).to.equal(1);
   });
 
+  it("FindRateQuery with movieId", async function() {
+    const temp = {
+      movieId,
+    };
+    const result = await ratesModule.findRateQuery(temp);
+    expect(result.length).to.equal(1);
+  });
 
+  it("FindRateQuery with userId", async function() {
+    const temp = {
+      userId,
+    };
+    const result = await ratesModule.findRateQuery(temp);
+    expect(result.length).to.equal(1);
+  });
 
+  it("FindRateQuery", async function() {
+    const temp = {
+    };
+    const result = await ratesModule.findRateQuery(temp);
+    expect(result.length).to.equal(1);
+  });
 
-//  //tests interacting with the database
-//  before(function(done) {
-//    mongoose.connect(testConfig);
-//    const db = mongoose.connection
-//    db.on('error', console.error.bind(console, 'connection error'));
-//    db.once('open', function() {
-//      console.log('Connected to Database');
-//      done();
-//    });
-//  });
-//
-//  after(function(done) {
-//    mongoose.connection.db.dropDatabase(function(){
-//      mongoose.connection.close(done);
-//    });
-//  });
+  it("CalculateRateByMovie", async function() {
+    const temp = {
+      movieId,
+    };
+    const result = await ratesModule.calculateRateOfMovie(temp);
+    expect(result).to.equal(3);
+  });
+
+  it("DeleteRateByUser", async function() {
+    const temp = {
+      movieId,
+      userId,
+    };
+    const result = await ratesModule.deleteRateByUserIdAndMovieId(temp);
+    expect(result.n).to.equal(1);
+  });
+
+  it("create Rate with invalid rate value less than 0", async function () {
+    const invalidRate = {
+      movieId,
+      userId,
+      rate: -1,
+    };
+    await new Rate(invalidRate).save().catch( e => {
+      expect(e.name).to.equal('ValidationError');
+    });
+  });
+
+  it("create Rate with invalid rate value greater than 10", async function () {
+    const invalidRate = {
+      movieId,
+      userId,
+      rate: 11,
+    };
+    await new Rate(invalidRate).save().catch( e => {
+      expect(e.name).to.equal('ValidationError');
+    });
+  });
 
 
 });
