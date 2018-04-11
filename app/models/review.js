@@ -74,15 +74,6 @@ const JoiReviewSchema = Joi.object().keys({
 });
 
 /**
- * Validations
- */
-
-ReviewSchema.path('content').validate(function (content) {
-    // check unique movie list
-    return content.length > 0;
-}, 'content cannot be blank');
-
-/**
  * Statics
  */
 
@@ -143,11 +134,11 @@ ReviewSchema.statics = {
             userId,
         });
     },
-    deleteReviewById: async function({ reviewId }) {
-        return await this.remove({
-            reviewId,
-        });
-    },
+    // deleteReviewById: async function({ reviewId }) {
+    //     return await this.remove({
+    //         reviewId,
+    //     });
+    // },
 };
 
 
