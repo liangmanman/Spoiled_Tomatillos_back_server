@@ -41,7 +41,7 @@ describe("Rate Modules", function () {
   });
 
   afterEach(() => {
-    Movie.collection.drop();
+    Movie.collection.drop()
   });
 
   after(function(done){

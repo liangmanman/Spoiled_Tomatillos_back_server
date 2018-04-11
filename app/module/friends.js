@@ -4,6 +4,7 @@ const _ = require('lodash');
 const mongoose = require('mongoose');
 const { friendSchemaString } = require('../models/friend');
 
+
 const Friend = mongoose.model(friendSchemaString);
 
 async function updateFriendOrCreateIfNotExist({ fromUserId, toUserId }) {
