@@ -88,6 +88,7 @@ describe("Movie Modules", function () {
         };
 
         const res = await createMovieIfNotExist(te);
+        console.log(res.isNew)
         expect(res.isNew).to.equal(false) //this should be true
       });
 
