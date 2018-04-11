@@ -8,7 +8,7 @@ const {
   verifyMe,
   getUser,
   findUsersBySearch,
-} = require('../app/module/users')
+} = require('../app/module/users');
 
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
@@ -45,6 +45,7 @@ const user_example = {
     fullName: 'Joey Joey',
     password: "pass"
 };
+const user_example_token = userModule.generateJwtTokenForUser({userId:userId_example})
 
 const user_instance = new User(user_example);
 const token_instance = generateJwtTokenForUser("ignore");
@@ -136,10 +137,13 @@ describe("User Modules", function () {
       });
 
 //      // tests true instance for VerifyMe
-//      it("VerifyMe_false", async() => {
-//        var person = user_example
-//        const res = await verifyMe(person, )
-//        expect(res.auth).to.equal(false)
+//      it("VerifyMe_true", async() => {
+//        console.log('userId', userId_example);
+//        console.log('exampleToken', user_example_token);
+//        console.log('decode_token', await userModule.decodeToken(user_example_token));
+//        const res = await verifyMe(user_example, user_example_token)
+//        console.log(res)
+//        expect(res.auth).to.equal(true)
 //      });
 
       // tests error instance for VerifyMe
