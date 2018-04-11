@@ -11,7 +11,13 @@ const {
 } = require('../app/module/users')
 
 const mongoose = require('mongoose');
-var MongoClient = require('mongodb').MongoClient;
+const ObjectId = mongoose.Types.ObjectId;
+const chai = require('chai'), expect = chai.expect;
+//chai.use(require('chai-as-promised');
+const userModule = require('../app/module/users');
+
+const { testConfig, options } = require('./constant');
+
 const { userSchemaString } = require('../app/models/user');
 const User = mongoose.model(userSchemaString);
 const router = require('../app/controllers/users');
@@ -21,17 +27,20 @@ const express = require('express');
 
 const getuserfun = require('../app/module/users').getUser;
 const getusernbysearch = require('../app/module/users').findUsersBySearch;
-const testConfig = 'mongodb://james_test:password@ds121189.mlab.com:21189/spoiled-tomatillos-test';
-var options = {
-  server: {
-    socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 },
-    // sets how many times to try reconnecting
-    reconnectTries: Number.MAX_VALUE,
-    // sets the delay between every retry (milliseconds)
-    reconnectInterval: 1000
-  }
-};
+
+//var options = {
+//  server: {
+//    socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 },
+//    // sets how many times to try reconnecting
+//    reconnectTries: Number.MAX_VALUE,
+//    // sets the delay between every retry (milliseconds)
+//    reconnectInterval: 1000
+//  }
+//};
+const userId_example = new ObjectId
+
 const user_example = {
+    _id: userId_example,
     email: 'jjy@jj.com',
     fullName: 'Joey Joey',
     password: "pass"
@@ -73,11 +82,20 @@ describe("User Modules", function () {
   before(function(done) {
     mongoose.connect(testConfig, options);
     const db = mongoose.connection;
+    User.collection.drop()
     db.on('error', console.error.bind(console, 'connection error'));
     db.once('open', function() {
       console.log('Connected to Database');
       done();
     });
+  });
+
+  beforeEach(async () => {
+    await new User(user_example).save();
+  });
+
+  afterEach(() => {
+    User.collection.drop();
   });
 
 
@@ -102,33 +120,34 @@ describe("User Modules", function () {
         done();
       });
 
-////      // tests gets User from DB
-//      it('getUser', function(done) {
-//        var person = {name:"James", userId: "5abe84d7c4fd37766e2b3d09"};
-//        const res = getuserfun(person);
-//        res
-//        .then((result) => {
-//          console.log("RES: " + res);
-//          done();
-//        })
-//        .catch((error) => {
-//          console.log("RES2: " + res);
-//          done(error);
-//        });
+      // tests gets User from DB
+      it('getUser', async() => {
+        var person = {name:"James", userId: userId_example};
+        const res = await getuserfun(person)
+        expect(res.fullName).to.equal("Joey Joey")
+
+      });
+
+      // tests false instance for VerifyMe
+      it("VerifyMe_false", async() => {
+        var person = user_example
+        const res = await verifyMe(person, "sdvim")
+        expect(res.auth).to.equal(false)
+      });
+
+//      // tests true instance for VerifyMe
+//      it("VerifyMe_false", async() => {
+//        var person = user_example
+//        const res = await verifyMe(person, )
+//        expect(res.auth).to.equal(false)
 //      });
 
-      // tests finding a user by Search
-      it("Find User By Search", function(done) {
-        const res = getusernbysearch({searchBy:'fullName'});
-        res
-        .then((result) => {
-          console.log(res);
-          done();
-        })
-        .catch((error) => {
-          done(error);
-        });
+      // tests error instance for VerifyMe
+      it("VerifyMe_error", async() => {
+        const res = await verifyMe("hello", "goodbye" )
+        expect(res.auth).to.equal(false)
       });
+
     });
 
   after(function(done){
@@ -137,28 +156,3 @@ describe("User Modules", function () {
     });
   });
 });
-
-
-
-//// controller user Tests
-//describe('User Controller Tests', function () {
-//  var server;
-//  var port = 3000;
-//  beforeEach(function () {
-//    console.log("Test Config:  " + testApp)
-//    server = testApp.listen(port);
-//    console.log('Express app started on port ' + port);
-////    index_connect(testConfig);
-//
-//  });
-//  afterEach(function () {
-//    server.close();
-//  })
-//  it('/isLoggedIn', function testSearch(done) {
-//    request('localhost:3000')
-//    .get('/isLoggedIn')
-//    .expect(401);
-//    done();
-//  });
-//  });
-//});
