@@ -1,131 +1,107 @@
-
-const assert = require('assert');
-const {
-    updateReviewOrCreateIfNotExist,
-    deleteReviewByUserIdAndMovieId,
-    findReviewQuery,
-} = require('../app/module/reviews')
-
 const mongoose = require('mongoose');
-var MongoClient = require('mongodb').MongoClient;
-const testConfig = 'mongodb://james_test:password@ds121189.mlab.com:21189/spoiled-tomatillos-test';
+const ObjectId = mongoose.Types.ObjectId;
+const chai = require('chai')
+  , expect = chai.expect;
 
-const { reviewSchemaString } = require('../app/models/review');
-const Review = mongoose.model(reviewSchemaString);
+const { testConfig, options } = require('./constant');
+const reviewsModule = require('../app/module/reviews');
+const { movieSchemaString } = require('../app/models/movie');
+const Movie = mongoose.model(movieSchemaString);
 
-const method_updateReviewOrCreateIfNotExist = require('../app/module/reviews').updateReviewOrCreateIfNotExist;
-const method_deleteReviewByUserIdAndMovieId = require('../app/module/reviews').deleteReviewByUserIdAndMovieId;
-const method_findReviewQuery = require('../app/module/reviews').findReviewQuery;
-
-//const user_example = {
-//    email: 'u3@jj.com',
-//    fullName: 'Joe Stevens',
-//    password: "pass"
-//};
-//
-//const movie_example = {
-//    title: 'Title10',
-//    imdbID: 'Imdb33',
-//    posterImgPath: "poster4",
-//    releaseYear: "2000",
-//    briefDescription: "Description",
-//};
-//
-//const user_instance = new User(user_example);
-//const movie_instance = new Movie(movie_example);
-//user_instance.save()
-//movie_instance.save()
-
-
+const userId = new ObjectId;
+const movieId = new ObjectId;
+const movie_example = {
+  _id: movieId,
+  title: 'testMovieTitle',
+  imdbID: 'testImdbId',
+  posterImgPath: 'testImgPath',
+  releaseYear: 'testReleaseYear',
+  briefDescription: 'testDescription',
+};
 
 describe("Review Modules", function () {
 
+  //tests interacting with the database
+  before(function(done) {
+    mongoose.connect(testConfig, options);
+    const db = mongoose.connection;
+    Movie.collection.drop();
+    db.dropDatabase();
+    db.on('error', console.error.bind(console, 'connection error'));
+    db.once('open', function() {
+      console.log('Connected to Database');
+      done();
+    });
+  });
+
+  beforeEach(async () => {
+    await new Movie(movie_example).save();
+  });
+
+  afterEach(() => {
+    Movie.collection.drop();
+  });
+
+  after(function(done){
+    mongoose.connection.db.dropDatabase(function(){
+      mongoose.connection.close(done);
+    });
+  });
+
   // tests updateReviewOrCreateIfNotExist
-  it("updateReviewOrCreateIfNotExist", function(done) {
+  it("updateReviewOrCreateIfNotExist", async function() {
     const temp = {
-      movieId: "5abe84d7c4fd37766e2b3d09",
-      userId: "5abe84d7c4fd37766e2b3d0b",
+      userId,
+      movieId,
       content: "This is a movie",
-    }
-    var f = method_updateReviewOrCreateIfNotExist(temp);
-    done();
-  })
+    };
+    const result = await reviewsModule.updateReviewOrCreateIfNotExist(temp);
+    expect(result.content).to.equal("This is a movie");
+  });
 
-  it("deleteReviewByUserIdAndMovieId", function(done) {
+  it("FindReviewQuery with UserId and movieId", async function() {
     const temp = {
-      userId: "5abe84d7c4fd37766e2b3d0b",
-      movieId: "5abe84d7c4fd37766e2b3d0b",
-    }
-    var f = method_deleteReviewByUserIdAndMovieId();
-    done();
-  })
+      movieId,
+      userId,
+    };
+    const result = await reviewsModule.findReviewQuery(temp);
+    expect(result.length).to.equal(1);
+    expect(result[0].content).to.equal("This is a movie");
+  });
 
-  it("findReviewQuery", function(done) {
+  it("FindReviewQuery with movieId", async function() {
     const temp = {
-      userId: "5abe84d7c4fd37766e2b3d0b",
-      movieId: "5abe84d7c4fd37766e2b3d0b",
-    }
-    var f = method_findReviewQuery(temp);
-    done();
-  })
+      movieId,
+    };
+    const result = await reviewsModule.findReviewQuery(temp);
+    expect(result.length).to.equal(1);
+    expect(result[0].content).to.equal("This is a movie");
+  });
 
+  it("FindReviewQuery with userId", async function() {
+    const temp = {
+      userId,
+    };
+    const result = await reviewsModule.findReviewQuery(temp);
+    expect(result.length).to.equal(1);
+    expect(result[0].content).to.equal("This is a movie");
+  });
 
+  it("FindReviewQuery", async function() {
+    const temp = {
+    };
+    const result = await reviewsModule.findReviewQuery(temp);
+    expect(result.length).to.equal(1);
+    expect(result[0].content).to.equal("This is a movie");
+  });
 
-
-
-
-// //tests interacting with the database
-//  before(function(done) {
-//    mongoose.connect(testConfig);
-//    const db = mongoose.connection;
-//    db.on('error', console.error.bind(console, 'connection error'));
-//    db.once('open', function() {
-//      console.log('Connected to Database');
-//      done();
-//    });
-//
-//    describe("Review Database Tests", function() {
-//      const movie_id = '5abe84d7c4fd37766e2b3d09';
-//      const user_id = '5abe84d7c4fd37766e2b3d0b';
-//      var review_test = Review({
-//        movieId: movie_id,
-//        userId: user_id,
-//        content: "This is a good film",
-//      });
-//
-//      it("Add User By Search", function(done) {
-//        const temp = {
-//          movieId: "5abe84d7c4fd37766e2b3d09",
-//          userId: "5abe84d7c4fd37766e2b3d0b",
-//          content: "This is a movie",
-//        }
-//        const res = method_updateReviewOrCreateIfNotExist(temp);
-//        res
-//        .then((result) => {
-//          console.log(res);
-//          setTimeout(done, 15000);
-//        })
-//        .catch((error) => {
-//          console.log(res);
-//          setTimeout(done, 15000);
-//        });
-//      });
-//
-//      it("Add User By Search", function(done) {
-//        const res = review_test.save();
-//        res
-//        .then((result) => {
-//          console.log(res);
-//          setTimeout(done, 15000);
-//        })
-//        .catch((error) => {
-//          console.log(res);
-//          setTimeout(done, 15000);
-//        });
-//      });
-//
-//
-//    });
-//  });
+  it("deleteReviewByUserIdAndMovieId", async function() {
+    const temp = {
+      userId,
+      movieId,
+    };
+    const result = await reviewsModule.deleteReviewByUserIdAndMovieId(temp);
+    expect(result.n).to.equal(1);
+  });
 
 });
