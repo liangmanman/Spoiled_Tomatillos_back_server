@@ -13,9 +13,9 @@ label, h1, h2, h3, h4, h5, h6, p, ul, div {
     color: #FFFFFF !important;
 }
 
-body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
-    background-color: #1f3d7a !important;
-    border-color: #CCCCCC !important;
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    background-color: #1f3d7a ;
+    border-color: #CCCCCC;
     padding: 2px;
 }
 
