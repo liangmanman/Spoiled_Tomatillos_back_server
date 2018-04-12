@@ -1,7 +1,7 @@
+
 "use strict";
 // definitions
 const assert = require('assert');
-
 const {
   decodeToken,
   generateJwtTokenForUser,
@@ -11,6 +11,7 @@ const {
 } = require('../app/module/users');
 
 const mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
 const ObjectId = mongoose.Types.ObjectId;
 const chai = require('chai'), expect = chai.expect;
 //chai.use(require('chai-as-promised');
@@ -20,7 +21,7 @@ const { testConfig, options } = require('./constant');
 
 const { userSchemaString } = require('../app/models/user');
 const User = mongoose.model(userSchemaString);
-const router = require('../app/controllers/users');
+//const router = require('../app/controllers/users');
 const request = require('supertest');
 const express = require('express');
 //const testApp = require('../index').app; // THIS LINE CAUSES EVERYTHING TO BREAK
@@ -151,7 +152,6 @@ describe("User Modules", function () {
         const res = await verifyMe("hello", "goodbye" )
         expect(res.auth).to.equal(false)
       });
-
     });
 
   after(function(done){

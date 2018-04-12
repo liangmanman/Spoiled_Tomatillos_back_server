@@ -30,7 +30,7 @@ require('./config/express')(app, passport);
 require('./app/controllers')(app);
 
 function listen () {
-    if (app.get('env') === 'test') return;
+    //if (app.get('env') === 'test') return;
     app.listen(port);
     console.log('Express app started on port ' + port);
 }
