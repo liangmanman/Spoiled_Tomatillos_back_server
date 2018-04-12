@@ -2,8 +2,8 @@ const assert = require('assert');
 const chai  = require('chai'), expect = chai.expect;
 
 const {
-    addFriend,
-    isFriend,
+    updateFriendOrCreateIfNotExist,
+    determineIsFriendOfUser,
     deleteFriend,
 } = require('../app/module/friends');
 
@@ -54,7 +54,7 @@ describe('Friend Module', function () {
     afterEach(function() {
     })
 
-    after(function() {
+    after(function(done) {
         mongoose.connection.db.dropDatabase(function(){
             mongoose.connection.close(done);
         });
@@ -62,7 +62,7 @@ describe('Friend Module', function () {
 
     describe( "Friend Creation", () => {
         it('should update the Friend entry or create it if it doesn\'t Exist', async function () {
-            await addFriend({
+            await updateFriendOrCreateIfNotExist({
                 fromUserId: userId1,
                 toUserId: userId2,
             });
@@ -74,11 +74,12 @@ describe('Friend Module', function () {
         });
 
         it('should determine if given user is a friend of user', async function () {
-            var ans = await isFriend({
+            var ans = await determineIsFriendOfUser({
                 fromUserId: userId1,
                 toUserId: userId2,
             });
-            expect(ans).to.equal(true);
+            expect(ans.fromUserId).to.eql(user_example_1._id);
+            expect(ans.toUserId).to.eql(user_example_2._id);
         });
     });
 
@@ -93,11 +94,11 @@ describe('Friend Module', function () {
         });
 
         it('should determine if given user is a friend of user', async function () {
-            var ans = await isFriend({
+            var ans = await determineIsFriendOfUser({
                 fromUserId: userId1,
                 toUserId: userId2,
             });
-            expect(ans).to.equal(false);
+            expect(ans).to.be.a('null');
         });
     });
 });
