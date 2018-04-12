@@ -92,6 +92,22 @@ describe("Movie Modules", function () {
         expect(res.isNew).to.equal(false) //this should be true
       });
 
+      it("Tests incrementVersionNumberForQuery", async() => {
+        const movie = await Movie.findOneAndUpdate({
+          title: 'Title2',
+          imdbID: 'Imdb2',
+          posterImgPath: "poster2",
+        },{
+          posterImgPath: "poster3",
+        }, {
+          new: true,
+          upsert: true,
+        });
+        expect(movie.posterImgPath).to.equal("poster3");
+      });
+
+
+
     });
 
 

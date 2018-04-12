@@ -32,7 +32,7 @@ function generateJwtTokenForUser({ userId }) {
 async function verifyMe({ _id }, token) {
   try {
     const decodedToken = await decodeToken(token);
-    if (_id === decodedToken.userId) {
+    if (_id.toString() === decodedToken.userId) {
       return {
         auth: true,
       };

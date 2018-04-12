@@ -11,7 +11,8 @@ function checkRequiredEnv() {
     }
 
     const unsetEnv = _.filter(requiredEnvList, (envString) => {
-        return _.isNil(process.env[envString])
+        //_.isNil(process.env[envString])
+        return process.env[envString] === 'undefined';
     });
 
     if (unsetEnv.length > 0) {
