@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "NODE_ENV=test MONGO_DB_URI=mongodb://admin:admin@ds121189.mlab.com:21189/spoiled-tomatillos-test SESSION_SECRET=TestSessionSecret ./node_modules/.bin/mocha --no-warnings",
+    "test": "NODE_ENV=test MONGO_DB_URI=mongodb://james_test:password@ds121189.mlab.com:21189/spoiled-tomatillos-test SESSION_SECRET=TestSessionSecret ./node_modules/.bin/mocha --no-warnings",
     "nyc-coverage": "nyc --reporter=html --reporter=text npm test",
     "nyc": "./node_modules/.bin/nyc --reporter=lcov --reporter=lcov npm test",
     "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",

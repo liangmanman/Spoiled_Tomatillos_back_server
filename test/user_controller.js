@@ -17,7 +17,7 @@
 //const router = require('../app/controllers/users');
 //const request = require('supertest');
 //const express = require('express');
-//const testApp = require('../index').app; // THIS LINE CAUSES EVERYTHING TO BREAK
+//const testApp = require('../index');
 //
 //const getuserfun = require('../app/module/users').getUser;
 //const getusernbysearch = require('../app/module/users').findUsersBySearch;
@@ -36,7 +36,8 @@
 //  var server;
 //  var port = 3000;
 //
-//  beforeEach(function () {
+//  // setup
+//  beforeEach(async () => {
 //    server = testApp.listen(port);
 //    mongoose.connect(testConfig, options);
 //    const db = mongoose.connection;
@@ -45,19 +46,23 @@
 //    db.on('error', console.error.bind(console, 'connection error'));
 //        db.once('open', function() {
 //          console.log('Connected to Database');
-//          done();
 //        });
-//    index_connect(testConfig);
 //  });
 //
-//  afterEach(function () {
+//  //take down
+//  afterEach(() => {
 //    server.close();
-//  })
+//    mongoose.connection.db.dropDatabase(function(){
+//      mongoose.connection.close();
+//    });
+//  });
 //
+//  /* Tests Below */
+//
+//  //
 //  it('/isLoggedIn', function testSearch(done) {
-//    request('localhost:3000')
-//    .get('/isLoggedIn')
-//    .expect(401);
+//    request('localhost:3000').get('/isLoggedIn').expect(401);
+//    console.log("TOTO: " + request('localhost:3000').get('isLoggedIn')[0])
 //    done();
 //  });
 //});
