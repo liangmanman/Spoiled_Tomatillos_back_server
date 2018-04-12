@@ -1,5 +1,7 @@
 .btn, .btn-primary {
-    padding: 2px !important;
+    padding-bottom: 6px;
+    text-align: center;
+    vertical-align: baseline;
 }
 
 h2 {

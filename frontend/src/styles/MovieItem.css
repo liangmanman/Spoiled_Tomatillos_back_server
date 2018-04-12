@@ -5,6 +5,8 @@
 
 .movie-title {
     text-decoration: underline;
+    -webkit-transition: color 500ms;
+    transition: color 500ms;
 }
 
 .movie-title:hover {

@@ -17,6 +17,8 @@
     padding: 16px 16px;
     text-decoration: none;
     font-size: 17px;
+    -webkit-transition: background-color 500ms;
+    transition: background-color 500ms;
 }
 
 .topNav a.active {
