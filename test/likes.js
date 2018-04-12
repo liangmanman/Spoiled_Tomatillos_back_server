@@ -64,7 +64,7 @@ describe("Like Modules", function () {
     it('should create a like object', async () => {
       const like = await likesModule.like({
         userId,
-        imdbID: 'testImdbId'
+        imdbID: 'testImdbId',
       });
       const likedMovies = like.likedMovies;
       expect(likedMovies).to.include(movieId);

@@ -1,10 +1,10 @@
 const assert = require('assert');
 
-const {
-  updateFriendOrCreateIfNotExist,
-  determineIsFriendOfUser,
-  deleteFriend,
-} = require('../app/module/friends');
+// const {
+//   updateFriendOrCreateIfNotExist,
+//   determineIsFriendOfUser,
+//   deleteFriend,
+// } = require('../app/module/friends');
 
 const {
   like,
@@ -70,28 +70,28 @@ describe('Array', function() {
     });
   });
 
-  describe('testFriend', function () {
-    it('updateFriendOrCreateIfNotExist', function () {
-      assert(updateFriendOrCreateIfNotExist({
-        fromUserId: 'testUserId1',
-        toUserId: 'testUserId2'
-      }), 'testUser');
-    });
-
-    it('determineIsFriendOfUser', function () {
-      assert(determineIsFriendOfUser({
-        fromUserId: 'testUserId1',
-        toUserId: 'testUserId2'
-      }), true);
-    });
-
-    it('deleteFriend', function () {
-      assert(deleteFriend({
-        fromUserId: 'testUserId1',
-        toUserId: 'testUserId2'
-      }), 'testResult');
-    });
-  });
+  // describe('testFriend', function () {
+  //   it('updateFriendOrCreateIfNotExist', function () {
+  //     assert(updateFriendOrCreateIfNotExist({
+  //       fromUserId: 'testUserId1',
+  //       toUserId: 'testUserId2',
+  //     }), 'testUser');
+  //   });
+  //
+  //   it('determineIsFriendOfUser', function () {
+  //     assert(determineIsFriendOfUser({
+  //       fromUserId: 'testUserId1',
+  //       toUserId: 'testUserId2',
+  //     }), true);
+  //   });
+  //
+  //   it('deleteFriend', function () {
+  //     assert(deleteFriend({
+  //       fromUserId: 'testUserId1',
+  //       toUserId: 'testUserId2',
+  //     }), 'testResult');
+  //   });
+  // });
 
   describe('testLike', function () {
     it('like', function () {
@@ -116,7 +116,7 @@ describe('Array', function() {
 
     it('findUsersLikeMovieId', function () {
       assert(findUsersLikeMovieId({
-        userId: 'testUserId'
+        userId: 'testUserId',
       }), [])
     });
   });

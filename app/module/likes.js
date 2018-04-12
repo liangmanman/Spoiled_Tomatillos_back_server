@@ -48,6 +48,7 @@ async function like({ userId, imdbID }) {
     throw new Error(`Cannot find movie with imdbID: ${imdbID}.`);
   }
 
+  // Call to Database model
   const like = await Like.findLikeOrCreateIfNotExist({ userId });
 
   if (_.isNil(findMovieInLikedList(like.likedMovies, movie._id))) {

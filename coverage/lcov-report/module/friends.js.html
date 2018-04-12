@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for config/util.js</title>
+    <title>Code coverage report for module/friends.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">config</a> util.js
+      <a href="../index.html">All files</a> / <a href="index.html">module</a> friends.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">55.56% </span>
+        <span class="strong">62.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>5/9</span>
+        <span class='fraction'>5/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/6</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">55.56% </span>
+        <span class="strong">62.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>5/9</span>
+        <span class='fraction'>5/8</span>
       </div>
     </div>
     <p class="quiet">
@@ -69,59 +69,74 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const _ = require('lodash');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+const _ = require('lodash');
 &nbsp;
-const requiredEnvList = [
-    'MONGO_DB_URI',
-    'SESSION_SECRET',
-];
+const mongoose = require('mongoose');
+const { friendSchemaString } = require('../models/friend');
 &nbsp;
-function checkRequiredEnv() {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (process.env['NODE_ENV'] === 'test' || <span class="branch-1 cbranch-no" title="branch not covered" >process.env['NODE_ENV'] === 'CI')</span> {
-        return;
-    }
+const Friend = mongoose.model(friendSchemaString);
 &nbsp;
-    const unsetEnv = <span class="cstat-no" title="statement not covered" >_.filter(requiredEnvList, <span class="fstat-no" title="function not covered" >(e</span>nvString) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return _.isNil(process.env[envString])</span>
-    });
+async function <span class="fstat-no" title="function not covered" >updateFriendOrCreateIfNotExist(</span>{ fromUserId, toUserId }) {
+<span class="cstat-no" title="statement not covered" >  return await Friend.updateFriendOrCreateIfNotExist({</span>
+    fromUserId,
+    toUserId,
+  });
+}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (unsetEnv.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error("Required ENV variables are not set: [" + unsetEnv.join(', ') + "]");</span>
-    }
+async function <span class="fstat-no" title="function not covered" >determineIsFriendOfUser(</span>{ fromUserId, toUserId }) {
+<span class="cstat-no" title="statement not covered" >  return await Friend.getFriendStatus({ fromUserId, toUserId });</span>
+}
+&nbsp;
+async function <span class="fstat-no" title="function not covered" >deleteFriend(</span>{ fromUserId, toUserId }) {
+<span class="cstat-no" title="statement not covered" >  return await Friend.deleteFriend({ fromUserId, toUserId });</span>
 }
 &nbsp;
 module.exports = {
-    checkRequiredEnv,
-};</pre></td></tr>
+  updateFriendOrCreateIfNotExist,
+  determineIsFriendOfUser,
+  deleteFriend,
+};
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Apr 11 2018 21:59:45 GMT-0400 (EDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Apr 11 2018 19:29:36 GMT-0400 (EDT)
 </div>
 </div>
 <script src="../prettify.js"></script>

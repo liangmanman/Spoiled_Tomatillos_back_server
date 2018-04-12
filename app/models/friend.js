@@ -3,6 +3,9 @@
 /**
  * Module dependencies.
  */
+
+const _ = require('lodash');
+
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
@@ -91,12 +94,13 @@ FriendSchema.statics = {
         select: '-hashed_password -salt',
       });
   },
-  getFriendStatus: async function({ fromUserId, toUserId }) {
+  isFriend: async function({ fromUserId, toUserId }) {
     let query = this.findOne({
       fromUserId,
       toUserId,
     });
-    return await this.populateUserInfo(query);
+    const rv = await this.populateUserInfo(query);
+    return !(_.isNil(rv));
   },
 
   deleteFriend: async function({ fromUserId, toUserId }) {
@@ -107,17 +111,22 @@ FriendSchema.statics = {
   },
 
   updateFriendOrCreateIfNotExist: async function({ fromUserId, toUserId }) {
-    let query = this.findOneAndUpdate({
-      fromUserId,
-      toUserId,
-    }, {
-      fromUserId,
-      toUserId,
-    }, {
-      new: true,
-      upsert: true,
-    });
-    return await this.populateUserInfo(query);
+
+      let friend = await this.findOne({
+          fromUserId: fromUserId,
+          toUserId: toUserId,
+      });
+
+      if (_.isNil(friend)) {
+          // create new friend
+          friend = new this();
+          friend.fromUserId = fromUserId;
+          friend.toUserId = toUserId;
+          await friend.save();
+      }
+
+      return friend;
+
   },
 };
 
