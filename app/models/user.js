@@ -32,7 +32,7 @@ const JoiUserSchema = Joi.object().keys({
 });
 
 
-const validatePresenceOf = value => value && value.length;
+//const validatePresenceOf = value => value && value.length;
 
 /**
  * Virtuals
@@ -45,9 +45,10 @@ UserSchema
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function () {
-    return this._password;
-  });
+  // .get(function () {
+  //   return this._password;
+  // })
+;
 
 /**
  * Validations
@@ -58,21 +59,21 @@ UserSchema.path('email').validate(function (email) {
   return email.length;
 }, 'Email cannot be blank');
 
-UserSchema.path('email').validate({
-  isAsync: true,
-  validator: function (email, fn) {
-    const User = mongoose.model('User');
-
-    // Check only when it is a new user or when email field is modified
-    if (this.isNew || this.isModified('email')) {
-      User.find({ email: email }).exec(function (err, users) {
-        fn(!err && users.length === 0);
-      });
-    } else fn(true);
-  },
-  // Default error message, overridden by 2nd argument to `cb()` above
-  message: 'Email already exists',
-});
+// UserSchema.path('email').validate({
+//   isAsync: true,
+//   validator: function (email, fn) {
+//     const User = mongoose.model('User');
+//
+//     // Check only when it is a new user or when email field is modified
+//     if (this.isNew || this.isModified('email')) {
+//       User.find({ email: email }).exec(function (err, users) {
+//         fn(!err && users.length === 0);
+//       });
+//     } else fn(true);
+//   },
+//   // Default error message, overridden by 2nd argument to `cb()` above
+//   message: 'Email already exists',
+// });
 
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
@@ -87,15 +88,15 @@ UserSchema.path('fullName').validate(function(fullName) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function (next) {
-  if (!this.isNew) return next();
-
-  if (!validatePresenceOf(this.password)) {
-    next(new Error('Invalid password'));
-  } else {
-    next();
-  }
-});
+// UserSchema.pre('save', function (next) {
+//   if (!this.isNew) return next();
+//
+//   if (!validatePresenceOf(this.password)) {
+//     next(new Error('Invalid password'));
+//   } else {
+//     next();
+//   }
+// });
 
 /**
  * Methods
@@ -136,14 +137,14 @@ UserSchema.methods = {
 
   encryptPassword: function (password) {
     if (!password) return '';
-    try {
+    // try {
       return crypto
         .createHmac('sha256', this.salt)
         .update(password)
         .digest('hex');
-    } catch (err) {
-      return '';
-    }
+    // } catch (err) {
+    //   return '';
+    // }
   },
 
 };
@@ -154,19 +155,19 @@ UserSchema.methods = {
 
 UserSchema.statics = {
 
-  /**
-   * Load
-   *
-   * @param {Object} options
-   * @param {Function} cb
-   * @api private
-   */
-  load: function (options, cb) {
-    options.select = options.select || 'name username';
-    return this.findOne(options.criteria)
-      .select(options.select)
-      .exec(cb);
-  },
+  // /**
+  //  * Load
+  //  *
+  //  * @param {Object} options
+  //  * @param {Function} cb
+  //  * @api private
+  //  */
+  // load: function (options, cb) {
+  //   options.select = options.select || 'name username';
+  //   return this.findOne(options.criteria)
+  //     .select(options.select)
+  //     .exec(cb);
+  // },
 
   getUserWithoutSensitiveInformation: async function ({userId}) {
     let user = await this.findOne({
