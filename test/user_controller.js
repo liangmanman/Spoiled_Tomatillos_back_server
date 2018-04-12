@@ -59,7 +59,7 @@ describe('User Controller Tests', function () {
     });
   });
 
-  /* Tests Below */
+  // Tests Below 
 
   it('/isLoggedIn', function (done) {
     request('localhost:3000').get('/isLoggedIn').expect(401);
