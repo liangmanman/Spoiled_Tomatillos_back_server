@@ -1,7 +1,6 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
 import { Link } from 'react-router-dom'
-
 import SuccessMessage from './SuccessMessage';
 import '../styles/Reviews.css';
 import {USER_PROFILE_URI} from "../containers/routesContainer/uriConstants";
@@ -71,10 +70,10 @@ class Reviews extends React.Component {
         <h4>Reviews</h4>
         {this.renderReviews()}
         {this.renderResponse()}
-        <form className="input-group" onSubmit={this.handleReview}>
-          <textarea className="form-control" aria-label="With textarea" name="reviewContent"/>
+        <form className="review-form input-group" onSubmit={this.handleReview}>
+          <textarea className="review-area form-control" aria-label="With textarea" name="reviewContent"/>
           <div className="input-group-prepend">
-            <button className="post-btn btn-primary input-group-text btn" >Post</button>
+            <button className="post-btn btn-primary input-group-text btn">   Post</button>
           </div>
         </form>
       </div>

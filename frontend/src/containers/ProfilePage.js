@@ -5,6 +5,7 @@ import { withRouter, Link} from "react-router-dom";
 import { USER_LIKES_URI } from './routesContainer/uriConstants';
 import { generateUserURI }  from '../util';
 import FriendButton from '../components/Button/FriendButton';
+import '../styles/ProfilePage.css';
 
 
 @inject(stores => {
@@ -63,10 +64,12 @@ class ProfilePage extends React.Component {
     let { profileUserName, profileUserId } = this.state;
     return (
       <div className="boxed">
-        <h2> You are logged in as {fullName}</h2>
-        <h2>This is the Profile Page of User:  {profileUserName}</h2>
+        <h3>This is the Profile Page of User:  {profileUserName}</h3>
+        <Link to={generateUserURI(profileUserId, USER_LIKES_URI)}>
+          <h4>See this user's likes</h4>
+        </Link>
+        <h4>You are logged in as {fullName}</h4>
         {this.renderFriendButton()}
-        <Link to={generateUserURI(profileUserId, USER_LIKES_URI)}>Likes</Link>
       </div>
     );
   }

@@ -48,11 +48,11 @@ class MoviePage extends React.Component {
           <div className="movie">
             <MovieItem imdbID={imdbID}/>
           </div>
-          <Reviews movieId={imdbID}/>
-          <div>
+          <div style={{textAlign: "center", marginBottom: 15}}>
             <ThumbsUp userRating={this.state.userRating}/>
             <ThumbsDown userRating={this.state.userRating}/>
           </div>
+          <Reviews movieId={imdbID}/>
         </div>
     );
   };

@@ -2,7 +2,7 @@
     background-color: #1f3d7a;
     overflow: hidden;
     margin-left: calc(50% - 50vw);
-    width: 100vw;
+    width: 100%;
 }
 
 .signOutButton {
@@ -17,6 +17,8 @@
     padding: 16px 16px;
     text-decoration: none;
     font-size: 17px;
+    -webkit-transition: background-color 500ms;
+    transition: background-color 500ms;
 }
 
 .topNav a.active {
@@ -25,7 +27,7 @@
 }
 
 .topNav a:hover {
-    background-color: #ddd;
+    background-color: #FFFFFF;
     color: black;
 }
 

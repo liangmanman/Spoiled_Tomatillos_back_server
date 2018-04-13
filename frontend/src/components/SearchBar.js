@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import '../styles/Main.css';
 import '../styles/SearchBar.css';
 
 class SearchBar extends React.Component {
@@ -24,8 +25,11 @@ class SearchBar extends React.Component {
     return (
       <div>
         <form className="searchBar" onSubmit={ this.handleSubmit }>
-          <input className="searchText" type="search" name="searchContent"></input>
-          <button className="btn btn-primary searchButton ">search</button>
+          <input className="searchText"
+                 type="Search"
+                 name="searchContent"
+                 placeholder="Search for Users or Movies..."></input>
+          <button className="searchButton btn btn-primary">Search</button>
         </form>
       </div>
     );

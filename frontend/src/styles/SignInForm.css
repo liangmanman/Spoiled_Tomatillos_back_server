@@ -1,8 +1,10 @@
-.btn {
-    padding: 2px;
+.btn, .btn-primary {
+    padding-bottom: 6px;
+    text-align: center;
+    vertical-align: baseline;
 }
 
-h2 {
+.login-title {
     text-align: center;
 }
 
