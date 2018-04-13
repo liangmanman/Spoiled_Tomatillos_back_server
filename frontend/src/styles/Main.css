@@ -9,6 +9,10 @@ label, h1, h2, h3, h4, h5, h6, p, ul, div {
     color: #FFFFFF;
 }
 
+p, ul, div, h6, h5, h4 {
+    font-weight: lighter;
+}
+
 .text-muted {
     color: #FFFFFF !important;
 }
