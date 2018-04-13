@@ -11,8 +11,6 @@ const { sendJoiValidationError } = require('../utils/joi');
 const { JoiFriendSchema } = require('../models/friend');
 const { validateUserHasPermission, sendPermissionError } = require('../utils/permission');
 
-
-
 const authorization = require('../middlewares/authorization');
 router.use(authorization.requiresLogin);
 

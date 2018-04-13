@@ -35,13 +35,11 @@ async function findReviewQuery({ userId, movieId }) {
         reviewList = await Review.findReviewByUserId({
             userId,
         });
-    } else if (!_.isNil(userId) && !_.isNil(movieId)){
+    } else {
         reviewList = await Review.findReviewByUserIdAndMovieId({
             userId,
             movieId,
         });
-    } else {
-        throw new Error('Incorrect Query');
     }
 
     return reviewList;

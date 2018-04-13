@@ -70,13 +70,13 @@ MovieSchema.path('briefDescription').validate(function (briefDescription) {
  */
 
 MovieSchema.statics = {
-  findAllWithIdList: async function(idList) {
-    return await this.find({
-      _id: {
-        $in: idList,
-      },
-    });
-  },
+  // findAllWithIdList: async function(idList) {
+  //   return await this.find({
+  //     _id: {
+  //       $in: idList,
+  //     },
+  //   });
+  // },
 };
 
 /**

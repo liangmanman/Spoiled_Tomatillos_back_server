@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --no-warnings",
+    "test": "NODE_ENV=test MONGO_DB_URI=mongodb://admin:admin@ds121189.mlab.com:21189/spoiled-tomatillos-test SESSION_SECRET=TestSessionSecret ./node_modules/.bin/mocha --no-warnings",
+    "nyc-coverage": "nyc --reporter=html --reporter=text npm test",
     "nyc": "./node_modules/.bin/nyc --reporter=lcov --reporter=lcov npm test",
     "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "lint": "./node_modules/.bin/eslint --ext .js ./",
@@ -15,11 +16,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-plugin-node": "^6.0.1",
     "mocha": "^5.0.4",
     "mocha-sonar-reporter": "^0.1.6",
-    "nyc": "^11.6.0"
+    "nyc": "^11.6.0",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "ajv": "^6.3.0",

@@ -35,15 +35,12 @@ async function findRateQuery({ userId, movieId }) {
         rateList = await Rate.findRateByUserId({
             userId,
         });
-    } else if (!_.isNil(userId) && !_.isNil(movieId)){
+    } else {
         rateList = await Rate.findRateByUserIdAndMovieId({
             userId,
             movieId,
         });
-    } else {
-        throw new Error('Incorrect Query');
     }
-
     return rateList;
 }
 
