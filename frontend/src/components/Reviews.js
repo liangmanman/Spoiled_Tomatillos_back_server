@@ -70,10 +70,10 @@ class Reviews extends React.Component {
         <h4>Reviews</h4>
         {this.renderReviews()}
         {this.renderResponse()}
-        <form className="input-group" onSubmit={this.handleReview}>
-          <textarea className="form-control" aria-label="With textarea" name="reviewContent"/>
+        <form className="review-form input-group" onSubmit={this.handleReview}>
+          <textarea className="review-area form-control" aria-label="With textarea" name="reviewContent"/>
           <div className="input-group-prepend">
-            <button className="post-btn btn-primary input-group-text btn" >Post</button>
+            <button className="post-btn btn-primary input-group-text btn">   Post</button>
           </div>
         </form>
       </div>

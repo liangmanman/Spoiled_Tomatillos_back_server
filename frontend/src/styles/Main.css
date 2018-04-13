@@ -33,12 +33,22 @@ p, ul, div, h6, h5, h4 {
 }
 
 .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
-    background-color: #1f3d7a ;
+    background-color: #1f3d7a;
     border-color: #CCCCCC;
     padding: 2px;
 }
 
 .btn-primary:hover {
     background-color: #142C5B !important;
+}
+
+.like-count-btn {
+    width: 25px;
+    height: 35px;
+}
+
+.like-btn {
+    width: 55px;
+    height: 35px;
 }
 

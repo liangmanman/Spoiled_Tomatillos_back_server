@@ -65,10 +65,10 @@ class ProfilePage extends React.Component {
     return (
       <div className="boxed">
         <h3>This is the Profile Page of User:  {profileUserName}</h3>
-        <h4>You are logged in as {fullName}</h4>
         <Link to={generateUserURI(profileUserId, USER_LIKES_URI)}>
           <h4>See this user's likes</h4>
         </Link>
+        <h4>You are logged in as {fullName}</h4>
         {this.renderFriendButton()}
       </div>
     );

@@ -53,7 +53,7 @@ class SearchResult extends React.Component {
     if (userList[0]) {
         return (
             <div className="boxed result-list">
-                <h3>Users</h3>
+                <h2>Users</h2>
                 {_.map(userList, (user) => {
                     return (
                         <div className={"userResult inside-boxed"}>
@@ -73,7 +73,7 @@ class SearchResult extends React.Component {
     if (movieList[0]) {
       return (
           <div className="boxed result-list">
-            <h3>Movies</h3>
+            <h2>Movies</h2>
             {_.map(movieList, (movie) => {
               return <MovieItem imdbID={movie.imdbID} key={movie.imdbID}/>
             })}

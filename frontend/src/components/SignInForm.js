@@ -43,7 +43,7 @@ class SignInForm extends React.Component {
     render() {
         return (
             <div className="boxed">
-                <h2>Sign in</h2>
+                <h2 className={"login-title"}>Sign in</h2>
                 <form>
                     {this.renderErrorMessage()}
                     <div className="form-group">
