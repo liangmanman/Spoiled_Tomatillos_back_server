@@ -67,10 +67,7 @@ class MyLikesPage extends React.Component {
     return _.map(userLikedMovieList, (movie) => {
       return (
           <div key={movie.title}>
-            {/*<Link to={}>*/}
-            <h1>{movie.title} </h1>
             <MovieItem imdbID={movie.imdbID}/>
-            {/*</Link>*/}
           </div>
       );
     });

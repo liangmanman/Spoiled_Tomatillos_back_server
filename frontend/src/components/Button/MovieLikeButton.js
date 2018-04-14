@@ -38,9 +38,9 @@ class MovieLikeButton extends React.Component {
     render() {
         let { isMovieLikedByUser, imdbID, currentUserLikedMovies } = this.props;
         if (isMovieLikedByUser({ currentUserLikedMovies, imdbID })) {
-            return (<button className="btn-primary" onClick={this.unLikeMovie}>Unlike</button>);
+            return (<button className="like-btn btn btn-primary" onClick={this.unLikeMovie}>Unlike</button>);
         } else {
-            return (<button className="btn-primary" onClick={this.postLikedMovie}>Like</button>);
+            return (<button className="like-btn btn btn-primary" onClick={this.postLikedMovie}>Like</button>);
         }
     }
     

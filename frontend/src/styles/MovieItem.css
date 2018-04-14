@@ -5,6 +5,8 @@
 
 .movie-title {
     text-decoration: underline;
+    -webkit-transition: color 500ms;
+    transition: color 500ms;
 }
 
 .movie-title:hover {
@@ -12,7 +14,8 @@
 }
 
 img {
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: 4px inset black;
 }
 

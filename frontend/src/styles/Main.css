@@ -5,24 +5,6 @@
     background-color: #8fa7d6;
 }
 
-label, h1, h2, h3, h4, h5, h6, p, ul, div {
-    color: #FFFFFF;
-}
-
-.text-muted {
-    color: #FFFFFF !important;
-}
-
-body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
-    background-color: #1f3d7a !important;
-    border-color: #CCCCCC !important;
-    padding: 2px;
-}
-
-.btn-primary:hover {
-    background-color: #142C5B !important;
-}
-
 .inside-boxed {
     border-radius: 12px;
     background-color: #6989c9;
@@ -30,3 +12,43 @@ body .btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus
     padding: 10px 15px 10px 15px;
     margin: 5px 5px 5px 5px;
 }
+
+.inside-boxed-no-radius {
+    background-color: #6989c9;
+    border: 3px solid #CCCCCC;
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 5px;
+}
+
+label, h1, h2, h3, h4, h5, h6, p, ul, div, a {
+    color: #FFFFFF;
+}
+
+p, ul, div, h6, h5, h4 {
+    font-weight: lighter;
+}
+
+.text-muted {
+    color: #FFFFFF !important;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    background-color: #1f3d7a;
+    border-color: #CCCCCC;
+    padding: 2px;
+}
+
+.btn-primary:hover {
+    background-color: #142C5B !important;
+}
+
+.like-count-btn {
+    width: 25px;
+    height: 35px;
+}
+
+.like-btn {
+    width: 55px;
+    height: 35px;
+}
+

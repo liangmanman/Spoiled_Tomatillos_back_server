@@ -1,6 +1,7 @@
 .searchBar {
     float: right;
     padding: 12px;
+    margin-right: 2.75%;
 }
 
 .searchText{
@@ -8,9 +9,11 @@
     width: 25vw;
 }
 
-.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
-    margin-top: -5px;
-    padding: 5px;
-    height: 36px;
+.searchButton {
+    padding: 5px !important;
+    height: 35px;
+    border-radius: 0px !important;
     font-family: Arial;
+    background-color: #7094db;
+    position: absolute;
 }
