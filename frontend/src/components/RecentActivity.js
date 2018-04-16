@@ -46,7 +46,7 @@ class RecentActivity extends React.Component {
       let dateString = '' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
       return (
           <div className="boxed recent-entry">
-            <img className="poster" src={review.movie.posterImgPath}/>
+            <img className="poster-mini" src={review.movie.posterImgPath}/>
             <div>
               <h5>You reviewed&nbsp;
                 <Link className="movie-title" to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>

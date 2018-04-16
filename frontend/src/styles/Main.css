@@ -24,6 +24,10 @@ label, h1, h2, h3, h4, h5, h6, p, ul, div, a {
     color: #FFFFFF;
 }
 
+.page-header {
+    padding: 8px;
+}
+
 p, ul, div, h6, h5, h4 {
     font-weight: lighter;
 }
