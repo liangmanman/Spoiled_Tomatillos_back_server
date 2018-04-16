@@ -45,13 +45,17 @@ class RecentActivity extends React.Component {
       let date = new Date(review.createdAt);
       let dateString = '' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
       return (
-          <div className="boxed">
-            <h4 style={{fontWeight: 500}}>Review</h4>
-            <Link to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>
-              <h5 className="movie-title">{review.movie.title}</h5>
-            </Link>
-            <p>{dateString}</p>
-            <p>{review.content}</p>
+          <div className="boxed recent-entry">
+            <img className="poster" src={review.movie.posterImgPath}/>
+            <div>
+              <h5>You reviewed&nbsp;
+                <Link className="movie-title" to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>
+                  {review.movie.title}
+                </Link>
+                &nbsp;on {dateString}
+              </h5>
+              <p>{review.content}</p>
+            </div>
           </div>);
     });
   }

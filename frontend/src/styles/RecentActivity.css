@@ -7,3 +7,21 @@
 .movie-title h5:hover {
     color: #142C5B;
 }
+
+.poster {
+    width: 88px;
+    height: 130px;
+    border: 2px inset black;
+    margin-right: 20px;
+    margin-top: 3px;
+    float: left;
+}
+
+.recent-entry {
+    height: 160px;
+}
+
+.recent-entry p {
+    height: 100px;
+    overflow-y: auto;
+}
