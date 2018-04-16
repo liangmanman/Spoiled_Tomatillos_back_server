@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import {withRouter} from "react-router-dom";
+import RecentActivity from '../components/RecentActivity';
 
 @inject(stores => {
     let { session } = stores;
@@ -28,6 +29,7 @@ class HomePage extends React.Component {
           like you! Connect with your friends, see what movies they've reviewed and liked, check out information about
           the newest movies along with critic ratings and more. Start by searching for a movie or user at the search bar
           on the top right of the screen.</p>
+          <RecentActivity />
       </div>
     );
   }

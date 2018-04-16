@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx'
 
 import { axios } from '../api/_axios';
-import { REVIEWS_OF_MOVIE_API, REVIEW_MOVIE_API} from '../api/constants';
+import { REVIEWS_OF_MOVIE_API, REVIEWS_OF_USER_API, REVIEW_MOVIE_API} from '../api/constants';
 import sessionStore from "./session";
 
 
@@ -30,6 +30,11 @@ class Reviews {
 
   @action async fetchReviewList({movieId}) {
     const res = await axios.get(REVIEWS_OF_MOVIE_API+movieId);
+    self.setReviewList(res.data);
+  }
+
+  @action async fetchUserReviewList({userId}) {
+    const res = await axios.get(REVIEWS_OF_USER_API+userId);
     self.setReviewList(res.data);
   }
 
