@@ -1,0 +1,9 @@
+.movie-title h5 {
+    text-decoration: underline;
+    -webkit-transition: color 500ms;
+    transition: color 500ms;
+}
+
+.movie-title h5:hover {
+    color: #142C5B;
+}

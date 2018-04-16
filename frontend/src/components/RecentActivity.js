@@ -2,6 +2,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import {inject, observer} from "mobx-react";
+import {MOVIE_DETAIL_URI} from "../containers/routesContainer/uriConstants";
+import { Link } from 'react-router-dom';
+import {generateMovieURI} from "../util";
+import '../styles/RecentActivity.css'
 
 @inject(stores => {
   let { reviews, session } = stores;
@@ -35,11 +39,20 @@ class RecentActivity extends React.Component {
   }
 
   renderRecentReviews() {
-    const { reviewList } = this.props;
-    console.log(reviewList);
+    let { reviewList } = this.props;
 
-    return _.map(reviewList, (review) => {
-      return <p>{review.content}</p>;
+    return _.map(reviewList.reverse(), (review) => {
+      let date = new Date(review.createdAt);
+      let dateString = '' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+      return (
+          <div className="boxed">
+            <h4 style={{fontWeight: 500}}>Review</h4>
+            <Link to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>
+              <h5 className="movie-title">{review.movie.title}</h5>
+            </Link>
+            <p>{dateString}</p>
+            <p>{review.content}</p>
+          </div>);
     });
   }
 

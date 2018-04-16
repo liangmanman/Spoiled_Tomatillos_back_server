@@ -1,20 +1,12 @@
 import * as React from 'react';
-import SearchBar from './SearchBar';
 import { Link, withRouter } from 'react-router-dom'
 import {inject, observer} from "mobx-react/index";
 import _ from 'lodash';
-
 import {
-    MOVIE_LIST_URI,
     SIGN_UP_URI,
     SIGN_IN_URI,
-    USER_PROFILE_URI
 } from '../containers/routesContainer/uriConstants';
-
-import { generateUserURI } from '../util';
-import SignOutButton from './SignOutButton';
 import NavBarLoggedIn from './NavBarLoggedIn';
-
 import '../styles/NavBar.css';
 
 
