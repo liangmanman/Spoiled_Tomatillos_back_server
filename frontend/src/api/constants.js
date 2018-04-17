@@ -26,5 +26,6 @@ export const RATE_CALCULATE_RAGE_OF_MOVIE_API = API + '/rates/calculate';
 export const ADD_FRIEND_API = API + '/friends';
 export const DELETE_FRIEND_API = API + '/friends/unFriend';
 export const IS_FRIEND_API = API + '/friends/isFriend?';
+export const FRIENDS_OF_USER_API = API + '/friends/friends';
 
 export const PROFILE_USER_INFO = API + '/profiles/:userId';

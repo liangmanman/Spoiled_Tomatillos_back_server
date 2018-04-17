@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withRouter, Link} from "react-router-dom";
 
-import { USER_LIKES_URI } from './routesContainer/uriConstants';
+import { USER_LIKES_URI, USER_FRIENDS_URI } from './routesContainer/uriConstants';
 import { generateUserURI }  from '../util';
 import FriendButton from '../components/Button/FriendButton';
 import '../styles/ProfilePage.css';
@@ -67,6 +67,9 @@ class ProfilePage extends React.Component {
         <h3>This is the Profile Page of User:  {profileUserName}</h3>
         <Link to={generateUserURI(profileUserId, USER_LIKES_URI)}>
           <h4>See this user's likes</h4>
+        </Link>
+        <Link to={generateUserURI(profileUserId, USER_FRIENDS_URI)}>
+          <h4>See this user's friends</h4>
         </Link>
         <h4>You are logged in as {fullName}</h4>
         {this.renderFriendButton()}

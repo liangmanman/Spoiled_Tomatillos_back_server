@@ -1,7 +1,9 @@
-import { action, observable } from 'mobx'
+import { action, observable } from 'mobx';
+import async from 'async';
+import _ from 'lodash';
 
 import { axios } from '../api/_axios';
-import { ADD_FRIEND_API, DELETE_FRIEND_API, IS_FRIEND_API, } from '../api/constants';
+import { ADD_FRIEND_API, DELETE_FRIEND_API, IS_FRIEND_API, FRIENDS_OF_USER_API } from '../api/constants';
 import sessionStore from "./session";
 
 
@@ -47,10 +49,33 @@ class Friends {
         toUserId: _id,
       }
     });
-    console.log(!!res.data);
     return !!res.data;
   }
 
+  @action async fetchFriends({ userId }) {
+    const res = await axios.get(FRIENDS_OF_USER_API, {
+      params: {
+        userId
+      }
+    });
+    const friends = await filter(res.data, async (f) => {
+      const friendData = await axios.get(IS_FRIEND_API, {
+        params: {
+          fromUserId: f.toUserId,
+          toUserId: f.fromUserId,
+        }
+      });
+      return !_.isNull(friendData.data);
+    });
+    return friends;
+
+  }
+}
+
+async function filter(arr, callback) {
+  return (await Promise.all(arr.map(async item => {
+    return (await callback(item)) ? item : undefined
+  }))).filter(i=>i!==undefined)
 }
 
 const self = new Friends();
