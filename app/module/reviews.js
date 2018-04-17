@@ -45,8 +45,19 @@ async function findReviewQuery({ userId, movieId }) {
     return reviewList;
 }
 
+async function findReviewByUserIdQuery({ userId }) {
+    let reviewList = [];
+    if(!_.isNil(userId)) {
+        reviewList = await Review.findReviewByUserId({
+            userId,});
+    }
+
+    return reviewList;
+}
+
 module.exports = {
     updateReviewOrCreateIfNotExist,
     deleteReviewByUserIdAndMovieId,
     findReviewQuery,
+    findReviewByUserIdQuery,
 };

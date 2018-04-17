@@ -62,7 +62,7 @@ class MovieItem extends Component {
     return (
         <div className="inside-boxed row Card">
           <div className="col-sm-4">
-            <img className="img-fluid" alt="Responsive image" src={result.Poster} />
+            <img className="big-poster img-fluid" alt="Responsive image" src={result.Poster} />
           </div>
           <div className="col-sm-8 card-right card-title">
             <div>

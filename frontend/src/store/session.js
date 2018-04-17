@@ -19,6 +19,7 @@ class Session {
         try {
             const res = await axios.get(PROFILE_ME_API);
             self.userInfo = res.data;
+            return res.data;
         } catch(err) {
             setXAccessToken(null);
         }
