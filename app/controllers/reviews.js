@@ -7,9 +7,10 @@ const router = express.Router();
 
 const { JoiReviewSchema } = require('../models/review');
 const {
-  updateReviewOrCreateIfNotExist,
-  findReviewQuery,
-  deleteReviewByUserIdAndMovieId,
+    updateReviewOrCreateIfNotExist,
+    findReviewQuery,
+    findReviewByUserIdQuery,
+    deleteReviewByUserIdAndMovieId,
 } = require('../module/reviews');
 const { sendJoiValidationError } = require('../utils/joi');
 const { validateUserHasPermission, sendPermissionError } = require('../utils/permission');
@@ -19,9 +20,13 @@ const authorization = require('../middlewares/authorization');
 router.use(authorization.requiresLogin);
 
 const JoiReviewQuerySchema = Joi.object().keys({
-  userId: Joi.string(),
-  movieId: Joi.string(),
-});
+                                                 userId: Joi.string(),
+                                                 movieId: Joi.string()
+                                               });
+
+const JoiReviewByUserIdQuerySchema = Joi.object().keys({
+                                                         userId: Joi.string()
+                                                       });
 
 
 
@@ -101,7 +106,7 @@ router.delete('/review', async function (req, res) {
 
 });
 
-router.get('/', async function(req, res) {
+router.get('/movie', async function(req, res) {
   const fieldList = ['userId', 'movieId'];
 
   const newReviewQuery = _.pick(req.query, fieldList);
@@ -122,6 +127,27 @@ router.get('/', async function(req, res) {
     res.status(500).send(error.message);
   }
 
+});
+
+router.get('/user', async function(req, res) {
+  const fieldList = ['userId'];
+
+  const newReviewQuery = _.pick(req.query, fieldList);
+  const joiResult  = Joi.validate(newReviewQuery, JoiReviewByUserIdQuerySchema, {
+    abortEarly: false,
+  });
+  const joiError = joiResult.error;
+
+  if (!_.isNil(joiError)) {
+    return sendJoiValidationError(joiError, res);
+  }
+
+  try {
+    const reviewList = await findReviewByUserIdQuery(newReviewQuery);
+    res.json(reviewList);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 module.exports = router;

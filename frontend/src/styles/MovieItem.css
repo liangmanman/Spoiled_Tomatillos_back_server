@@ -13,8 +13,8 @@
     color: #1f3d7a;
 }
 
-img {
-    margin-top: 10px;
+.big-poster {
+    margin-top: 45px;
     margin-bottom: 10px;
     border: 4px inset black;
 }
