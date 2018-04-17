@@ -6,6 +6,7 @@ import {MOVIE_DETAIL_URI} from "../containers/routesContainer/uriConstants";
 import { Link } from 'react-router-dom';
 import {generateMovieURI} from "../util";
 import '../styles/RecentActivity.css'
+import PropTypes from "prop-types";
 
 @inject(stores => {
   let { reviews, session } = stores;
@@ -20,22 +21,18 @@ import '../styles/RecentActivity.css'
 class RecentActivity extends React.Component {
   constructor(props) {
     super(props);
-    this.getRecentReviews = this.getRecentReviews.bind(this);
-    this.state = {
-      loading: true,
-      error: null,
-    };
   }
 
   componentWillMount() {
-   this.getRecentReviews();
-  }
-
-  getRecentReviews() {
     const {fetchUserReviewList, getUserInfo} = this.props;
     getUserInfo();
-    const { userInfo } = this.props;
-    fetchUserReviewList({userId: userInfo._id});
+    const { selectedUser } = this.props;
+    fetchUserReviewList({userId: selectedUser._id});
+  }
+
+  getHeaderName() {
+    const { userInfo, selectedUser } = this.props;
+    return (userInfo._id === selectedUser._id) ? "Your" : selectedUser.fullName + "'s";
   }
 
   renderRecentReviews() {
@@ -63,11 +60,15 @@ class RecentActivity extends React.Component {
   render() {
     return (
         <div className="inside-boxed">
-          <h4>Your Recent Activity:</h4>
+          <h4>{this.getHeaderName()} Recent Activity:</h4>
           {this.renderRecentReviews()}
         </div>
     )
   }
 }
+
+RecentActivity.propTypes = {
+  selectedUser: PropTypes.object.isRequired,
+};
 
 export default RecentActivity;
