@@ -71,4 +71,11 @@ p, ul, div, h6, h5, h4 {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+
 }
+
+.like-btn {
+    width: 55px;
+    height: 35px;
+}
+

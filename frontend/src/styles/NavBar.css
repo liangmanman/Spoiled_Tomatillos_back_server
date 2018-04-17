@@ -2,7 +2,7 @@
     background-color: #1f3d7a;
     overflow: hidden;
     margin-left: calc(50% - 50vw);
-    width: 100vw;
+    width: 100%;
 }
 
 .signOutButton {

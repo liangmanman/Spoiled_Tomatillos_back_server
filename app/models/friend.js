@@ -119,6 +119,13 @@ FriendSchema.statics = {
     });
     return await this.populateUserInfo(query);
   },
+
+  getFriendList: async function({ userId }) {
+    let query = this.find({
+      fromUserId: userId,
+    });
+    return await this.populateUserInfo(query);
+  }
 };
 
 mongoose.model(friendSchemaString, FriendSchema);

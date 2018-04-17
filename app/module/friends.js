@@ -22,8 +22,14 @@ async function deleteFriend({ fromUserId, toUserId }) {
   return await Friend.deleteFriend({ fromUserId, toUserId });
 }
 
+async function getFriendList({ userId }) {
+  const friendList = await Friend.getFriendList({ userId });
+  return friendList;
+}
+
 module.exports = {
   updateFriendOrCreateIfNotExist,
   determineIsFriendOfUser,
   deleteFriend,
+  getFriendList,
 };

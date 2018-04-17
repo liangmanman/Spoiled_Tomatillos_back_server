@@ -10,6 +10,9 @@ const usersModule = require('../module/users');
 const { sendJoiValidationError } = require('../utils/joi');
 const { JoiFriendSchema } = require('../models/friend');
 const { validateUserHasPermission, sendPermissionError } = require('../utils/permission');
+const JoiFriendListSchema = Joi.object().keys({
+  userId: Joi.string(),
+});
 
 const authorization = require('../middlewares/authorization');
 router.use(authorization.requiresLogin);
@@ -109,6 +112,27 @@ router.get('/isFriend?', async function (req, res) {
 
   try {
     const response = await friendsModule.determineIsFriendOfUser(isFriendQuery);
+    res.json(response);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+router.get('/friends', async function (req, res) {
+  const fieldList = ['userId'];
+  const friendListQuery = _.pick(req.query, fieldList);
+
+  const joiResult  = Joi.validate(friendListQuery, JoiFriendListSchema, {
+    abortEarly: false,
+  });
+  const joiError = joiResult.error;
+
+  if (!_.isNil(joiError)) {
+    return sendJoiValidationError(joiError, res);
+  }
+
+  try {
+    const response = await friendsModule.getFriendList(friendListQuery);
     res.json(response);
   } catch (error) {
     res.status(500).send(error.message);
