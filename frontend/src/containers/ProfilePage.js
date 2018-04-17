@@ -72,7 +72,7 @@ class ProfilePage extends React.Component {
           </Link>
         </div>
         <RecentActivity selectedUser={{_id: profileUserId, fullName: profileUserName}}/>
-        <h4>You are logged in as {fullName}</h4>
+        <h6>You are logged in as {fullName}</h6>
       </div>
     );
   }

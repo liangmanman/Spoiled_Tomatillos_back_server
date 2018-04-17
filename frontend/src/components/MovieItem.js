@@ -72,7 +72,7 @@ class MovieItem extends Component {
               </div>
               <h5>
                 <Link to={generateMovieURI(result.imdbID, MOVIE_DETAIL_URI)}>
-                  <h3 className="movie-title">{result.Title}</h3>
+                  <h3 className="link">{result.Title}</h3>
                 </Link>
               </h5>
               <Rate movieId={result.imdbID}/>

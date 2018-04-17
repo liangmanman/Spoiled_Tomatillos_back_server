@@ -56,7 +56,7 @@ class SearchResult extends React.Component {
                 <h2>Users</h2>
                 {_.map(userList, (user) => {
                     return (
-                        <div className={"userResult inside-boxed"}>
+                        <div className={"user-result inside-boxed"}>
                           <Link to={generateUserURI(user._id, USER_PROFILE_URI)}><h5>{user.fullName}</h5></Link>
                           <p>Name: {user.fullName}</p>
                         </div>

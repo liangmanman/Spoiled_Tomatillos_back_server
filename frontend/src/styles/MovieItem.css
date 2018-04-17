@@ -3,13 +3,13 @@
     float: right;
 }
 
-.movie-title {
+.link {
     text-decoration: underline;
     -webkit-transition: color 500ms;
     transition: color 500ms;
 }
 
-.movie-title:hover {
+.link:hover {
     color: #1f3d7a;
 }
 

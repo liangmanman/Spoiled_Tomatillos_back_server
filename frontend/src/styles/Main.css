@@ -56,6 +56,10 @@ p, ul, div, h6, h5, h4 {
     height: 35px;
 }
 
+.user-result p {
+    margin-bottom: 0;
+}
+
 /* custom scroll bar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -74,8 +78,4 @@ p, ul, div, h6, h5, h4 {
 
 }
 
-.like-btn {
-    width: 55px;
-    height: 35px;
-}
 
