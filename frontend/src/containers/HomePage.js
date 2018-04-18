@@ -22,6 +22,8 @@ class HomePage extends React.Component {
 
 
   render() {
+    let { userInfo } = this.props;
+    console.log("test");
     return (
       <div className="boxed">
           <h3 className="page-header">Hi {this.state.fullName}!</h3>
@@ -29,7 +31,7 @@ class HomePage extends React.Component {
           like you! Connect with your friends, see what movies they've reviewed and liked, check out information about
           the newest movies along with critic ratings and more. Start by searching for a movie or user at the search bar
           on the top right of the screen.</p>
-          <RecentActivity />
+          <RecentActivity selectedUser={userInfo}/>
       </div>
     );
   }
