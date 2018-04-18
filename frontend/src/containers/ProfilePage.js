@@ -59,6 +59,7 @@ class ProfilePage extends React.Component {
   render() {
     let { fullName, _id } = this.props.userInfo;
     let { profileUserName, profileUserId } = this.state;
+    console.log("test");
     return (
       <div className="boxed">
         <h3>This is the Profile Page of User:  {profileUserName} {this.renderFriendButton()}</h3>
