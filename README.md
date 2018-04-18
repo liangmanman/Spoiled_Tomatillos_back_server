@@ -12,11 +12,10 @@ Joseph Moore
 [Spoiled Tomatillos](https://spoiled-tomatillos-back-server.herokuapp.com/#/)
 
 # Links to Youtube videos
-```
-[System Demo]()
-[System Setup]()
-[Final Presentation]()
-```
+* [System Demo]()
+* [System Setup](https://www.youtube.com/watch?v=xdX89Dz7oLQ&feature=youtu.be)
+* [Final Presentation]()
+
 
 ##  Setup Environment
 
