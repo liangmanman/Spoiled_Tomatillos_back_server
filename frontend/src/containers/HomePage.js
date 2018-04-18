@@ -25,6 +25,7 @@ class HomePage extends React.Component {
     let { userInfo } = this.props;
     return (
       <div className="boxed">
+        <h1>Test</h1>
           <h3 className="page-header">Hi {this.state.fullName}!</h3>
           <p className="inside-boxed">Welcome to Spoiled Tomatillos - the online database of movies with a growing community of cinephiles just
           like you! Connect with your friends, see what movies they've reviewed and liked, check out information about
