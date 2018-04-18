@@ -46,7 +46,7 @@ class RecentActivity extends React.Component {
             <img className="poster-mini" src={review.movie.posterImgPath}/>
             <div>
               <h5>You reviewed&nbsp;
-                <Link className="movie-title" to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>
+                <Link className="link movie-title" to={generateMovieURI(review.movieId, MOVIE_DETAIL_URI)}>
                   {review.movie.title}
                 </Link>
                 &nbsp;on {dateString}

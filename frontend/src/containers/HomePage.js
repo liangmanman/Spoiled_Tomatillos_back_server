@@ -23,7 +23,6 @@ class HomePage extends React.Component {
 
   render() {
     let { userInfo } = this.props;
-    console.log("test");
     return (
       <div className="boxed">
           <h3 className="page-header">Hi {this.state.fullName}!</h3>
