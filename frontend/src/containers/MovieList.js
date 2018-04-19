@@ -25,14 +25,12 @@ class MovieList extends React.Component {
 
   renderMoveInfoList() {
     const { movieList } = this.props;
-
       return _.map(movieList, (movie) => {
         return <MovieItem imdbID={movie.imdbID} key={movie.imdbID}/>
       });
 
 
   }
-
 
   render() {
 

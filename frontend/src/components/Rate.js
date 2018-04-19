@@ -1,10 +1,7 @@
 import React from 'react';
 import {inject, observer} from "mobx-react";
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import StarRatingComponent from './StarRating/StarRatingComponent';
-
-import SuccessMessage from './SuccessMessage';
 import '../styles/Rates.css';
 
 @inject(stores => {

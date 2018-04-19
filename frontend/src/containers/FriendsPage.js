@@ -46,7 +46,7 @@ class MyLikesPage extends React.Component {
       userId,
     });
     this.setState({
-      friends,
+      friends: friends,
     });
     console.log('this.states.friends', this.state.friends);
 
@@ -62,10 +62,14 @@ class MyLikesPage extends React.Component {
 
     return _.map(friends, (friend) => {
       const { toUser } = friend;
+      let date = new Date(friend.createdAt);
+      let dateString = '' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
       return (
-        <div key={toUser.fullName}>
-          <Link to={generateUserURI(toUser._id, USER_PROFILE_URI)}>{toUser.fullName}</Link>
-        </div>
+          <div key={toUser.fullName} className={"user-result inside-boxed"}>
+            <Link to={generateUserURI(toUser._id, USER_PROFILE_URI)}><h5 className="link">{toUser.fullName}</h5></Link>
+            <p>Name: {toUser.fullName}</p>
+            <p>Friends Since: {dateString}</p>
+          </div>
       );
     });
   }
